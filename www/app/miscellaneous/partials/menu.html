@@ -1,0 +1,51 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <!-- Left menu -->
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-royal">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <a menu-close class="item item-icon-left item-borderless" href="#/app/projects">
+                <i class="icon ion-ios-briefcase"></i>
+                Projetos
+                <span class="badge badge-calm">0</span>
+            </a>
+            <a menu-close class="item item-icon-left item-borderless" href="#">
+              <i class="icon ion-ios-paper"></i>
+              Tarefas
+            </a>
+
+            <a menu-close class="item item-icon-left item-borderless" href="#">
+              <i class="icon ion-ios-pricetags"></i>
+              Categorias
+            </a>
+
+            <a menu-close class="item item-icon-left item-separator" href="#">
+              <i class="icon ion-ios-gear"></i>
+              Configurações
+            </a>
+            <a menu-close class="item item-icon-left item-borderless" href="#">
+              <i class="icon ion-ios-information"></i>
+              Sobre
+            </a>
+            <a menu-close class="item item-icon-left item-borderless" href="#">
+              <i class="icon ion-power"></i>
+              Sair
+            </a>
+        </div>
+    </ion-content>
+  </ion-side-menu>
+<!-- end left menu -->
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-royal" align-title="center">
+      <!-- <ion-nav-back-button></ion-nav-back-button> -->
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="content-menu"></ion-nav-view>
+  </ion-side-menu-content>
+</ion-side-menus>
