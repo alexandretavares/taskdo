@@ -15,11 +15,19 @@
     </ion-nav-buttons>
 
     <ion-content overflow-scroll="false">
-        <div class="list">
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="Nome" ng-model="mv.project.name">
-            </label>
-        </div>
+        <form class="">
+            <div class="list padding-horizontal">
+                <label class="item item-input item-floating-label has-error">
+                    <span class="input-label">Nome</span>
+                    <input type="text" placeholder="Nome"
+                        ng-model="mv.project.name" required>
+                </label>
+                <!-- <div class="form-errors" ng-messages="true">
+                    <div class="form-error" ng-message="required">
+                        Campo obrigatório
+                    </div>
+                </div> -->
+            </div>
+        </form>
     </ion-content>
 </ion-view>

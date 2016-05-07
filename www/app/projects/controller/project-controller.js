@@ -1,6 +1,6 @@
 angular.module("todolist.projects")
 .controller("ProjectController", function($scope, $state, $ionicHistory,
-    $ionicPopover, $ionicPopup, APP_STATE, projectService) {
+    $ionicPopover, $ionicPopup, APP_STATE, projectService, toastService) {
 
     var mv = this;
     var _popover = null;
@@ -17,10 +17,12 @@ angular.module("todolist.projects")
         mv.selected = {};
         mv.selectedAll = false;
         mv.newMode = APP_STATE.PROJECTS.NEW;
+        mv.editMode = APP_STATE.PROJECTS.EDIT;
+        mv.listMode = APP_STATE.PROJECTS.LIST;
 
         _initPopover();
 
-        if ($state.is(APP_STATE.PROJECTS.LIST)) {
+        if ($state.is(mv.listMode)) {
             mv.projects = projectService.list();
         } else {
             if ($state.params.id) {
@@ -29,10 +31,6 @@ angular.module("todolist.projects")
                 mv.project = {};
             }
         }
-    };
-
-    mv.goEdit = function(id) {
-        $state.go(APP_STATE.PROJECTS.EDIT, {id: id});
     };
 
     mv.goBack = function() {
@@ -48,11 +46,11 @@ angular.module("todolist.projects")
     }
 
     mv.isEditMode = function() {
-        return $state.is(APP_STATE.PROJECTS.EDIT);
+        return $state.is(mv.editMode);
     };
 
     mv.isListMode = function() {
-        return $state.is(APP_STATE.PROJECTS.LIST);
+        return $state.is(mv.listMode);
     };
 
     mv.hasSelected = function() {
@@ -86,7 +84,8 @@ angular.module("todolist.projects")
         }
 
         projectService.save(mv.project);
-        $state.go(APP_STATE.PROJECTS.LIST);
+        toastService.show("Registro salvo com sucesso");
+        $state.go(mv.listMode);
     };
 
     mv.remove = function() {
@@ -100,10 +99,8 @@ angular.module("todolist.projects")
         confirmPopup.then(function(res) {
             if (res) {
                 projectService.remove($state.params.id);
-                $state.go(APP_STATE.PROJECTS.LIST);
-                console.log("Projeto removido: " + $state.params.id);
-            } else {
-                console.log("Nenhum projeto removido");
+                toastService.show("Registro removido com sucesso");
+                $state.go(mv.listMode);
             }
         });
     };
@@ -126,7 +123,8 @@ angular.module("todolist.projects")
 
                 projectService.removeList(projectsToRemove);
                 mv.selected = {};
-                console.log("Registros removidos: " + projectsToRemove);
+
+                toastService.show("Registros removidos com sucesso");
             }
         });
     };
