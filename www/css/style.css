@@ -3,3 +3,20 @@
     border: none;
     border-top: 1px solid #ddd;
 }
+
+.has-errors {
+    border-bottom: 3px solid #B83E2C;
+}
+
+.todolist-popover {
+    height: auto !important;
+}
+
+.todolist-popover ion-header-bar {
+    position: relative;
+}
+
+.todolist-popover ion-content {
+    top: 0;
+    position: relative;
+}

@@ -1,0 +1,27 @@
+<ion-view view-title="Projeto" ng-init="mv.init()">
+    <ion-nav-bar class="bar-royal" align-title="left">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-android-arrow-back"
+                ng-click="mv.goBack()"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-android-delete"
+                    ng-click="mv.remove()" ng-show="mv.editMode()"></button>
+
+            <button class="button button-icon icon ion-android-done"
+                ng-click="mv.save()"></button>
+
+            <button class="button button-icon icon ion-android-more-vertical"
+                    ng-click="mv.showMore($event)"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-content overflow-scroll="false">
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nome</span>
+                <input type="text" placeholder="Nome" ng-model="mv.project.name">
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

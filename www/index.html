@@ -18,13 +18,20 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+    <!-- miscellaneous -->
+    <script src="app/miscellaneous/miscellaneous.js"></script>
+    <script src="app/miscellaneous/controller/dashboard-controller.js"></script>
+
     <!-- projects module -->
     <script src="app/projects/projects.js"></script>
+    <script src="app/projects/service/project-service.js"></script>
     <script src="app/projects/controller/project-controller.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/routes.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/states.js"></script>
+    <script src="app/routes.js"></script>
+
   </head>
   <body ng-app="todolist">
       <ion-nav-view></ion-nav-view>
