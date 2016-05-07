@@ -63,4 +63,10 @@ angular.module("todolist.projects").service("projectService", function() {
         }
     };
 
+    this.removeList = function(ids) {
+        for (var i = 0; i < ids.length; i++) {
+            this.remove(ids[i]);
+        }
+    };
+
 });

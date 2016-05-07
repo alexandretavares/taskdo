@@ -1,9 +1,12 @@
 <ion-popover-view class="todolist-popover">
     <ion-content>
         <div class="list">
-              <a class="item">
-                  Ignorar
-              </a>
-          </div>
+            <a class="item ng-hide" ng-show="mv.isListMode()" ng-click="mv.selectAll()">
+                Selecionar todos
+            </a>
+            <a class="item ng-hide" ng-show="!mv.isListMode()" ng-click="mv.closeMoreActions()">
+                Ignorar
+            </a>
+        </div>
     </ion-content>
 </ion-popover-view>

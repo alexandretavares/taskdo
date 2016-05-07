@@ -14,27 +14,32 @@ angular.module('todolist').config(function(APP_STATE, $stateProvider, $urlRouter
             }
         }
     })
-    .state(APP_STATE.PROJECTS.BASE, {
+    .state(APP_STATE.PROJECTS.LIST, {
         url: "/projects",
-        abstract: true,
         views: {
             'content-menu': {
-                template: "<ion-nav-view></ion-nav-view>",
+                templateUrl: "app/projects/partials/project-list.html",
                 controller: "ProjectController as mv"
             }
         }
     })
-    .state(APP_STATE.PROJECTS.LIST, {
-        url: "/list",
-        templateUrl: "app/projects/partials/project-list.html"
-    })
     .state(APP_STATE.PROJECTS.NEW, {
-        url: "/new",
-        templateUrl: "app/projects/partials/project-form.html"
+        url: "/projects/new",
+        views: {
+            'content-menu': {
+                templateUrl: "app/projects/partials/project-form.html",
+                controller: "ProjectController as mv"
+            }
+        }
     })
     .state(APP_STATE.PROJECTS.EDIT, {
-        url: "/edit/:id",
-        templateUrl: "app/projects/partials/project-form.html"
+        url: "/projects/edit/:id",
+        views: {
+            'content-menu': {
+                templateUrl: "app/projects/partials/project-form.html",
+                controller: "ProjectController as mv"
+            }
+        }
     });
 
     $urlRouterProvider.otherwise("/app/dashboard");
