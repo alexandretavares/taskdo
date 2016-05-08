@@ -1,14 +1,14 @@
 <ion-view view-title="Projeto" ng-init="mv.init()">
     <ion-nav-buttons side="left">
         <button class="button button-icon icon ion-android-arrow-back"
-            ng-click="mv.goBack()"></button>
+                ng-click="mv.goBack()"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button class="button button-icon icon ion-android-delete ng-hide"
                 ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
 
         <button class="button button-icon icon ion-android-done"
-            ng-click="mv.save()"></button>
+                ng-click="mv.save()"></button>
 
         <button class="button button-icon icon ion-android-more-vertical"
                 ng-click="mv.showMoreActions($event)"></button>
@@ -17,7 +17,7 @@
     <ion-content overflow-scroll="false">
         <form class="">
             <div class="list padding-horizontal">
-                <label class="item item-input item-floating-label has-error">
+                <label class="item item-input item-floating-label">
                     <span class="input-label">Nome</span>
                     <input type="text" placeholder="Nome"
                         ng-model="mv.project.name" required>

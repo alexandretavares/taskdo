@@ -1,9 +1,11 @@
+//TODO Implementar comunicação com banco de dados ou similar
 angular.module("todolist.projects").service("projectService", function() {
 
     var _projects = [];
 
+    //TODO Remover
     (function() {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 10; i++) {
             _projects.push({
                 id: i,
                 name: "Projeto " + i,

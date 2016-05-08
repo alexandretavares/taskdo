@@ -1,10 +1,9 @@
 <ion-view view-title="Projetos" ng-init="mv.init()">
     <ion-nav-buttons side="right">
         <button class="button button-icon icon ion-android-delete ng-hide"
-                ng-click="mv.removeSelected()" ng-show="!mv.hasSelected()"></button>
+                ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
 
-        <button class="button button-icon icon ion-compose"
-            ui-sref="{{mv.newMode}}"></button>
+        <button class="button button-icon icon ion-compose" ui-sref="{{mv.newMode}}"></button>
 
         <button class="button button-icon icon ion-android-more-vertical"
             ng-click="mv.showMoreActions($event)"></button>
@@ -20,7 +19,7 @@
                             ng-change="mv.checkSelected(project.id)" />
                      </label>
                 </div>
-                <a ui-sref="{{mv.editMode}}({id: project.id})" class="subdued">
+                <a ui-sref="{{mv.editMode}}({id: project.id})" class="item-no-decoration">
                     <h2>{{project.name}}</h2>
                     <p>Criado em: {{project.createdDate | date : 'dd/MM/yyyy'}}</p>
                     <i class="icon ion-chevron-right icon-accessory"></i>

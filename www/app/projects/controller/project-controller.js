@@ -1,6 +1,6 @@
 angular.module("todolist.projects")
 .controller("ProjectController", function($scope, $state, $ionicHistory,
-    $ionicPopover, $ionicPopup, APP_STATE, projectService, toastService) {
+    $ionicPopover, APP_STATE, projectService, toastService, popupService) {
 
     var mv = this;
     var _popover = null;
@@ -54,12 +54,16 @@ angular.module("todolist.projects")
     };
 
     mv.hasSelected = function() {
-        return angular.equals({}, mv.selected);
+        return !angular.equals({}, mv.selected);
     };
 
     mv.checkSelected = function(id) {
         if (!mv.selected[id]) {
             delete mv.selected[id];
+        }
+
+        if (!mv.hasSelected() && mv.selectedAll) {
+            mv.selectedAll = false;
         }
     };
 
@@ -89,14 +93,7 @@ angular.module("todolist.projects")
     };
 
     mv.remove = function() {
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Remover projeto',
-            template: 'Você tem certeza que deseja remover o projeto?',
-            cancelText: 'Não',
-            okText: 'Sim'
-        });
-
-        confirmPopup.then(function(res) {
+        popupService.remove(function(res) {
             if (res) {
                 projectService.remove($state.params.id);
                 toastService.show("Registro removido com sucesso");
@@ -106,14 +103,7 @@ angular.module("todolist.projects")
     };
 
     mv.removeSelected = function() {
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Remover selecionados',
-            template: 'Você tem certeza que deseja remover os registros selecionados?',
-            cancelText: 'Não',
-            okText: 'Sim'
-        });
-
-        confirmPopup.then(function(res) {
+        popupService.remove(function(res) {
             if (res) {
                 var projectsToRemove = [];
 

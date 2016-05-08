@@ -2,7 +2,7 @@
     <ion-content>
         <div class="list">
             <a class="item ng-hide" ng-show="mv.isListMode()" ng-click="mv.selectAll()">
-                Selecionar todos
+                {{mv.selectedAll ? 'Cancelar seleção' : 'Selecionar todos'}}
             </a>
             <a class="item ng-hide" ng-show="!mv.isListMode()" ng-click="mv.closeMoreActions()">
                 Ignorar
