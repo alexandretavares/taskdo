@@ -1,0 +1,5 @@
+<div class="form-errors" ng-messages="field.$error" ng-if="field.$dirty">
+    <div class="form-error" ng-message="required">Campo obrigatório</div>
+    <div class="form-error" ng-message="minlength">Tamanho mínimo: {{minLength}} caracteres</div>
+    <div class="form-error" ng-message="maxlength">Tamanho máximo: {{maxLength}} caracteres</div>
+</div>

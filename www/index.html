@@ -14,26 +14,31 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
-    <!-- miscellaneous -->
-    <script src="app/miscellaneous/miscellaneous.js"></script>
-    <script src="app/miscellaneous/service/toast-service.js"></script>
-    <script src="app/miscellaneous/service/popup-service.js"></script>
-    <script src="app/miscellaneous/controller/dashboard-controller.js"></script>
+    <!-- components module -->
+    <script src="app/components/app.components.module.js"></script>
+    <script src="app/components/service/toast.service.js"></script>
+    <script src="app/components/service/popup.service.js"></script>
+    <script src="app/components/directive/todo-error-messages.directive.js"></script>
+
+    <!-- miscellaneous module -->
+    <script src="app/miscellaneous/miscellaneous.module.js"></script>
+    <script src="app/miscellaneous/controller/dashboard.controller.js"></script>
 
     <!-- projects module -->
-    <script src="app/projects/projects.js"></script>
-    <script src="app/projects/service/project-service.js"></script>
-    <script src="app/projects/controller/project-controller.js"></script>
+    <script src="app/projects/projects.module.js"></script>
+    <script src="app/projects/service/project.service.js"></script>
+    <script src="app/projects/controller/project.controller.js"></script>
 
-    <!-- your app's js -->
-    <script src="app/app.js"></script>
-    <script src="app/states.js"></script>
-    <script src="app/routes.js"></script>
+    <!-- app's js -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.states.js"></script>
+    <script src="app/app.routes.js"></script>
   </head>
   <body ng-app="todolist">
       <ion-nav-view></ion-nav-view>

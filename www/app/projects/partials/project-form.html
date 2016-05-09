@@ -1,33 +1,34 @@
-<ion-view view-title="Projeto" ng-init="mv.init()">
-    <ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-android-arrow-back"
-                ng-click="mv.goBack()"></button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-android-delete ng-hide"
-                ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
+<ng-form class="form" name="mv.projectForm" novalidate>
+    <ion-view view-title="Projeto" ng-init="mv.init()">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-android-arrow-back"
+                    ng-click="mv.goBack()"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-android-delete ng-hide"
+                    ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
 
-        <button class="button button-icon icon ion-android-done"
-                ng-click="mv.save()"></button>
+            <button class="button button-icon icon ion-android-done" ng-click="mv.save()"
+                    ng-disabled="mv.isInvalidForm()"></button>
 
-        <button class="button button-icon icon ion-android-more-vertical"
-                ng-click="mv.showMoreActions($event)"></button>
-    </ion-nav-buttons>
+            <button class="button button-icon icon ion-android-more-vertical"
+                    ng-click="mv.showMoreActions($event)"></button>
+        </ion-nav-buttons>
 
-    <ion-content overflow-scroll="false">
-        <form class="">
+        <ion-content overflow-scroll="false">
             <div class="list padding-horizontal">
-                <label class="item item-input item-floating-label">
+                <label class="item item-input item-floating-label"
+                    ng-class="{'has-error' : mv.projectForm.projectName.$invalid
+                    && mv.projectForm.projectName.$dirty}">
+
                     <span class="input-label">Nome</span>
-                    <input type="text" placeholder="Nome"
-                        ng-model="mv.project.name" required>
+                    <input name="projectName" type="text" placeholder="Nome"
+                        ng-model="mv.project.name" ng-model-options="{debounce: 500}"
+                        ng-minlength="3" ng-maxlength="20" required>
                 </label>
-                <!-- <div class="form-errors" ng-messages="true">
-                    <div class="form-error" ng-message="required">
-                        Campo obrigatório
-                    </div>
-                </div> -->
+                <todo-error-messages field="mv.projectForm.projectName"
+                    min-length="3" max-length="20"></todo-error-messages>
             </div>
-        </form>
-    </ion-content>
-</ion-view>
+        </ion-content>
+    </ion-view>
+</ng-form>

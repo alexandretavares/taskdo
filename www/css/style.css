@@ -23,21 +23,11 @@
     text-decoration: none;
 }
 
-/*.item-no-decoration.active,
-.item-no-decoration.activated {
-  border-color: #ccc;
-  background-color: #D9D9D9;
-}*/
-
-form .list .item {
+.form .list .item {
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
     padding-left: 0;
-}
-
-label.item.has-error {
-    border-bottom: 2px solid red;
 }
 
 .form-errors {
@@ -47,4 +37,8 @@ label.item.has-error {
 .form-error {
     padding: 2px 0 2px 0px;
     color: red;
+}
+
+label.item.has-error {
+    border-bottom: 2px solid red;
 }
