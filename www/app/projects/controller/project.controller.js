@@ -9,11 +9,13 @@
         var _popover = null;
 
         var _initPopover = function() {
-            $ionicPopover.fromTemplateUrl('app/projects/partials/project-more-actions.html', {
-                scope: $scope
-            }).then(function(popover) {
-                _popover = popover;
-            });
+            if (_popover == null) {
+                $ionicPopover.fromTemplateUrl('app/projects/partials/project-more-actions.html', {
+                    scope: $scope
+                }).then(function(popover) {
+                    _popover = popover;
+                });
+            }
         };
 
         mv.init = function() {
@@ -26,14 +28,23 @@
             _initPopover();
 
             if ($state.is(mv.listMode)) {
-                mv.projects = projectService.list();
+                mv.refreshList();
             } else {
                 if ($state.params.id) {
-                    mv.project = projectService.get($state.params.id);
+                    projectService.get($state.params.id)
+                        .then(function(project) {
+                            mv.project = project;
+                        });
                 } else {
                     mv.project = {};
                 }
             }
+        };
+
+        mv.refreshList = function() {
+            projectService.list().then(function(projects) {
+                mv.projects = projects;
+            });
         };
 
         mv.goBack = function() {
@@ -83,7 +94,7 @@
 
             if (mv.selectedAll) {
                 for (var i = 0; i < mv.projects.length; i++) {
-                    mv.selected[mv.projects[i].id] = true;
+                    mv.selected[mv.projects[i]._id] = true;
                 }
             } else {
                 mv.selected = {};
@@ -93,30 +104,43 @@
         };
 
         mv.save = function() {
-            var msg;
-
             if ($state.params.id) {
-                msg = "Registro atualizado com sucesso";
-                projectService.update(mv.project);
+                projectService.update(mv.project)
+                    .then(function() {
+                        $state.go(mv.listMode).then(function() {
+                            toastService.show("Registro atualizado com sucesso");
+                        });
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
             } else {
-                msg = "Registro criado com sucesso";
                 mv.project.createdDate = new Date();
-                projectService.save(mv.project);
-            }
 
-            $state.go(mv.listMode).then(function() {
-                toastService.show(msg);
-            });
+                projectService.save(mv.project)
+                    .then(function() {
+                        $state.go(mv.listMode).then(function() {
+                            toastService.show("Registro criado com sucesso");
+                        });
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+            }
         };
 
         mv.remove = function() {
             popupService.remove(function(res) {
                 if (res) {
-                    projectService.remove($state.params.id);
-
-                    $state.go(mv.listMode).then(function() {
-                        toastService.show("Registro removido com sucesso");
-                    });
+                    projectService.remove($state.params.id)
+                        .then(function() {
+                            $state.go(mv.listMode).then(function() {
+                                toastService.show("Registro removido com sucesso");
+                            });
+                        })
+                        .catch(function(error) {
+                            console.error(error);
+                        });
                 }
             });
         };
@@ -130,10 +154,12 @@
                         projectsToRemove.push(key);
                     });
 
-                    projectService.removeList(projectsToRemove);
-                    mv.selected = {};
+                    projectService.removeList(projectsToRemove).then(function() {
+                        mv.selected = {};
+                        mv.refreshList();
+                        toastService.show("Registros removidos com sucesso");
+                    });
 
-                    toastService.show("Registros removidos com sucesso");
                 }
             });
         };

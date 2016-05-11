@@ -21,5 +21,6 @@ angular.module('todolist', ['ionic', 'ngCordova', 'ngMessages',
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
   });
 });

@@ -18,6 +18,9 @@
         })
         .state(APP_STATE.PROJECTS.LIST, {
             url: "/projects",
+            params: {
+                refresh: false
+            },
             views: {
                 'content-menu': {
                     templateUrl: "app/projects/partials/project-list.html",
@@ -27,6 +30,7 @@
         })
         .state(APP_STATE.PROJECTS.NEW, {
             url: "/projects/new",
+            cache: false,
             views: {
                 'content-menu': {
                     templateUrl: "app/projects/partials/project-form.html",
@@ -44,7 +48,8 @@
             }
         });
 
-        $urlRouterProvider.otherwise("/app/dashboard");
+        //$urlRouterProvider.otherwise("/app/dashboard");
+        $urlRouterProvider.otherwise("/app/projects");
     });
 
 })();
