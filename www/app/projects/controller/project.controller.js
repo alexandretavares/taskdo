@@ -1,9 +1,13 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.projects")
-    .controller("ProjectController", function($scope, $state, $ionicHistory,
-        $ionicPopover, APP_STATE, projectService, toastService, popupService) {
+    angular.module("todolist.projects").controller("ProjectController", controller);
+
+    controller.$inject = ['$scope', '$state', '$q', '$ionicHistory', '$ionicPopover',
+        'APP_STATE', 'projectService', 'toastService', 'popupService'];
+
+    function controller($scope, $state, $q, $ionicHistory, $ionicPopover, APP_STATE,
+        projectService, toastService, popupService) {
 
         var mv = this;
         var _popover = null;
@@ -18,32 +22,16 @@
             }
         };
 
-        mv.init = function() {
-            mv.selected = {};
-            mv.selectedAll = false;
-            mv.newMode = APP_STATE.PROJECTS.NEW;
-            mv.editMode = APP_STATE.PROJECTS.EDIT;
-            mv.listMode = APP_STATE.PROJECTS.LIST;
-
-            _initPopover();
-
-            if ($state.is(mv.listMode)) {
-                mv.refreshList();
-            } else {
-                if ($state.params.id) {
-                    projectService.get($state.params.id)
-                        .then(function(project) {
-                            mv.project = project;
-                        });
-                } else {
-                    mv.project = {};
-                }
-            }
-        };
-
         mv.refreshList = function() {
-            projectService.list().then(function(projects) {
-                mv.projects = projects;
+            return $q(function(resolve, reject) {
+                projectService.list()
+                    .then(function(projects) {
+                        mv.projects = projects;
+                        resolve();
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
             });
         };
 
@@ -104,29 +92,16 @@
         };
 
         mv.save = function() {
-            if ($state.params.id) {
-                projectService.update(mv.project)
-                    .then(function() {
-                        $state.go(mv.listMode).then(function() {
-                            toastService.show("Registro atualizado com sucesso");
-                        });
-                    })
-                    .catch(function(error) {
-                        console.error(error);
-                    });
-            } else {
-                mv.project.createdDate = new Date();
+            projectService.save(mv.project)
+                .then(function() {
+                    var msg = ($state.params.id) ? "Registro atualizado com sucesso" : "Registro criado com sucesso";
 
-                projectService.save(mv.project)
-                    .then(function() {
-                        $state.go(mv.listMode).then(function() {
-                            toastService.show("Registro criado com sucesso");
-                        });
-                    })
-                    .catch(function(error) {
-                        console.error(error);
-                    });
-            }
+                    toastService.show(msg);
+                    $state.go(mv.listMode, {refresh: true});
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
         };
 
         mv.remove = function() {
@@ -154,19 +129,53 @@
                         projectsToRemove.push(key);
                     });
 
-                    projectService.removeList(projectsToRemove).then(function() {
-                        mv.selected = {};
-                        mv.refreshList();
-                        toastService.show("Registros removidos com sucesso");
-                    });
-
+                    projectService.removeList(projectsToRemove)
+                        .then(function() {
+                            mv.selected = {};
+                            mv.refreshList();
+                            toastService.show("Registros removidos com sucesso");
+                        });
                 }
             });
         };
 
+        $scope.$on("$ionicView.beforeEnter", function() {
+            if ($state.is(mv.listMode)) {
+                if ($state.params.refresh) {
+                    mv.refreshList();
+                }
+            } else {
+                if ($state.params.id) {
+                    projectService.get($state.params.id)
+                        .then(function(project) {
+                            mv.project = project;
+                        });
+                } else {
+                    mv.project = {};
+                    mv.projectForm.$setPristine();
+                }
+            }
+        });
+
         $scope.$on('$destroy', function() {
             _popover.remove();
         });
-    });
+
+        (function() {
+            mv.projects = [];
+            mv.project = {};
+            mv.selected = {};
+            mv.selectedAll = false;
+            mv.newMode = APP_STATE.PROJECTS.NEW;
+            mv.editMode = APP_STATE.PROJECTS.EDIT;
+            mv.listMode = APP_STATE.PROJECTS.LIST;
+
+            _initPopover();
+
+            if ($state.is(mv.listMode)) {
+                mv.refreshList();
+            }
+        })();
+    }
 
 })();

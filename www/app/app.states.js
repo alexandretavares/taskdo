@@ -5,9 +5,10 @@
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: {
-            LIST: "app.projects",
-            NEW: "app.projects-new",
-            EDIT: "app.projects-edit"
+            BASE: "app.projects",
+            LIST: "app.projects.list",
+            NEW: "app.projects.new",
+            EDIT: "app.projects.edit"
         }
     });
 

@@ -12,11 +12,11 @@
         };
 
         this.save = function(project) {
+            if (!project.hasOwnProperty("createdDate")) {
+                project.createdDate = new Date();
+            }
+            
             return db.save(project);
-        };
-
-        this.update = function(project) {
-            return db.update(project);
         };
 
         this.get = function(id) {

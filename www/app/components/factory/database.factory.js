@@ -45,16 +45,13 @@
 
             this.save = function(entity) {
                 return $q(function(resolve, reject) {
-                    collection.insert(entity);
-                    commit(resolve, reject);
-                });
-            };
+                    if (entity.hasOwnProperty("_id")) {
+                        collection.update({_id: entity._id}, entity);
+                    } else {
+                        collection.insert(entity);
+                    }
 
-            this.update = function(entity) {
-                return $q(function(resolve, reject) {
-                    collection.update({_id: entity._id}, entity, {}, function() {
-                        commit(resolve, reject);
-                    });
+                    commit(resolve, reject);
                 });
             };
 
