@@ -1,0 +1,63 @@
+{
+    "i18n": {
+        "dashboard": {
+
+        },
+        "menu": {
+            "home": "Home",
+            "projects": "Projects",
+            "tasks": "Tasks",
+            "categories": "Categories",
+            "configurations": "Configurations",
+            "about": "About",
+            "exit": "Exit"
+        },
+        "common": {
+            "moreActions": {
+                "selectAll": "Select all",
+                "unselectAll": "Unselect all",
+                "ignore": "Ignore"
+            },
+            "validations": {
+                "required": "Field required",
+                "minlength": "Min length: {{minlength}} characters",
+                "maxlength": "Max length: {{maxlength}} characters"
+            },
+            "messages": {
+                "success": {
+                    "created": "Successfully created record",
+                    "updated": "Successfully updated record",
+                    "removed": "Successfully removed record",
+                    "removedSelected": "Successfully removed records"
+                },
+                "error": {
+
+                }
+            },
+            "popup": {
+                "buttons": {
+                    "yes": "Yes",
+                    "no": "No"
+                },
+                "remove": {
+                    "title": "Remove records",
+                    "content": "Do you want remove the records?"
+                }
+            }
+        },
+        "projects": {
+            "list": {
+                "title": "Projects"
+            },
+            "form": {
+                "title": "Project",
+                "fields": {
+                    "name": "Name"
+                }
+            }
+        },
+        "configuration": {
+
+        }
+    }
+}

@@ -1,5 +1,5 @@
 <ng-form class="form" name="mv.projectForm" novalidate>
-    <ion-view view-title="Projeto">
+    <ion-view view-title="{{'i18n.projects.form.title' | translate}}">
         <ion-nav-buttons side="left">
             <button class="button button-icon icon ion-android-arrow-back"
                     ng-click="mv.goBack()"></button>
@@ -21,8 +21,9 @@
                     ng-class="{'has-error' : mv.projectForm.projectName.$invalid
                     && mv.projectForm.projectName.$dirty}">
 
-                    <span class="input-label">Nome</span>
-                    <input name="projectName" type="text" placeholder="Nome"
+                    <span class="input-label" translate="i18n.projects.form.fields.name"></span>
+                    <input name="projectName" type="text"
+                        placeholder="{{'i18n.projects.form.fields.name' | translate}}"
                         ng-model="mv.project.name" ng-model-options="{debounce: 500}"
                         ng-minlength="3" ng-maxlength="20" required>
                 </label>

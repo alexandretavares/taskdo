@@ -12,7 +12,8 @@
             url: "/dashboard",
             views: {
                 'content-menu': {
-                    templateUrl: "app/miscellaneous/partials/dashboard.html"
+                    templateUrl: "app/miscellaneous/partials/dashboard.html",
+                    controller: "DashboardController as mv"
                 }
             }
         })
@@ -28,9 +29,6 @@
         })
         .state(APP_STATE.PROJECTS.LIST, {
             url: "/list",
-            params: {
-                refresh: false
-            },
             views: {
                 'project-view': {
                     templateUrl: "app/projects/partials/project-list.html"

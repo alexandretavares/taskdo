@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist").constant("APP_STATE", {
+    angular.module("todolist.common").constant("APP_STATE", {
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: {

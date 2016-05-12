@@ -1,7 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.components").service("toastService", function($cordovaToast, $ionicLoading) {
+    angular.module("todolist.components").service("toastService", toastService);
+    toastService.$inject = ['$cordovaToast', '$ionicLoading'];
+
+    function toastService($cordovaToast, $ionicLoading) {
 
         this.show = function(message) {
             if (window.plugins && window.plugins.toast) {
@@ -11,6 +14,6 @@
             }
         };
 
-    });
+    }
 
 })();

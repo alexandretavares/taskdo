@@ -2,33 +2,37 @@
     <!-- Left menu -->
     <ion-side-menu side="left">
         <ion-header-bar class="bar-royal" align-title="left">
-            <h1 class="title">Menu</h1>
+
         </ion-header-bar>
-        <ion-content>
+        <ion-content overflow-scroll="false" ng-controller="DashboardController as mv">
             <div class="list list-borderless">
-                <a menu-close class="item item-icon-left" href="#/app/dashboard">
-                    <i class="icon ion-home"></i>Início
+                <!-- <a menu-close class="item item-icon-left" href="#/app/dashboard"> -->
+                <a class="item item-icon-left" href="#" ng-click="mv.switchTranslate()">
+                    <i class="icon ion-home"></i>{{'i18n.menu.home' | translate}}
                 </a>
 
                 <a menu-close class="item item-icon-left" href="#/app/projects">
-                    <i class="icon ion-ios-briefcase"></i>Projetos
-                </a>
-                <a menu-close class="item item-icon-left" href="#">
-                    <i class="icon ion-ios-paper"></i>Tarefas
+                    <i class="icon ion-ios-briefcase"></i>{{'i18n.menu.projects' | translate}}
                 </a>
 
                 <a menu-close class="item item-icon-left" href="#">
-                    <i class="icon ion-ios-pricetags"></i>Categorias
+                    <i class="icon ion-ios-paper"></i>{{'i18n.menu.tasks' | translate}}
+                </a>
+
+                <a menu-close class="item item-icon-left" href="#">
+                    <i class="icon ion-ios-pricetags"></i>{{'i18n.menu.categories' | translate}}
                 </a>
 
                 <a menu-close class="item item-icon-left item-separator" href="#">
-                    <i class="icon ion-ios-gear"></i>Configurações
+                    <i class="icon ion-ios-gear"></i>{{'i18n.menu.configurations' | translate}}
                 </a>
+
                 <a menu-close class="item item-icon-left" href="#">
-                    <i class="icon ion-ios-information"></i>Sobre
+                    <i class="icon ion-ios-information"></i>{{'i18n.menu.about' | translate}}
                 </a>
+
                 <a menu-close class="item item-icon-left" href="#">
-                    <i class="icon ion-power"></i>Sair
+                    <i class="icon ion-power"></i>{{'i18n.menu.exit' | translate}}
                 </a>
             </div>
         </ion-content>

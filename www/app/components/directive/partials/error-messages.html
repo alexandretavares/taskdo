@@ -1,5 +1,12 @@
 <div class="form-errors" ng-messages="field.$error" ng-if="field.$dirty">
-    <div class="form-error" ng-message="required">Campo obrigatório</div>
-    <div class="form-error" ng-message="minlength">Tamanho mínimo: {{minLength}} caracteres</div>
-    <div class="form-error" ng-message="maxlength">Tamanho máximo: {{maxLength}} caracteres</div>
+    <div class="form-error" ng-message="required"
+        translate="i18n.common.validations.required"></div>
+
+    <div class="form-error" ng-message="minlength"
+        translate="i18n.common.validations.minlength"
+        translate-values="{minlength: minLength}"></div>
+
+    <div class="form-error" ng-message="maxlength"
+        translate="i18n.common.validations.maxlength"
+        translate-values="{maxlength: maxLength}"></div>
 </div>

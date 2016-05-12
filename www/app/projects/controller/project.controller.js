@@ -4,10 +4,10 @@
     angular.module("todolist.projects").controller("ProjectController", controller);
 
     controller.$inject = ['$scope', '$state', '$q', '$ionicHistory', '$ionicPopover',
-        'APP_STATE', 'projectService', 'toastService', 'popupService'];
+        'APP_STATE', 'projectService', 'toastService', 'popupService', 'i18nService'];
 
-    function controller($scope, $state, $q, $ionicHistory, $ionicPopover, APP_STATE,
-        projectService, toastService, popupService) {
+    function controller($scope, $state, $q, $ionicHistory, $ionicPopover,
+        APP_STATE, projectService, toastService, popupService, i18n) {
 
         var mv = this;
         var _popover = null;
@@ -94,10 +94,15 @@
         mv.save = function() {
             projectService.save(mv.project)
                 .then(function() {
-                    var msg = ($state.params.id) ? "Registro atualizado com sucesso" : "Registro criado com sucesso";
+                    if ($state.params.id) {
+                        toastService.show(i18n.common.messages.success.updated);
+                    } else {
+                        toastService.show(i18n.common.messages.success.created);
+                    }
 
-                    toastService.show(msg);
-                    $state.go(mv.listMode, {refresh: true});
+                    $state.go(mv.listMode).then(function() {
+                        mv.refreshList();
+                    });
                 })
                 .catch(function(error) {
                     console.error(error);
@@ -109,8 +114,10 @@
                 if (res) {
                     projectService.remove($state.params.id)
                         .then(function() {
+                            toastService.show(i18n.common.messages.success.removed);
+
                             $state.go(mv.listMode).then(function() {
-                                toastService.show("Registro removido com sucesso");
+                                mv.refreshList();
                             });
                         })
                         .catch(function(error) {
@@ -132,19 +139,15 @@
                     projectService.removeList(projectsToRemove)
                         .then(function() {
                             mv.selected = {};
+                            toastService.show(i18n.common.messages.success.removedSelected);
                             mv.refreshList();
-                            toastService.show("Registros removidos com sucesso");
                         });
                 }
             });
         };
 
         $scope.$on("$ionicView.beforeEnter", function() {
-            if ($state.is(mv.listMode)) {
-                if ($state.params.refresh) {
-                    mv.refreshList();
-                }
-            } else {
+            if (!$state.is(mv.listMode)) {
                 if ($state.params.id) {
                     projectService.get($state.params.id)
                         .then(function(project) {
