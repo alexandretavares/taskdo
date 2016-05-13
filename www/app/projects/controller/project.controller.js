@@ -1,13 +1,13 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.projects").controller("ProjectController", controller);
+    angular.module("todolist.projects").controller("ProjectController", ProjectController);
 
-    controller.$inject = ['$scope', '$state', '$q', '$ionicHistory', '$ionicPopover',
-        'APP_STATE', 'projectService', 'toastService', 'popupService', 'i18nService'];
+    ProjectController.$inject = ['$scope', '$state', '$q', '$ionicHistory', '$ionicPopover',
+        'STATE', 'projectService', 'toastService', 'popupService', 'i18nService'];
 
-    function controller($scope, $state, $q, $ionicHistory, $ionicPopover,
-        APP_STATE, projectService, toastService, popupService, i18n) {
+    function ProjectController($scope, $state, $q, $ionicHistory, $ionicPopover,
+        STATE, projectService, toastService, popupService, i18n) {
 
         var mv = this;
         var _popover = null;
@@ -45,7 +45,7 @@
 
         mv.closeMoreActions = function() {
             _popover.hide();
-        }
+        };
 
         mv.isEditMode = function() {
             return $state.is(mv.editMode);
@@ -169,9 +169,10 @@
             mv.project = {};
             mv.selected = {};
             mv.selectedAll = false;
-            mv.newMode = APP_STATE.PROJECTS.NEW;
-            mv.editMode = APP_STATE.PROJECTS.EDIT;
-            mv.listMode = APP_STATE.PROJECTS.LIST;
+            mv.newMode = STATE.PROJECTS.NEW;
+            mv.editMode = STATE.PROJECTS.EDIT;
+            mv.listMode = STATE.PROJECTS.LIST;
+            mv.showMode = STATE.PROJECTS.SHOW;
 
             _initPopover();
 

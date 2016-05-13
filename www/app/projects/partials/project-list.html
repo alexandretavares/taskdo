@@ -1,4 +1,5 @@
-<ion-view view-title="{{'i18n.projects.list.title' | translate}}">
+<ion-view>
+    <ion-nav-title translate="i18n.projects.list.title"></ion-nav-title>
     <ion-nav-buttons side="right">
         <button class="button button-icon icon ion-android-delete ng-hide"
                 ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
@@ -20,6 +21,7 @@
                      </label>
                 </div>
                 <a ui-sref="{{mv.editMode}}({id: project._id})" class="item-no-decoration">
+                <!-- <a ui-sref="{{mv.showMode}}({id: project._id})" class="item-no-decoration"> -->
                     <h2 ng-bind="project.name"></h2>
                     <p translate="i18n.projects.list.createdIn"
                         translate-values="{createdIn: project.createdDate}">

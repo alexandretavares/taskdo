@@ -1,0 +1,22 @@
+<ng-form class="form" name="mv.settingForm" novalidate>
+    <ion-view>
+        <ion-nav-title translate="i18n.settings.form.title"></ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-android-done" ng-click="mv.save()"></button>
+
+            <button class="button button-icon icon ion-android-more-vertical"
+                    ng-click="mv.showMoreActions($event)"></button>
+        </ion-nav-buttons>
+
+        <ion-content overflow-scroll="false">
+            <div class="list padding-horizontal">
+                <label class="item item-input item-select">
+                    <div class="input-label" translate="i18n.settings.form.fields.language"></div>
+                      <select ng-model="mv.setting.language"
+                            ng-options="('i18n.language.' + language) | translate for language in mv.languages">
+                    </select>
+                </label>
+            </div>
+        </ion-content>
+    </ion-view>
+</ng-form>

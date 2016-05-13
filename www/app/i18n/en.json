@@ -1,14 +1,26 @@
 {
     "i18n": {
         "dashboard": {
-
+            "title": "Home"
+        },
+        "language": {
+            "en": "English",
+            "pt_br": "Portuguese"
+        },
+        "priority": {
+            "critical": "Critical",
+            "highest": "Highest",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "lowest": "Lowest"
         },
         "menu": {
             "home": "Home",
             "projects": "Projects",
             "tasks": "Tasks",
             "categories": "Categories",
-            "configurations": "Configurations",
+            "settings": "Settings",
             "about": "About",
             "exit": "Exit"
         },
@@ -56,8 +68,26 @@
                 }
             }
         },
-        "configuration": {
-
+        "tasks": {
+            "list": {
+                "title": "Tasks"
+            }
+        },
+        "settings": {
+            "moreActions": {
+                "discard": "Discard changes"
+            },
+            "form": {
+                "title": "Settings",
+                "fields": {
+                    "language": "Language"
+                }
+            },
+            "messages": {
+                "success": {
+                    "updated": "Successfully updated settings"
+                }
+            }
         }
     }
 }

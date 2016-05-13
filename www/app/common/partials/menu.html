@@ -4,18 +4,17 @@
         <ion-header-bar class="bar-royal" align-title="left">
 
         </ion-header-bar>
-        <ion-content overflow-scroll="false" ng-controller="DashboardController as mv">
+        <ion-content overflow-scroll="false">
             <div class="list list-borderless">
-                <!-- <a menu-close class="item item-icon-left" href="#/app/dashboard"> -->
-                <a class="item item-icon-left" href="#" ng-click="mv.switchTranslate()">
+                <a menu-close class="item item-icon-left" href="#/app/dashboard">
                     <i class="icon ion-home"></i>{{'i18n.menu.home' | translate}}
                 </a>
 
-                <a menu-close class="item item-icon-left" href="#/app/projects">
+                <a menu-close class="item item-icon-left" href="#/app/projects/list">
                     <i class="icon ion-ios-briefcase"></i>{{'i18n.menu.projects' | translate}}
                 </a>
 
-                <a menu-close class="item item-icon-left" href="#">
+                <a menu-close class="item item-icon-left" href="#/app/tasks/list">
                     <i class="icon ion-ios-paper"></i>{{'i18n.menu.tasks' | translate}}
                 </a>
 
@@ -23,8 +22,8 @@
                     <i class="icon ion-ios-pricetags"></i>{{'i18n.menu.categories' | translate}}
                 </a>
 
-                <a menu-close class="item item-icon-left item-separator" href="#">
-                    <i class="icon ion-ios-gear"></i>{{'i18n.menu.configurations' | translate}}
+                <a menu-close class="item item-icon-left item-separator" href="#/app/settings">
+                    <i class="icon ion-ios-gear"></i>{{'i18n.menu.settings' | translate}}
                 </a>
 
                 <a menu-close class="item item-icon-left" href="#">

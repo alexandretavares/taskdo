@@ -6,14 +6,16 @@
             'ionic', 'ngCordova', 'ngMessages', 'pascalprecht.translate',
             'todolist.common',
             'todolist.components',
-            'todolist.miscellaneous',
-            'todolist.projects'
+            'todolist.dashboard',
+            'todolist.settings',
+            'todolist.projects',
+            'todolist.tasks'
         ]
     ).run(run);
 
-    run.$inject = ['$ionicPlatform'];
+    run.$inject = ['$ionicPlatform', '$translate'];
 
-    function run($ionicPlatform) {
+    function run($ionicPlatform, $translate) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
               // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -29,6 +31,12 @@
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+
+            if (typeof navigator.globalization !== "undefined") {
+               navigator.globalization.getPreferredLanguage(function(language) {
+                   $translate.use((language.value).split("-")[0]);
+               }, null);
+           }
         });
     }
 })();

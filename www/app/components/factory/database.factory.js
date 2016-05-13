@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.components").factory("Database", databaseFactory);
-    databaseFactory.$inject = ['$q'];
+    angular.module("todolist.components").factory("Database", DatabaseFactory);
+    DatabaseFactory.$inject = ['$q'];
 
-    function databaseFactory($q) {
+    function DatabaseFactory($q) {
         var _fdb = new ForerunnerDB();
         var _db = _fdb.db("todolist");
 

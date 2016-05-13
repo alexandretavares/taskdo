@@ -2,22 +2,30 @@
     'use strict';
 
     angular.module('todolist').config(config);
-    config.$inject = ['$translateProvider'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider',
+        'STATE', 'LANGUAGE'];
 
-    function config($translateProvider) {
+    function config($stateProvider, $urlRouterProvider, $translateProvider,
+        STATE, LANGUAGE) {
+
         $translateProvider
             .useStaticFilesLoader({
-                prefix: 'app/i18n/',
-                suffix: '.json'
+                prefix: LANGUAGE.PREFIX,
+                suffix: LANGUAGE.SUFFIX
             })
-            .registerAvailableLanguageKeys(['en', 'pt_BR'], {
-                'en' : 'en', 'en_*': 'en',
-                'pt' : 'pt_BR', 'pt_BR': 'pt_BR'
-            })
-            .preferredLanguage('pt_BR')
-            .fallbackLanguage('en')
+            .registerAvailableLanguageKeys(LANGUAGE.KEYS, LANGUAGE.ALIAS)
+            .preferredLanguage(LANGUAGE.PREFERRED)
+            .fallbackLanguage(LANGUAGE.FALLBACK)
             .determinePreferredLanguage()
             .useSanitizeValueStrategy('escapeParameters');
+
+        $stateProvider.state(STATE.BASE, {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'app/common/partials/menu.html'
+        });
+
+        $urlRouterProvider.otherwise("/app/dashboard");
     }
 
 })();

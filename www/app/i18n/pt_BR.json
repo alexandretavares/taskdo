@@ -1,14 +1,26 @@
 {
     "i18n": {
         "dashboard": {
-
+            "title": "Início"
+        },
+        "language": {
+            "en": "Inglês",
+            "pt_br": "Português"
+        },
+        "priority": {
+            "critical": "Crítico",
+            "highest": "Muito alto",
+            "high": "Alto",
+            "medium": "Médio",
+            "low": "Baixo",
+            "lowest": "Muito baixo"
         },
         "menu": {
             "home": "Início",
             "projects": "Projetos",
             "tasks": "Tarefas",
             "categories": "Categorias",
-            "configurations": "Configurações",
+            "settings": "Configurações",
             "about": "Sobre",
             "exit": "Sair"
         },
@@ -57,8 +69,26 @@
                 }
             }
         },
-        "configuration": {
-
+        "tasks": {
+            "list": {
+                "title": "Tarefas"
+            }
+        },
+        "settings": {
+            "moreActions": {
+                "discard": "Descartar alterações"
+            },
+            "form": {
+                "title": "Configurações",
+                "fields": {
+                    "language": "Idioma"
+                }
+            },
+            "messages": {
+                "success": {
+                    "updated": "Configurações atualizadas com sucesso"
+                }
+            }
         }
     }
 }
