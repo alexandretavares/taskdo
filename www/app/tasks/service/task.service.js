@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module("todolist.tasks").service("taskService", taskService);
-    taskService.$inject = ['Database'];
+    taskService.$inject = ['TABLE', 'Database'];
 
-    function taskService(Database) {
-        var db = new Database("task");
+    function taskService(TABLE, Database) {
+        var db = new Database(TABLE.TASK);
 
         this.list = function() {
             return db.find({}, {
@@ -13,11 +13,35 @@
                     "project": {
                         "_id": "project_id",
                         "$as": "project",
-                        "$required": false,
+                        "$required": true,
                         "$multi": false
                     }
                 }]
             });
+        };
+
+        this.listIncompleteTasks = function() {
+            return db.find(
+                {
+                    $or: [
+                        { finished: false },
+                        { finished: { $exists: false } }
+                    ]
+                },
+                {
+                    "$join": [{
+                        "project": {
+                            "_id": "project_id",
+                            "$as": "project",
+                            "$required": true,
+                            "$multi": false
+                        }
+                    }],
+                    "$orderBy": {
+                        "dueDate": 1
+                    }
+                }
+            );
         };
 
         this.save = function(task) {

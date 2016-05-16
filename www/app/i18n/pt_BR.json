@@ -19,7 +19,6 @@
             "home": "Início",
             "projects": "Projetos",
             "tasks": "Tarefas",
-            "categories": "Categorias",
             "settings": "Configurações",
             "about": "Sobre",
             "exit": "Sair"
@@ -41,9 +40,6 @@
                     "updated": "Registro atualizado com sucesso",
                     "removed": "Registro removido com sucesso",
                     "removedSelected": "Registros removidos com sucesso"
-                },
-                "error": {
-
                 }
             },
             "popup": {

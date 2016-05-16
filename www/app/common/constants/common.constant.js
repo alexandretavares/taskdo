@@ -59,4 +59,10 @@
         FALLBACK: "en"
     });
 
+    angular.module("todolist.common").constant("TABLE", {
+        PROJECT: "project",
+        TASK: "task",
+        SETTING: "setting"
+    });
+
 })();

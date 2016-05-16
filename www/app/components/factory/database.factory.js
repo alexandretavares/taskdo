@@ -2,14 +2,22 @@
     'use strict';
 
     angular.module("todolist.components").factory("Database", DatabaseFactory);
-    DatabaseFactory.$inject = ['$q'];
+    DatabaseFactory.$inject = ['$q', 'TABLE'];
 
-    function DatabaseFactory($q) {
+    function DatabaseFactory($q, TABLE) {
         var _fdb = new ForerunnerDB();
         var _db = _fdb.db("todolist");
+        var _collections = {};
+
+        (function() {
+            angular.forEach(TABLE, function(tableName, key) {
+                _collections[tableName] = _db.collection(tableName);
+                _collections[tableName].load();
+            });
+        })();
 
         function Database(tableName) {
-            var collection = _db.collection(tableName);
+            var collection = _collections[tableName]
 
             var commit = function(resolve, reject) {
                 collection.save(function(error) {

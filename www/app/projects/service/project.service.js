@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module("todolist.projects").service("projectService", projectService);
-    projectService.$inject = ['Database', 'taskService'];
+    projectService.$inject = ['TABLE', 'Database', 'taskService'];
 
-    function projectService(Database, taskService) {
-        var db = new Database("project");
+    function projectService(TABLE, Database, taskService) {
+        var db = new Database(TABLE.PROJECT);
 
         this.list = function() {
             return db.list();

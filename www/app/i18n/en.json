@@ -19,7 +19,6 @@
             "home": "Home",
             "projects": "Projects",
             "tasks": "Tasks",
-            "categories": "Categories",
             "settings": "Settings",
             "about": "About",
             "exit": "Exit"
@@ -41,9 +40,6 @@
                     "updated": "Successfully updated record",
                     "removed": "Successfully removed record",
                     "removedSelected": "Successfully removed records"
-                },
-                "error": {
-
                 }
             },
             "popup": {

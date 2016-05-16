@@ -1,5 +1,19 @@
 <ion-view>
     <ion-nav-title translate="i18n.dashboard.title"></ion-nav-title>
     <ion-content overflow-scroll="false">
+        <ion-list ng-repeat="taskPerDate in mv.tasksToFilter() | filter:mv.filterTasks">
+            <ion-item class="item item-divider">
+                {{taskPerDate.dueDate | date: 'dd/MM/yyyy'}}
+            </ion-item>
+
+            <ion-item type="item-text-wrap" class="item item-icon-right item-avatar"
+                ng-repeat="task in mv.tasks | filter:{ dueDate: taskPerDate.dueDate }">
+
+                <a class="item-no-decoration">
+                    <h2 ng-bind="task.name"></h2>
+                    <p ng-bind="task.project.name"></p>
+                </a>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

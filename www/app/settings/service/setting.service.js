@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module("todolist.settings").service("settingService", settingService);
-    settingService.$inject = ['Database', '$q'];
+    settingService.$inject = ['TABLE', 'Database', '$q'];
 
-    function settingService(Database, $q) {
-        var db = new Database("setting");
+    function settingService(TABLE, Database, $q) {
+        var db = new Database(TABLE.SETTING);
 
         this.getLanguage = function() {
             return $q(function(resolve, reject) {
