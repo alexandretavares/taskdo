@@ -33,11 +33,15 @@
                     <textarea name="taskNotes" ng-model="mv.task.notes"></textarea>
                 </label>
 
-                <label class="item item-input">
+                <label class="item item-input"
+                    ng-class="{'has-error' : mv.taskForm.taskDueDate.$invalid
+                    && mv.taskForm.taskDueDate.$dirty}">
+
                     <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
-                    <input type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
-                        min="{{mv.minDate | date:'yyyy-MM-dd'}}">
+                    <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
+                        min="{{mv.minDate | date:'yyyy-MM-dd'}}" required>
                 </label>
+                <todo-error-messages field="mv.taskForm.taskDueDate"></todo-error-messages>
 
                 <label class="item item-input item-select">
                     <div class="input-label" translate="i18n.tasks.form.fields.project"></div>

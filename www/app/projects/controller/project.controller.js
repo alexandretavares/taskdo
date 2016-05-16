@@ -29,7 +29,7 @@
                 })
                 .catch(function(error) {
                     mv.projects = [];
-                    console.log(error);
+                    console.error(error);
                 });
         };
 

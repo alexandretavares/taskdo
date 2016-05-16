@@ -1,4 +1,6 @@
 (function() {
+    'use strict';
+    
     angular.module("todolist.common").filter('groupBy', groupBy);
 
     function groupBy() {

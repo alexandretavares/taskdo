@@ -1,7 +1,8 @@
 {
     "i18n": {
         "dashboard": {
-            "title": "Home"
+            "title": "Home",
+            "noTasks": "There are not open tasks"
         },
         "language": {
             "en": "English",
@@ -32,7 +33,8 @@
             "validations": {
                 "required": "Field required",
                 "minlength": "Min length: {{minlength}} characters",
-                "maxlength": "Max length: {{maxlength}} characters"
+                "maxlength": "Max length: {{maxlength}} characters",
+                "invalidDate": "Invalid date"
             },
             "messages": {
                 "success": {
@@ -108,6 +110,11 @@
                     "updated": "Successfully updated settings"
                 }
             }
+        },
+        "about": {
+            "title": "About",
+            "version": "Version: {{version}}",
+            "text": "This is an app that store tasks to do. You can create projects to organize your tasks."
         }
     }
 }

@@ -25,25 +25,17 @@
 
         this.refresh = function(language) {
             return $q(function(resolve, reject) {
-                if (language) {
-                    $translate.use(language).then(function() {
-                        _translate(language)
-                            .then(function() {
-                                resolve();
-                            })
-                            .catch(function(error) {
-                                reject(error);
-                            });
-                    });
-                } else {
-                    _translate($translate.use())
+                var lang = language || $translate.resolveClientLocale().toLowerCase();
+
+                $translate.use(lang).then(function() {
+                    _translate(lang)
                         .then(function() {
                             resolve();
                         })
                         .catch(function(error) {
                             reject(error);
                         });
-                }
+                });
             });
         };
 

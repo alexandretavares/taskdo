@@ -37,12 +37,7 @@
             _popover.show($event);
         };
 
-        (function() {
-            mv.setting = {};
-            mv.languages = i18n.getLanguages();
-
-            _initPopover();
-
+        $scope.$on("$ionicView.loaded", function() {
             settingService.get().then(function(setting) {
                 if (setting != null) {
                     mv.setting = setting;
@@ -52,6 +47,13 @@
 
                 mv.defaultSetting = angular.copy(mv.setting);
             });
+        });
+
+        (function() {
+            mv.setting = {};
+            mv.languages = i18n.getLanguages();
+
+            _initPopover();            
         })();
 
     }

@@ -9,13 +9,14 @@
             'todolist.dashboard',
             'todolist.settings',
             'todolist.projects',
-            'todolist.tasks'
+            'todolist.tasks',
+            'todolist.about'
         ]
     ).run(run);
 
-    run.$inject = ['$ionicPlatform', '$translate', 'settingService', 'i18nService'];
+    run.$inject = ['$ionicPlatform','settingService', 'i18nService'];
 
-    function run($ionicPlatform, $translate, settingService, i18n) {
+    function run($ionicPlatform, settingService, i18n) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
               // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -39,7 +40,7 @@
                 } else {
                     if (typeof navigator.globalization !== "undefined") {
                        navigator.globalization.getPreferredLanguage(function(language) {
-                           i18n.refresh((language.value).split("-")[0]);
+                           i18n.refresh(language.value.split("-")[0]);
                        }, null);
                    } else {
                        i18n.refresh();

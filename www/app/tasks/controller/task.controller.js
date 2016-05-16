@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module("todolist.tasks").controller("TaskController", TaskController);
-    TaskController.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', 'STATE',
+    TaskController.$inject = ['$scope', '$state', '$ionicHistory', 'STATE',
         'i18nService', 'toastService', 'popupService', 'taskService', 'projectService'];
 
-    function TaskController($rootScope, $scope, $state, $ionicHistory, STATE, i18n,
+    function TaskController($scope, $state, $ionicHistory, STATE, i18n,
         toastService, popupService, taskService, projectService) {
 
         var mv = this;
@@ -31,7 +31,7 @@
                     mv.projects = projects;
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    console.error(error);
                 });
         };
 

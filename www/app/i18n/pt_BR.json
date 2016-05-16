@@ -1,7 +1,8 @@
 {
     "i18n": {
         "dashboard": {
-            "title": "Início"
+            "title": "Início",
+            "noTasks": "Não existem tarefas em aberto"
         },
         "language": {
             "en": "Inglês",
@@ -32,7 +33,8 @@
             "validations": {
                 "required": "Campo obrigatório",
                 "minlength": "Tamanho mínimo: {{minlength}} caracteres",
-                "maxlength": "Tamanho máximo: {{maxlength}} caracteres"
+                "maxlength": "Tamanho máximo: {{maxlength}} caracteres",
+                "invalidDate": "Data inválida"
             },
             "messages": {
                 "success": {
@@ -108,6 +110,11 @@
                     "updated": "Configurações atualizadas com sucesso"
                 }
             }
+        },
+        "about": {
+            "title": "Sobre",
+            "version": "Versão: {{version}}",
+            "text": "Esta é uma aplicação para registrar tarefas a fazer. É possível criar projetos para organizar suas tarefas."
         }
     }
 }

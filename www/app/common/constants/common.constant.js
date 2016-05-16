@@ -17,7 +17,8 @@
             NEW: "app.tasks.new",
             EDIT: "app.tasks.edit"
         },
-        SETTINGS: "app.settings"
+        SETTINGS: "app.settings",
+        ABOUT: "app.about"
     });
 
     angular.module("todolist.common").constant("PRIORITY", {
