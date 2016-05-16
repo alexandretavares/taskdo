@@ -1,25 +1,70 @@
-Ionic App Base
-=====================
+# TodoList
 
-A starting project for Ionic that optionally supports using custom SCSS.
+It is a mobile hybrid app Ionic-based that store tasks todo. You can create projects to organize your tasks.
 
-## Using this project
+### Version
+0.1.0
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+### Tech
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+* [NodeJS] - JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [Ionic] - Advanced HTML5 Hybrid Mobile App Framework.
+* [Cordova] - Mobile apps with HTML, CSS & JS.
+* [AngularJS] - HTML enhanced for web apps!
+* [ForerunnerDB] - NoSQL In-Browser JavaScript Database.
 
+
+### Installation
+Firts intall **NodeJS** and required platform dependencies (Android or IOS).
+
+You need `ionic` and `cordova` installed globally:
 ```bash
-$ npm install -g ionic
+$ npm install -g ionic cordova
 ```
 
-Then run: 
-
+Clone the repository and install project dependencies:
 ```bash
-$ ionic start myProject tabs
+$ https://github.com/alexandretavares/ionic-todolist.git
+$ cd todolist
+$ npm install
 ```
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+Setup device platform:
+```bash
+$ ionic platform add android
+or
+$ ionic platform add ios
+```
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+### Run
+
+To start the project on browser run:
+```bash
+$ ionic serve
+```
+
+Run on emulator:
+```bash
+$ ionic build android
+$ ionic emulate android
+```
+
+Run on device:
+```bash
+$ ionic run android
+```
+
+More info on this can be found on the Ionic [Getting Started] [IonicGettingStarted] page and the [Ionic CLI] [IonicCLI] repo.
+
+License
+----
+
+MIT
+
+[AngularJS]: <http://angularjs.org>
+[NodeJS]: <https://nodejs.org>
+[Cordova]: <https://cordova.apache.org>
+[Ionic]: <http://ionicframework.com>
+[IonicGettingStarted]: <http://ionicframework.com/getting-started>
+[IonicCLI]: <https://github.com/driftyco/ionic-cli>
+[ForerunnerDB]: <http://www.forerunnerdb.com>
