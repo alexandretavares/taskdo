@@ -40,14 +40,6 @@
                         templateUrl: "app/projects/partials/project-form.html"
                     }
                 }
-            })
-            .state(STATE.PROJECTS.SHOW, {
-                url: "/show/:id",
-                views: {
-                    'content-view': {
-                        templateUrl: "app/projects/partials/project-show.html"
-                    }
-                }
             });
     }
 

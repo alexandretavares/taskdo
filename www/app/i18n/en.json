@@ -53,13 +53,22 @@
                 },
                 "remove": {
                     "title": "Remove records",
-                    "content": "Do you want remove the records?"
+                    "content": "Do you want to remove the records?"
+                },
+                "finish": {
+                    "title": "Finish records",
+                    "content": "Do you want to finish the records?"
+                },
+                "exit": {
+                    "title": "Exit",
+                    "content": "Do you want to exit the application?"
                 }
             }
         },
         "projects": {
             "list": {
-                "title": "Projects"
+                "title": "Projects",
+                "createdIn": "Created in: {{createdIn | date : 'dd/MM/yyyy'}}"
             },
             "form": {
                 "title": "Project",
@@ -71,6 +80,21 @@
         "tasks": {
             "list": {
                 "title": "Tasks"
+            },
+            "form": {
+                "title": "Task",
+                "fields": {
+                    "name": "Name",
+                    "project": "Project",
+                    "finished": "Finished",
+                    "dueDate": "Due date",
+                    "notes": "Notes"
+                }
+            },
+            "messages": {
+                "success": {
+                    "finished": "Successfully finished tasks"
+                }
             }
         },
         "settings": {

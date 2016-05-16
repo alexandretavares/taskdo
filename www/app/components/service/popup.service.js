@@ -2,17 +2,42 @@
     'use strict';
 
     angular.module("todolist.components").service("popupService", popupService);
-    popupService.$inject = ['$ionicPopup', 'i18nService'];
+    popupService.$inject = ['$q', '$ionicPopup', 'i18nService'];
 
-    function popupService($ionicPopup, i18n) {
+    function popupService($q, $ionicPopup, i18n) {
 
-        this.remove = function(callback) {
-            $ionicPopup.confirm({
-                title: i18n.common.popup.remove.title,
-                template: i18n.common.popup.remove.content,
-                cancelText: i18n.common.popup.buttons.no,
-                okText: i18n.common.popup.buttons.yes
-            }).then(callback);
+        var _confirmPopup = function(i18nOjb) {
+            return $q(function(resolve, reject) {
+                $ionicPopup.confirm({
+                        title: i18nOjb.title,
+                        template: i18nOjb.content,
+                        cancelText: i18n.common.popup.buttons.no,
+                        okText: i18n.common.popup.buttons.yes,
+                        okType: "button-stable"
+                    })
+                    .then(function(result) {
+                        if (result) {
+                            resolve();
+                        } else {
+                            reject();
+                        }
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        };
+
+        this.remove = function() {
+            return _confirmPopup(i18n.common.popup.remove);
+        };
+
+        this.finish = function() {
+            return _confirmPopup(i18n.common.popup.finish);
+        };
+
+        this.exit = function(callback) {
+            return _confirmPopup(i18n.common.popup.exit);
         };
 
     }

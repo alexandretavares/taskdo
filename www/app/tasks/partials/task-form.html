@@ -1,0 +1,56 @@
+<ng-form class="form" name="mv.taskForm" novalidate>
+    <ion-view>
+        <ion-nav-title translate="i18n.tasks.form.title"></ion-nav-title>
+
+        <ion-nav-buttons side="left">
+            <button class="button button-icon icon ion-android-arrow-back"
+                    ng-click="mv.goBack()"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-android-delete ng-hide"
+                    ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
+
+            <button class="button button-icon icon ion-android-done" ng-click="mv.save()"
+                    ng-disabled="mv.isInvalidForm()"></button>
+        </ion-nav-buttons>
+
+        <ion-content overflow-scroll="false">
+            <div class="list padding-horizontal">
+                <label class="item item-input"
+                    ng-class="{'has-error' : mv.taskForm.taskName.$invalid
+                    && mv.taskForm.taskName.$dirty}">
+
+                    <span class="input-label" translate="i18n.tasks.form.fields.name"></span>
+                    <input name="taskName" type="text"
+                        ng-model="mv.task.name" ng-model-options="{debounce: 300}"
+                        ng-minlength="3" ng-maxlength="25" required>
+                </label>
+                <todo-error-messages field="mv.taskForm.taskName"
+                    min-length="3" max-length="25"></todo-error-messages>
+
+                <label class="item item-input">
+                    <span class="input-label" translate="i18n.tasks.form.fields.notes"></span>
+                    <textarea name="taskNotes" ng-model="mv.task.notes"></textarea>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
+                    <input type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
+                        min="{{mv.minDate | date:'yyyy-MM-dd'}}">
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label" translate="i18n.tasks.form.fields.project"></div>
+                    <select ng-model="mv.task.project_id" required
+                        ng-options="project._id as project.name for project in mv.projects">
+                    </select>
+                </label>
+
+                <ion-toggle class="ng-hide" toggle-class="toggle-royal"
+                    ng-model="mv.task.finished" ng-show="mv.isEditMode()">
+                    {{'i18n.tasks.form.fields.finished' | translate}}
+                </ion-toggle>
+            </div>
+        </ion-content>
+    </ion-view>
+</ng-form>

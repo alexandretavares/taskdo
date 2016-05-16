@@ -22,7 +22,14 @@
         $stateProvider.state(STATE.BASE, {
             url: '/app',
             abstract: true,
-            templateUrl: 'app/common/partials/menu.html'
+            templateUrl: 'app/common/partials/menu.html',
+            controller: function($scope, popupService) {
+                $scope.exit = function() {
+                    popupService.exit().then(function() {
+                        ionic.Platform.exitApp();
+                    });
+                }
+            }
         });
 
         $urlRouterProvider.otherwise("/app/dashboard");

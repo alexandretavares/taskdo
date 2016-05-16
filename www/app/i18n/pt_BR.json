@@ -54,6 +54,14 @@
                 "remove": {
                     "title": "Remover registro(s)",
                     "content": "Deseja remover o(s) registro(s)?"
+                },
+                "finish": {
+                    "title": "Finalizar registro(s)",
+                    "content": "Deseja finalizar o(s) registro(s)?"
+                },
+                "exit": {
+                    "title": "Sair",
+                    "content": "Deseja sair da aplicação?"
                 }
             }
         },
@@ -72,6 +80,21 @@
         "tasks": {
             "list": {
                 "title": "Tarefas"
+            },
+            "form": {
+                "title": "Tarefa",
+                "fields": {
+                    "name": "Nome",
+                    "project": "Projeto",
+                    "finished": "Finalizada",
+                    "dueDate": "Finaliza em",
+                    "notes": "Notas"
+                }
+            },
+            "messages": {
+                "success": {
+                    "finished": "Tarefas finalizadas com sucesso"
+                }
             }
         },
         "settings": {

@@ -13,7 +13,9 @@
         },
         TASKS: {
             BASE: "app.tasks",
-            LIST: "app.tasks.list"
+            LIST: "app.tasks.list",
+            NEW: "app.tasks.new",
+            EDIT: "app.tasks.edit"
         },
         SETTINGS: "app.settings"
     });
@@ -53,7 +55,7 @@
             'en' : 'en', 'en_*': 'en', 'en-*': 'en',
             'pt' : 'pt_br', 'pt_*': 'pt_br', 'pt-*': 'pt_br'
         },
-        PREFERRED: "pt_br",
+        PREFERRED: "en",
         FALLBACK: "en"
     });
 

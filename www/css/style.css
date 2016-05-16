@@ -42,3 +42,11 @@
 label.item.has-error {
     border-bottom: 2px solid red;
 }
+
+.item.item-strikethrough {
+    text-decoration: line-through;
+}
+
+.form .item.item-input {
+    margin-top: 15px;
+}

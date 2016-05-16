@@ -3,10 +3,10 @@
 
     angular.module("todolist.projects").controller("ProjectController", ProjectController);
 
-    ProjectController.$inject = ['$scope', '$state', '$q', '$ionicHistory', '$ionicPopover',
+    ProjectController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
         'STATE', 'projectService', 'toastService', 'popupService', 'i18nService'];
 
-    function ProjectController($scope, $state, $q, $ionicHistory, $ionicPopover,
+    function ProjectController($scope, $state, $ionicHistory, $ionicPopover,
         STATE, projectService, toastService, popupService, i18n) {
 
         var mv = this;
@@ -23,16 +23,14 @@
         };
 
         mv.refreshList = function() {
-            return $q(function(resolve, reject) {
-                projectService.list()
-                    .then(function(projects) {
-                        mv.projects = projects;
-                        resolve();
-                    })
-                    .catch(function(error) {
-                        reject(error);
-                    })
-            });
+            projectService.list()
+                .then(function(projects) {
+                    mv.projects = projects;
+                })
+                .catch(function(error) {
+                    mv.projects = [];
+                    console.log(error);
+                });
         };
 
         mv.goBack = function() {
@@ -110,52 +108,48 @@
         };
 
         mv.remove = function() {
-            popupService.remove(function(res) {
-                if (res) {
-                    projectService.remove($state.params.id)
-                        .then(function() {
-                            toastService.show(i18n.common.messages.success.removed);
+            popupService.remove().then(function() {
+                projectService.remove($state.params.id)
+                    .then(function() {
+                        toastService.show(i18n.common.messages.success.removed);
 
-                            $state.go(mv.listMode).then(function() {
-                                mv.refreshList();
-                            });
-                        })
-                        .catch(function(error) {
-                            console.error(error);
+                        $state.go(mv.listMode).then(function() {
+                            mv.refreshList();
                         });
-                }
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
             });
         };
 
         mv.removeSelected = function() {
-            popupService.remove(function(res) {
-                if (res) {
-                    var projectsToRemove = [];
+            popupService.remove().then(function() {
+                var projectsToRemove = [];
 
-                    angular.forEach(mv.selected, function(value, key) {
-                        projectsToRemove.push(key);
+                angular.forEach(mv.selected, function(value, key) {
+                    projectsToRemove.push(key);
+                });
+
+                projectService.remove(projectsToRemove)
+                    .then(function() {
+                        mv.selected = {};
+                        toastService.show(i18n.common.messages.success.removedSelected);
+                        mv.refreshList();
                     });
-
-                    projectService.removeList(projectsToRemove)
-                        .then(function() {
-                            mv.selected = {};
-                            toastService.show(i18n.common.messages.success.removedSelected);
-                            mv.refreshList();
-                        });
-                }
             });
         };
 
         $scope.$on("$ionicView.beforeEnter", function() {
             if (!$state.is(mv.listMode)) {
+                mv.project = {};
+                mv.projectForm.$setPristine();
+
                 if ($state.params.id) {
                     projectService.get($state.params.id)
                         .then(function(project) {
                             mv.project = project;
                         });
-                } else {
-                    mv.project = {};
-                    mv.projectForm.$setPristine();
                 }
             }
         });
@@ -175,10 +169,7 @@
             mv.showMode = STATE.PROJECTS.SHOW;
 
             _initPopover();
-
-            if ($state.is(mv.listMode)) {
-                mv.refreshList();
-            }
+            mv.refreshList();
         })();
     }
 

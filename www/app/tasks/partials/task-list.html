@@ -1,9 +1,36 @@
 <ion-view>
     <ion-nav-title translate="i18n.tasks.list.title"></ion-nav-title>
-    <ion-nav-buttons side="right">
-        
-    </ion-nav-buttons>
-    <ion-content overflow-scroll="false">
 
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-done-all ng-hide"
+                ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
+
+        <button class="button button-icon icon ion-android-delete ng-hide"
+                ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
+
+        <button class="button button-icon icon ion-compose" ui-sref="{{mv.newMode}}"></button>
+    </ion-nav-buttons>
+
+    <ion-content overflow-scroll="false">
+        <ion-list>
+            <ion-item ng-repeat="task in mv.tasks" type="item-text-wrap"
+                class="item-icon-right item-avatar"
+                ng-class="{'item-strikethrough' : task.finished}">
+
+                <div class="item-image">
+                     <label class="checkbox checkbox-royal" ng-switch="task.finished">
+                         <input type="checkbox" checked="checked" disabled="disadled"
+                            ng-switch-when="true" />
+                         <input type="checkbox" ng-model="mv.selected[task._id]"
+                            ng-change="mv.checkSelected(task._id)" ng-switch-default />
+                     </label>
+                </div>
+                <a ui-sref="{{mv.editMode}}({id: task._id})" class="item-no-decoration">
+                    <h2 ng-bind="task.name"></h2>
+                    <p ng-bind="task.project.name"></p>
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+                </a>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

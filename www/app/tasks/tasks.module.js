@@ -24,6 +24,22 @@
                         templateUrl: "app/tasks/partials/task-list.html"
                     }
                 }
+            })
+            .state(STATE.TASKS.NEW, {
+                url: "/new",
+                views: {
+                    'content-view': {
+                        templateUrl: "app/tasks/partials/task-form.html"
+                    }
+                }
+            })
+            .state(STATE.TASKS.EDIT, {
+                url: "/edit/:id",
+                views: {
+                    'content-view': {
+                        templateUrl: "app/tasks/partials/task-form.html"
+                    }
+                }
             });
     }
 

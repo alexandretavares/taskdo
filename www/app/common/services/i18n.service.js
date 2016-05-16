@@ -59,9 +59,6 @@
             return $interpolate(i18nKey)(params);
         };
 
-        (function() {
-            that.refresh();
-        })();
     }
 
 })();

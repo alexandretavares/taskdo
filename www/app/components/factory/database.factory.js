@@ -21,6 +21,15 @@
                 });
             };
 
+            this.find = function(query, options) {
+                return $q(function(resolve, reject) {
+                    collection.load(function() {
+                        var docs = collection.find(query, options);
+                        resolve(angular.copy(docs));
+                    });
+                });
+            };
+
             this.list = function() {
                 return $q(function(resolve, reject) {
                     collection.load(function() {
@@ -38,7 +47,7 @@
                     if (docs.length > 0) {
                         resolve(angular.copy(docs[0]));
                     } else {
-                        reject("Record not found in database. Id: " + id);
+                        reject(null);
                     }
                 });
             };
@@ -55,23 +64,29 @@
                 });
             };
 
-            this.remove = function(id) {
+            this.remove = function(ids) {
                 return $q(function(resolve, reject) {
-                    collection.remove({_id: id}, function() {
+                    collection.remove({ _id: ids }, function() {
                         commit(resolve, reject);
                     });
                 });
             };
 
-            this.removeList = function(ids) {
+            this.removeByQuery = function(query) {
                 return $q(function(resolve, reject) {
-                    collection.remove({
-                        _id: ids
-                    }, function() {
+                    collection.remove(query, function() {
                         commit(resolve, reject);
                     });
                 });
             };
+
+            this.update = function(ids, fields) {
+                return $q(function(resolve, reject) {
+                    collection.update({ _id: ids }, fields);
+                    commit(resolve, reject);
+                });
+            };
+
         }
 
         return Database;

@@ -18,13 +18,12 @@
 
         <ion-content overflow-scroll="false">
             <div class="list padding-horizontal">
-                <label class="item item-input item-floating-label"
+                <label class="item item-input"
                     ng-class="{'has-error' : mv.projectForm.projectName.$invalid
                     && mv.projectForm.projectName.$dirty}">
 
                     <span class="input-label" translate="i18n.projects.form.fields.name"></span>
                     <input name="projectName" type="text"
-                        placeholder="{{'i18n.projects.form.fields.name' | translate}}"
                         ng-model="mv.project.name" ng-model-options="{debounce: 300}"
                         ng-minlength="3" ng-maxlength="25" required>
                 </label>

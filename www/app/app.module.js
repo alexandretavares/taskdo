@@ -13,9 +13,9 @@
         ]
     ).run(run);
 
-    run.$inject = ['$ionicPlatform', '$translate'];
+    run.$inject = ['$ionicPlatform', '$translate', 'settingService', 'i18nService'];
 
-    function run($ionicPlatform, $translate) {
+    function run($ionicPlatform, $translate, settingService, i18n) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
               // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -32,11 +32,21 @@
                 StatusBar.styleDefault();
             }
 
-            if (typeof navigator.globalization !== "undefined") {
-               navigator.globalization.getPreferredLanguage(function(language) {
-                   $translate.use((language.value).split("-")[0]);
-               }, null);
-           }
+            // Setting the language
+            settingService.getLanguage().then(function(lang) {
+                if (lang != null) {
+                    i18n.refresh(lang);
+                } else {
+                    if (typeof navigator.globalization !== "undefined") {
+                       navigator.globalization.getPreferredLanguage(function(language) {
+                           i18n.refresh((language.value).split("-")[0]);
+                       }, null);
+                   } else {
+                       i18n.refresh();
+                   }
+                }
+            });
+
         });
     }
 })();
