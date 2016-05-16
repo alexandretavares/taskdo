@@ -15,7 +15,7 @@ It is a mobile hybrid app Ionic-based that store tasks todo. You can create proj
 
 
 ### Installation
-Firts intall **NodeJS** and required platform dependencies (Android or IOS).
+First install **NodeJS** and required platform dependencies (Android or IOS).
 
 You need `ionic` and `cordova` installed globally:
 ```bash

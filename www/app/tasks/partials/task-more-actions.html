@@ -1,0 +1,9 @@
+<ion-popover-view class="todolist-popover">
+    <ion-content>
+        <div class="list">
+            <a class="item ng-hide" ng-show="mv.isListMode()" ng-click="mv.selectAll()">
+                {{(mv.selectedAll ? 'i18n.common.moreActions.unselectAll' : 'i18n.common.moreActions.selectAll') | translate}}
+            </a>
+        </div>
+    </ion-content>
+</ion-popover-view>

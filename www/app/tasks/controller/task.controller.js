@@ -2,13 +2,24 @@
     'use strict';
 
     angular.module("todolist.tasks").controller("TaskController", TaskController);
-    TaskController.$inject = ['$scope', '$state', '$ionicHistory', 'STATE',
+    TaskController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover', 'STATE',
         'i18nService', 'toastService', 'popupService', 'taskService', 'projectService'];
 
-    function TaskController($scope, $state, $ionicHistory, STATE, i18n,
+    function TaskController($scope, $state, $ionicHistory, $ionicPopover, STATE, i18n,
         toastService, popupService, taskService, projectService) {
 
         var mv = this;
+        var _popover = null;
+
+        var _initPopover = function() {
+            if (_popover == null) {
+                $ionicPopover.fromTemplateUrl('app/tasks/partials/task-more-actions.html', {
+                    scope: $scope
+                }).then(function(popover) {
+                    _popover = popover;
+                });
+            }
+        };
 
         mv.goBack = function() {
             $ionicHistory.goBack();
@@ -41,6 +52,10 @@
 
         mv.isListMode = function() {
             return $state.is(mv.listMode);
+        };
+
+        mv.showMoreActions = function($event) {
+            _popover.show($event);
         };
 
         mv.isInvalidForm = function() {
@@ -76,7 +91,7 @@
                 mv.selected = {};
             }
 
-            mv.closeMoreActions();
+            _popover.hide();
         };
 
         mv.save = function() {
@@ -190,6 +205,7 @@
             mv.listMode = STATE.TASKS.LIST;
             mv.showMode = STATE.TASKS.SHOW;
 
+            _initPopover();
             mv.refreshList();
             mv.refreshProjects();
         })();

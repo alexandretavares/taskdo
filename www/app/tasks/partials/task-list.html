@@ -3,12 +3,16 @@
 
     <ion-nav-buttons side="right">
         <button class="button button-icon icon ion-android-done-all ng-hide"
-                ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
+            ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
 
         <button class="button button-icon icon ion-android-delete ng-hide"
-                ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
+            ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
 
-        <button class="button button-icon icon ion-compose" ui-sref="{{mv.newMode}}"></button>
+        <button class="button button-icon icon ion-compose"
+            ui-sref="{{mv.newMode}}"></button>
+
+        <button class="button button-icon icon ion-android-more-vertical"
+            ng-click="mv.showMoreActions($event)"></button>
     </ion-nav-buttons>
 
     <ion-content overflow-scroll="false">
