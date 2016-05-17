@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.components").directive("todoErrorMessages", function() {
+    angular.module("taskdo.components").directive("tskErrorMessages", function() {
         return {
             scope: {
                 field: "=",

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.tasks").controller("TaskController", TaskController);
+    angular.module("taskdo.tasks").controller("TaskController", TaskController);
     TaskController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover', 'STATE',
         'i18nService', 'toastService', 'popupService', 'taskService', 'projectService'];
 
@@ -81,17 +81,19 @@
         };
 
         mv.selectAll = function() {
-            mv.selectedAll = !mv.selectedAll;
+            if (mv.tasks.length > 0) {
+                mv.selectedAll = !mv.selectedAll;
 
-            if (mv.selectedAll) {
-                for (var i = 0; i < mv.tasks.length; i++) {
-                    mv.selected[mv.tasks[i]._id] = true;
+                if (mv.selectedAll) {
+                    for (var i = 0; i < mv.tasks.length; i++) {
+                        mv.selected[mv.tasks[i]._id] = true;
+                    }
+                } else {
+                    mv.selected = {};
                 }
-            } else {
-                mv.selected = {};
-            }
 
-            _popover.hide();
+                _popover.hide();
+            }
         };
 
         mv.save = function() {

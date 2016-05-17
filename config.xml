@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.gmail.alexandredevice.ionic.todolistv01" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>TodoListV01</name>
+<widget id="com.gmail.tmalexandre.ionic.taskdov01" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>TaskDoV01</name>
   <description>
-        A todo list project
+        An app to store tasks to do.
     </description>
-  <author email="alexandredevice@gmail.com" href="">
+  <author email="tm.alexandre@gmail.com" href="">
         Alexandre Tavares
     </author>
   <content src="index.html"/>

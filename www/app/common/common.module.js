@@ -1,6 +1,6 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.common", []);
+    angular.module("taskdo.common", []);
 
 })();

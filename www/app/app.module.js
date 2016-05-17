@@ -1,16 +1,16 @@
 (function() {
     'use strict';
 
-    angular.module('todolist',
+    angular.module('taskdo',
         [
             'ionic', 'ngCordova', 'ngMessages', 'pascalprecht.translate',
-            'todolist.common',
-            'todolist.components',
-            'todolist.dashboard',
-            'todolist.settings',
-            'todolist.projects',
-            'todolist.tasks',
-            'todolist.about'
+            'taskdo.common',
+            'taskdo.components',
+            'taskdo.dashboard',
+            'taskdo.settings',
+            'taskdo.projects',
+            'taskdo.tasks',
+            'taskdo.about'
         ]
     ).run(run);
 

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.components").service("toastService", toastService);
+    angular.module("taskdo.components").service("toastService", toastService);
     toastService.$inject = ['$cordovaToast', '$ionicLoading'];
 
     function toastService($cordovaToast, $ionicLoading) {

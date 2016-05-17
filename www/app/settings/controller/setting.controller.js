@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.settings").controller("SettingController", SettingController);
+    angular.module("taskdo.settings").controller("SettingController", SettingController);
     SettingController.$inject = ['$scope', 'i18nService', 'toastService', '$ionicPopover', 'settingService'];
 
     function SettingController($scope, i18n, toastService, $ionicPopover, settingService) {

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.common").service("i18nService", i18nService);
+    angular.module("taskdo.common").service("i18nService", i18nService);
     i18nService.$inject = ['$q', '$translate', '$http', '$interpolate',
         'LANGUAGE'];
 

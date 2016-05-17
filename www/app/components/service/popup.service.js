@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.components").service("popupService", popupService);
+    angular.module("taskdo.components").service("popupService", popupService);
     popupService.$inject = ['$q', '$ionicPopup', 'i18nService'];
 
     function popupService($q, $ionicPopup, i18n) {

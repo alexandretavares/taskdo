@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.settings").service("settingService", settingService);
+    angular.module("taskdo.settings").service("settingService", settingService);
     settingService.$inject = ['TABLE', 'Database', '$q'];
 
     function settingService(TABLE, Database, $q) {

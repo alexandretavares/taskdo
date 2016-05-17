@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('todolist').config(config);
+    angular.module('taskdo').config(config);
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider',
         'STATE', 'LANGUAGE'];
 

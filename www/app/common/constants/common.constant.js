@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.common").constant("STATE", {
+    angular.module("taskdo.common").constant("STATE", {
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: {
@@ -21,7 +21,7 @@
         ABOUT: "app.about"
     });
 
-    angular.module("todolist.common").constant("PRIORITY", {
+    angular.module("taskdo.common").constant("PRIORITY", {
         CRITICAL: {
             code: "CRITICAL",
             name: "i18n.priority.critical"
@@ -48,7 +48,7 @@
         }
     });
 
-    angular.module("todolist.common").constant("LANGUAGE", {
+    angular.module("taskdo.common").constant("LANGUAGE", {
         PREFIX: "app/i18n/",
         SUFFIX: ".json",
         KEYS: ['en', 'pt_br'],
@@ -60,7 +60,7 @@
         FALLBACK: "en"
     });
 
-    angular.module("todolist.common").constant("TABLE", {
+    angular.module("taskdo.common").constant("TABLE", {
         PROJECT: "project",
         TASK: "task",
         SETTING: "setting"

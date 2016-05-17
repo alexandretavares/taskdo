@@ -25,8 +25,8 @@
                         ng-model="mv.task.name" ng-model-options="{debounce: 300}"
                         ng-minlength="3" ng-maxlength="25" required>
                 </label>
-                <todo-error-messages field="mv.taskForm.taskName"
-                    min-length="3" max-length="25"></todo-error-messages>
+                <tsk-error-messages field="mv.taskForm.taskName"
+                    min-length="3" max-length="25"></tsk-error-messages>
 
                 <label class="item item-input">
                     <span class="input-label" translate="i18n.tasks.form.fields.notes"></span>
@@ -41,7 +41,7 @@
                     <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
                         min="{{mv.minDate | date:'yyyy-MM-dd'}}" required>
                 </label>
-                <todo-error-messages field="mv.taskForm.taskDueDate"></todo-error-messages>
+                <tsk-error-messages field="mv.taskForm.taskDueDate"></tsk-error-messages>
 
                 <label class="item item-input item-select">
                     <div class="input-label" translate="i18n.tasks.form.fields.project"></div>

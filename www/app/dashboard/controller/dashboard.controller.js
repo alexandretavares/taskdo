@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.dashboard").controller("DashboardController", DashboardController);
+    angular.module("taskdo.dashboard").controller("DashboardController", DashboardController);
     DashboardController.$inject = ['$scope', 'dashboardService'];
 
     function DashboardController($scope, dashboardService) {

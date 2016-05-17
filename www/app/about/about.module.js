@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.about", ['todolist.common']).config(config);
+    angular.module("taskdo.about", ['taskdo.common']).config(config);
     config.$inject = ['$stateProvider', 'STATE'];
 
     function config($stateProvider, STATE) {

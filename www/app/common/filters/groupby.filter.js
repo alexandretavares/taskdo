@@ -1,7 +1,14 @@
+/**
+*
+* Created by Josep M Sobrepere
+* https://github.com/josepot
+* http://sobrepere.com/blog/2014/10/14/creating-groupby-filter-angularjs/
+*
+*/
 (function() {
     'use strict';
-    
-    angular.module("todolist.common").filter('groupBy', groupBy);
+
+    angular.module("taskdo.common").filter('groupBy', groupBy);
 
     function groupBy() {
         var results = {};

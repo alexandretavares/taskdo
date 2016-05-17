@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module("todolist.dashboard").service("dashboardService", dashboardService);
+    angular.module("taskdo.dashboard").service("dashboardService", dashboardService);
     dashboardService.$inject = ['taskService'];
 
     function dashboardService(taskService) {

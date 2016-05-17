@@ -1,4 +1,4 @@
-# TodoList
+# TaskDo
 
 It is a mobile hybrid app Ionic-based that store tasks todo. You can create projects to organize your tasks.
 
@@ -24,9 +24,10 @@ $ npm install -g ionic cordova
 
 Clone the repository and install project dependencies:
 ```bash
-$ https://github.com/alexandretavares/ionic-todolist.git
-$ cd todolist
+$ https://github.com/alexandretavares/taskdo.git
+$ cd taskdo
 $ npm install
+$ bower install
 ```
 
 Setup device platform:
