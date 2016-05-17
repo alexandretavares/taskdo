@@ -30,6 +30,11 @@ $ npm install
 $ bower install
 ```
 
+Install all cordova plugins in **package.json**:
+```bash
+$ ionic state restore
+```
+
 Setup device platform:
 ```bash
 $ ionic platform add android
@@ -54,6 +59,8 @@ Run on device:
 ```bash
 $ ionic run android
 ```
+
+You change `android` for `ios` if you prefer.
 
 More info on this can be found on the Ionic [Getting Started] [IonicGettingStarted] page and the [Ionic CLI] [IonicCLI] repo.
 

@@ -30,6 +30,5 @@
     "cordova-plugin-globalization"
   ],
   "cordovaPlatforms": [
-    "android"
   ]
 }

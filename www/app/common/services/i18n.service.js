@@ -10,7 +10,7 @@
 
         var _translate = function(language) {
             return $q(function(resolve, reject) {
-                var file = [LANGUAGE.PREFIX, language, LANGUAGE.SUFFIX].join('');
+                var file = [LANGUAGE.PREFIX, $translate.use(), LANGUAGE.SUFFIX].join('');
 
                 $http.get(file)
                     .success(function(result) {
@@ -25,14 +25,15 @@
 
         this.refresh = function(language) {
             return $q(function(resolve, reject) {
-                var lang = language || $translate.resolveClientLocale().toLowerCase();
+                var lang = language || $translate.resolveClientLocale();
 
                 $translate.use(lang).then(function() {
-                    _translate(lang)
+                    _translate()
                         .then(function() {
                             resolve();
                         })
                         .catch(function(error) {
+                            console.error(error);
                             reject(error);
                         });
                 });
