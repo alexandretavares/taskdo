@@ -1,35 +1,35 @@
-<ng-form class="form" name="mv.projectForm" novalidate>
-    <ion-view>
-        <ion-nav-title translate="i18n.projects.form.title"></ion-nav-title>
-        <ion-nav-buttons side="left">
-            <button class="button button-icon icon ion-android-arrow-back"
-                    ng-click="mv.goBack()"></button>
-        </ion-nav-buttons>
-        <ion-nav-buttons side="right">
-            <button class="button button-icon icon ion-android-delete ng-hide"
-                    ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-royal" align-title="left">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.hideForm()"></button>
+        </div>
 
-            <button class="button button-icon icon ion-android-done" ng-click="mv.save()"
-                    ng-disabled="mv.isInvalidForm()"></button>
+        <h1 class="title" translate="i18n.projects.form.title"></h1>
 
-            <button class="button button-icon icon ion-android-more-vertical"
-                    ng-click="mv.showMoreActions($event)"></button>
-        </ion-nav-buttons>
+        <div class="buttons buttons-right header-item">
+            <span class="right-buttons">
+                <button class="button button-fab button-purple" ng-click="mv.save()">
+                    <i class="icon ion-android-done"></i>
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
 
-        <ion-content overflow-scroll="false">
+    <ion-content overflow-scroll="false">
+        <ng-form name="mv.projectForm">
             <div class="list padding-horizontal">
-                <label class="item item-input"
+                <label class="item item-input item-stacked-label"
                     ng-class="{'has-error' : mv.projectForm.projectName.$invalid
                     && mv.projectForm.projectName.$dirty}">
 
                     <span class="input-label" translate="i18n.projects.form.fields.name"></span>
                     <input name="projectName" type="text"
+                        placeholder="{{'i18n.projects.form.fields.name' | translate}}"
                         ng-model="mv.project.name" ng-model-options="{debounce: 300}"
                         ng-minlength="3" ng-maxlength="25" required>
                 </label>
-                <tsk-error-messages field="mv.projectForm.projectName"
-                    min-length="3" max-length="25"></tsk-error-messages>
             </div>
-        </ion-content>
-    </ion-view>
-</ng-form>
+        </ng-form>
+    </ion-content>
+</ion-modal-view>

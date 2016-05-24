@@ -4,13 +4,16 @@
     angular.module("taskdo.projects").controller("ProjectController", ProjectController);
 
     ProjectController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
-        'STATE', 'projectService', 'toastService', 'popupService', 'i18nService'];
+        '$ionicModal', 'STATE', 'projectService', 'toastService', 'popupService',
+        'i18nService', '$timeout', 'ionicMaterialInk', 'CRUD_FIELDS'];
 
     function ProjectController($scope, $state, $ionicHistory, $ionicPopover,
-        STATE, projectService, toastService, popupService, i18n) {
+        $ionicModal, STATE, projectService, toastService, popupService, i18n,
+        $timeout, ionicMaterialInk, CRUD_FIELDS) {
 
         var mv = this;
         var _popover = null;
+        var _modal = null;
 
         var _initPopover = function() {
             if (_popover == null) {
@@ -22,19 +25,28 @@
             }
         };
 
+        var _initModal = function() {
+            $ionicModal.fromTemplateUrl('app/projects/partials/project-form.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                _modal = modal;
+            });
+        };
+
         mv.refreshList = function() {
             projectService.list()
                 .then(function(projects) {
                     mv.projects = projects;
+
+                    $timeout(function() {
+                        ionicMaterialInk.displayEffect();
+                    }, 300);
                 })
                 .catch(function(error) {
                     mv.projects = [];
                     console.error(error);
                 });
-        };
-
-        mv.goBack = function() {
-            $ionicHistory.goBack();
         };
 
         mv.showMoreActions = function($event) {
@@ -45,34 +57,32 @@
             _popover.hide();
         };
 
-        mv.isEditMode = function() {
-            return $state.is(mv.editMode);
+        mv.showForm = function(edit) {
+            if (edit && mv.hasOnlySelected()) {
+                var firstKey = Object.keys(mv.selected)[0];
+                mv.project = angular.copy(mv.selected[firstKey]);
+            } else {
+                mv.project = {};
+            }
+
+            _modal.show();
+        };
+
+        mv.hideForm = function() {
+            mv.project = {};
+            _modal.hide();
         };
 
         mv.isListMode = function() {
             return $state.is(mv.listMode);
         };
 
-        mv.isInvalidForm = function() {
-            if (mv.isEditMode()) {
-                return mv.projectForm.$invalid;
-            } else {
-                return mv.projectForm.$invalid || mv.projectForm.$pristine;
-            }
-        };
+        mv.hasOnlySelected = function() {
+            return (!angular.equals({}, mv.selected) && mv.selectedCount == 1);
+        }
 
         mv.hasSelected = function() {
             return !angular.equals({}, mv.selected);
-        };
-
-        mv.checkSelected = function(id) {
-            if (!mv.selected[id]) {
-                delete mv.selected[id];
-            }
-
-            if (!mv.hasSelected() && mv.selectedAll) {
-                mv.selectedAll = false;
-            }
         };
 
         mv.selectAll = function() {
@@ -81,48 +91,44 @@
 
                 if (mv.selectedAll) {
                     for (var i = 0; i < mv.projects.length; i++) {
-                        mv.selected[mv.projects[i]._id] = true;
+                        mv.selected[mv.projects[i]._id] = mv.projects[i];
+                        mv.selectedCount++;
                     }
                 } else {
-                    mv.selected = {};
+                    mv.unselectAll();
                 }
 
                 mv.closeMoreActions();
             }
         };
 
-        mv.save = function() {
-            projectService.save(mv.project)
-                .then(function() {
-                    if ($state.params.id) {
-                        toastService.show(i18n.common.messages.success.updated);
-                    } else {
-                        toastService.show(i18n.common.messages.success.created);
-                    }
-
-                    $state.go(mv.listMode).then(function() {
-                        mv.refreshList();
-                    });
-                })
-                .catch(function(error) {
-                    console.error(error);
-                });
+        mv.unselectAll = function() {
+            mv.selected = {};
+            mv.selectedAll = false;
+            mv.selectedCount = 0;
         };
 
-        mv.remove = function() {
-            popupService.remove().then(function() {
-                projectService.remove($state.params.id)
+        mv.save = function() {
+            if (mv.projectForm.$invalid) {
+                toastService.show("Campos obrigatórios não preenchidos");
+            } else {
+                projectService.save(mv.project)
                     .then(function() {
-                        toastService.show(i18n.common.messages.success.removed);
+                        if (mv.project.hasOwnProperty("_id")) {
+                            toastService.show(i18n.common.messages.success.updated);
 
-                        $state.go(mv.listMode).then(function() {
-                            mv.refreshList();
-                        });
+                        } else {
+                            toastService.show(i18n.common.messages.success.created);
+                        }
+
+                        mv.unselectAll();
+                        mv.refreshList();
+                        mv.hideForm();
                     })
                     .catch(function(error) {
                         console.error(error);
                     });
-            });
+            }
         };
 
         mv.removeSelected = function() {
@@ -135,26 +141,16 @@
 
                 projectService.remove(projectsToRemove)
                     .then(function() {
-                        mv.selected = {};
+                        mv.unselectAll();
                         toastService.show(i18n.common.messages.success.removedSelected);
                         mv.refreshList();
                     });
             });
         };
 
-        $scope.$on("$ionicView.beforeEnter", function() {
-            if (!$state.is(mv.listMode)) {
-                mv.project = {};
-                mv.projectForm.$setPristine();
-
-                if ($state.params.id) {
-                    projectService.get($state.params.id)
-                        .then(function(project) {
-                            mv.project = project;
-                        });
-                }
-            }
-        });
+        mv.onHold = function(project) {
+            mv.mark(project);
+        };
 
         $scope.$on('$destroy', function() {
             _popover.remove();
@@ -164,13 +160,13 @@
             mv.projects = [];
             mv.project = {};
             mv.selected = {};
+            mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.newMode = STATE.PROJECTS.NEW;
-            mv.editMode = STATE.PROJECTS.EDIT;
             mv.listMode = STATE.PROJECTS.LIST;
-            mv.showMode = STATE.PROJECTS.SHOW;
+            mv.fields = CRUD_FIELDS.PROJECTS;
 
             _initPopover();
+            _initModal();
             mv.refreshList();
         })();
     }

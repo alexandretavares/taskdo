@@ -3,14 +3,14 @@
         <ion-nav-title translate="i18n.tasks.form.title"></ion-nav-title>
 
         <ion-nav-buttons side="left">
-            <button class="button button-icon icon ion-android-arrow-back"
+            <button class="button button-icon button-clear ion-android-arrow-back"
                     ng-click="mv.goBack()"></button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <button class="button button-icon icon ion-android-delete ng-hide"
+            <button class="button button-icon button-clear ion-android-delete ng-hide"
                     ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
 
-            <button class="button button-icon icon ion-android-done" ng-click="mv.save()"
+            <button class="button button-icon button-clear ion-android-done" ng-click="mv.save()"
                     ng-disabled="mv.isInvalidForm()"></button>
         </ion-nav-buttons>
 

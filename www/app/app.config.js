@@ -2,12 +2,9 @@
     'use strict';
 
     angular.module('taskdo').config(config);
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$translateProvider',
-        'STATE', 'LANGUAGE'];
+    config.$inject = ['$urlRouterProvider', '$translateProvider', 'LANGUAGE'];
 
-    function config($stateProvider, $urlRouterProvider, $translateProvider,
-        STATE, LANGUAGE) {
-
+    function config($urlRouterProvider, $translateProvider, LANGUAGE) {
         $translateProvider
             .useStaticFilesLoader({
                 prefix: LANGUAGE.PREFIX,
@@ -18,19 +15,6 @@
             .fallbackLanguage(LANGUAGE.FALLBACK)
             .determinePreferredLanguage()
             .useSanitizeValueStrategy('escapeParameters');
-
-        $stateProvider.state(STATE.BASE, {
-            url: '/app',
-            abstract: true,
-            templateUrl: 'app/common/partials/menu.html',
-            controller: function($scope, popupService) {
-                $scope.exit = function() {
-                    popupService.exit().then(function() {
-                        ionic.Platform.exitApp();
-                    });
-                }
-            }
-        });
 
         $urlRouterProvider.otherwise("/app/dashboard");
     }

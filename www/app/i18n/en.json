@@ -22,7 +22,11 @@
             "tasks": "Tasks",
             "settings": "Settings",
             "about": "About",
-            "exit": "Exit"
+            "exit": "Exit",
+            "management": "Management",
+            "button": {
+                "project": "Add project"
+            }
         },
         "common": {
             "moreActions": {

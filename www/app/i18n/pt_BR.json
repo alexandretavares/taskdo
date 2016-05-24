@@ -22,7 +22,11 @@
             "tasks": "Tarefas",
             "settings": "Configurações",
             "about": "Sobre",
-            "exit": "Sair"
+            "exit": "Sair",
+            "management": "Gerenciamento",
+            "button": {
+                "project": "Novo projeto"
+            }
         },
         "common": {
             "moreActions": {

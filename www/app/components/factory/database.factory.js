@@ -19,12 +19,12 @@
         function Database(tableName) {
             var collection = _collections[tableName]
 
-            var commit = function(resolve, reject) {
+            var commit = function(resolve, reject, entity) {
                 collection.save(function(error) {
                     if (error) {
                         reject(error);
                     } else {
-                        resolve();
+                        resolve(entity);
                     }
                 });
             };
@@ -60,7 +60,9 @@
                 });
             };
 
-            this.save = function(entity) {
+            this.save = function(obj) {
+                var entity = angular.copy(obj);
+
                 return $q(function(resolve, reject) {
                     if (entity.hasOwnProperty("_id")) {
                         collection.update({_id: entity._id}, entity);
@@ -68,7 +70,7 @@
                         collection.insert(entity);
                     }
 
-                    commit(resolve, reject);
+                    commit(resolve, reject, entity);
                 });
             };
 

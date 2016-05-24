@@ -15,9 +15,18 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$royal: #673AB7 !default;
+$pink: #FF4081;
+$purple: #E040FB;
+$bar-height: 56px !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$robotodraft-font-path: "../lib/robotodraft/fonts" !default;
+$material-icons-font-path: "../fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
+@import "robotodraft";
+@import "material-icons";
+@import "app-style";

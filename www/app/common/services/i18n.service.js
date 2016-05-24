@@ -2,8 +2,7 @@
     'use strict';
 
     angular.module("taskdo.common").service("i18nService", i18nService);
-    i18nService.$inject = ['$q', '$translate', '$http', '$interpolate',
-        'LANGUAGE'];
+    i18nService.$inject = ['$q', '$translate', '$http', '$interpolate', 'LANGUAGE'];
 
     function i18nService($q, $translate, $http, $interpolate, LANGUAGE) {
         var that = this;

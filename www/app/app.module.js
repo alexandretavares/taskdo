@@ -3,7 +3,11 @@
 
     angular.module('taskdo',
         [
-            'ionic', 'ngCordova', 'ngMessages', 'pascalprecht.translate',
+            'ionic',
+            'ngCordova',
+            'ngMessages',
+            'pascalprecht.translate',
+            'ionic-material',
             'taskdo.common',
             'taskdo.components',
             'taskdo.dashboard',

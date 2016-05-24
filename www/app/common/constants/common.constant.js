@@ -1,16 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.common").constant("STATE", {
+    var APP_STATE = {
         BASE: "app",
         DASHBOARD: "app.dashboard",
-        PROJECTS: {
-            BASE: "app.projects",
-            LIST: "app.projects.list",
-            NEW: "app.projects.new",
-            EDIT: "app.projects.edit",
-            SHOW: "app.projects.show"
-        },
+        PROJECTS: "app.projects",
         TASKS: {
             BASE: "app.tasks",
             LIST: "app.tasks.list",
@@ -19,7 +13,42 @@
         },
         SETTINGS: "app.settings",
         ABOUT: "app.about"
+    };
+
+    angular.module("taskdo.common").constant("STATE", APP_STATE);
+
+    angular.module("taskdo.common").constant("MENU", {
+        GENERAL: {
+            DASHBOARD: {
+                STATE: APP_STATE.DASHBOARD,
+                ICON: "home",
+                I18N: "i18n.menu.home"
+            },
+            PROJECTS: {
+                STATE: APP_STATE.PROJECTS,
+                ICON: "work",
+                I18N: "i18n.menu.projects"
+            },
+            TASKS: {
+                STATE: APP_STATE.TASKS.LIST,
+                ICON: "description",
+                I18N: "i18n.menu.tasks"
+            }
+        },
+        MANAGEMENT: {
+            SETTINGS: {
+                STATE: APP_STATE.SETTINGS,
+                ICON: "settings",
+                I18N: "i18n.menu.settings"
+            },
+            ABOUT: {
+                STATE: APP_STATE.ABOUT,
+                ICON: "info",
+                I18N: "i18n.menu.about"
+            }
+        }
     });
+
 
     angular.module("taskdo.common").constant("PRIORITY", {
         CRITICAL: {
@@ -64,6 +93,17 @@
         PROJECT: "project",
         TASK: "task",
         SETTING: "setting"
+    });
+
+    angular.module("taskdo.common").constant("CRUD_FIELDS", {
+        PROJECTS: [
+            { name: "name", type: "string" },
+            { name: "createdDate", type: "date" }
+        ],
+        TASKS: [
+            { name: "name", type: "string" },
+            { name: "createdDate", type: "date" }
+        ]
     });
 
 })();
