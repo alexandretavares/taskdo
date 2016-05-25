@@ -1,9 +1,9 @@
 # TaskDo
 
-It is a mobile hybrid app Ionic-based that store tasks todo. You can create projects to organize your tasks.
+It is a mobile hybrid app Ionic-based (v1) that store tasks todo. You can create projects to organize your tasks.
 
 ### Version
-0.1.0
+0.6.0
 
 ### Tech
 
@@ -12,6 +12,7 @@ It is a mobile hybrid app Ionic-based that store tasks todo. You can create proj
 * [Cordova] - Mobile apps with HTML, CSS & JS.
 * [AngularJS] - HTML enhanced for web apps!
 * [ForerunnerDB] - NoSQL In-Browser JavaScript Database.
+* [IonicMaterial] - Ionic + Material = ❤
 
 
 ### Installation
@@ -76,3 +77,4 @@ MIT
 [IonicGettingStarted]: <http://ionicframework.com/getting-started>
 [IonicCLI]: <https://github.com/driftyco/ionic-cli>
 [ForerunnerDB]: <http://www.forerunnerdb.com>
+[IonicMaterial]: <http://ionicmaterial.com/>

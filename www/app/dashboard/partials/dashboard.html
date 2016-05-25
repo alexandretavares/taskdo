@@ -8,14 +8,12 @@
             </div>
         </div>
 
-        <ion-list ng-show="mv.tasks.length" ng-repeat="taskPerDate in mv.tasksToFilter() | filter:mv.filterTasks">
+        <ion-list ng-show="mv.tasks.length" ng-repeat="(dueDate, tasks) in (mv.tasks | groupBy: 'dueDate')">
             <ion-item class="item item-divider">
-                {{taskPerDate.dueDate | date: 'dd/MM/yyyy'}}
+                {{dueDate | date: 'dd/MM/yyyy'}}
             </ion-item>
 
-            <ion-item type="item-text-wrap" class="item"
-                ng-repeat="task in mv.tasks | filter:{ dueDate: taskPerDate.dueDate }">
-
+            <ion-item type="item-text-wrap" class="item" ng-repeat="task in tasks">
                 <a class="item-no-decoration">
                     <h2 ng-bind="task.name"></h2>
                     <p ng-bind="task.project.name"></p>

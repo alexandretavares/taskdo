@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module("taskdo.dashboard").controller("DashboardController", DashboardController);
-    DashboardController.$inject = ['$scope', 'dashboardService'];
+    DashboardController.$inject = ['$scope', 'dashboardService', 'CRUD_FIELDS'];
 
-    function DashboardController($scope, dashboardService) {
+    function DashboardController($scope, dashboardService, CRUD_FIELDS) {
         var mv = this;
         var _indexedTasks = [];
 
@@ -33,6 +33,10 @@
 
         (function() {
             mv.tasks = [];
+            mv.selected = {};
+            mv.selectedCount = 0;
+            mv.selectedAll = false;
+            mv.fields = CRUD_FIELDS.DASHBOARD;
         })();
     }
 

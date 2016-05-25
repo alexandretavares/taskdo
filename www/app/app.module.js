@@ -4,6 +4,7 @@
     angular.module('taskdo',
         [
             'ionic',
+            'angular.filter',
             'ngCordova',
             'ngMessages',
             'pascalprecht.translate',

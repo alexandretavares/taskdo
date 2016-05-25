@@ -85,6 +85,10 @@
     });
 
     angular.module("taskdo.common").constant("CRUD_FIELDS", {
+        DASHBOARD: [
+            { name: "name", type: "string" },
+            { name: "project.name", type: "string" }
+        ],
         PROJECTS: [
             { name: "name", type: "string" },
             { name: "createdDate", type: "date" }

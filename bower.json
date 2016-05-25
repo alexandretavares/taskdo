@@ -9,6 +9,7 @@
     "angular-translate": "^2.11.0",
     "angular-translate-loader-static-files": "^2.11.0",
     "ionic-material": "^0.4.2",
-    "robotodraft": "^1.1.0"
+    "robotodraft": "^1.1.0",
+    "angular-filter": "^0.5.8"
   }
 }
