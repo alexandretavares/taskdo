@@ -38,7 +38,8 @@
                 "required": "Field required",
                 "minlength": "Min length: {{minlength}} characters",
                 "maxlength": "Max length: {{maxlength}} characters",
-                "invalidDate": "Invalid date"
+                "invalidDate": "Invalid date",
+                "requiredFields": "Required fields unfilled"
             },
             "messages": {
                 "success": {

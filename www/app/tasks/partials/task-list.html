@@ -1,40 +1,40 @@
-<ion-view>
+<ion-view hide-nav-bar="mv.hasSelected()">
     <ion-nav-title translate="i18n.tasks.list.title"></ion-nav-title>
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-android-done-all ng-hide"
-            ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
-
-        <button class="button button-icon button-clear ion-android-delete ng-hide"
-            ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
-
-        <button class="button button-icon button-clear ion-compose"
-            ui-sref="{{mv.newMode}}"></button>
-
         <button class="button button-icon button-clear ion-android-more-vertical"
             ng-click="mv.showMoreActions($event)"></button>
     </ion-nav-buttons>
 
-    <ion-content overflow-scroll="false">
-        <ion-list>
-            <ion-item ng-repeat="task in mv.tasks" type="item-text-wrap"
-                class="item-icon-right item-avatar"
-                ng-class="{'item-finished' : task.finished}">
+    <ion-header-bar align-title="left" class="bar-purple">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-arrow-back"
+                    ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
 
-                <div class="item-image">
-                     <label class="checkbox checkbox-royal" ng-switch="task.finished">
-                         <input type="checkbox" checked="checked" disabled="disadled"
-                            ng-switch-when="true" />
-                         <input type="checkbox" ng-model="mv.selected[task._id]"
-                            ng-change="mv.checkSelected(task._id)" ng-switch-default />
-                     </label>
-                </div>
-                <a ui-sref="{{mv.editMode}}({id: task._id})" class="subdued">
-                    <h2 ng-bind="task.name"></h2>
-                    <p ng-bind="task.project.name"></p>
-                    <i class="icon ion-chevron-right icon-accessory"></i>
-                </a>
-            </ion-item>
-        </ion-list>
+            <span>{{mv.selectedCount}}</span>
+        </div>
+
+        <h1 class="title"></h1>
+
+        <div class="buttons buttons-right header-item">
+            <button class="button button-icon button-clear ion-android-create"
+                    ng-click="mv.showForm(true)" ng-show="mv.hasOnlySelected()"></button>
+
+            <button class="button button-icon button-clear ion-android-delete"
+                    ng-click="mv.remove()" ng-show="mv.hasSelected()"></button>
+            <button class="button button-icon button-clear ion-android-more-vertical"
+                    ng-click="mv.showMoreActions($event)"></button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+        <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"
+            selected-count="mv.selectedCount" selected-all="mv.selectedAll"
+            selected="mv.selected" swipe-left="true" swipe-right="true">
+        </tsk-list>
     </ion-content>
+
+    <button class="button button-fab button-fab-bottom-right button-royal" ng-click="mv.showForm()">
+        <i class="icon ion-android-add"></i>
+    </button>
 </ion-view>

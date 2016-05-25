@@ -2,14 +2,16 @@
     'use strict';
 
     angular.module("taskdo.tasks").controller("TaskController", TaskController);
-    TaskController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover', 'STATE',
+
+    TaskController.$inject = ['$scope', '$ionicPopover', '$ionicModal', 'CRUD_FIELDS',
         'i18nService', 'toastService', 'popupService', 'taskService', 'projectService'];
 
-    function TaskController($scope, $state, $ionicHistory, $ionicPopover, STATE, i18n,
-        toastService, popupService, taskService, projectService) {
+    function TaskController($scope, $ionicPopover, $ionicModal, CRUD_FIELDS,
+        i18n, toastService, popupService, taskService, projectService) {
 
         var mv = this;
         var _popover = null;
+        var _modal = null;
 
         var _initPopover = function() {
             if (_popover == null) {
@@ -21,8 +23,13 @@
             }
         };
 
-        mv.goBack = function() {
-            $ionicHistory.goBack();
+        var _initModal = function() {
+            $ionicModal.fromTemplateUrl('app/tasks/partials/task-form.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                _modal = modal;
+            });
         };
 
         mv.refreshList = function() {
@@ -46,38 +53,45 @@
                 });
         };
 
-        mv.isEditMode = function() {
-            return $state.is(mv.editMode);
-        };
-
-        mv.isListMode = function() {
-            return $state.is(mv.listMode);
-        };
-
         mv.showMoreActions = function($event) {
             _popover.show($event);
         };
 
-        mv.isInvalidForm = function() {
-            if (mv.isEditMode()) {
-                return mv.taskForm.$invalid;
-            } else {
-                return mv.taskForm.$invalid || mv.taskForm.$pristine;
-            }
+        mv.closeMoreActions = function() {
+            _popover.hide();
         };
+
+        mv.showForm = function(edit) {
+            mv.minDate = new Date();
+
+            if (edit && mv.hasOnlySelected()) {
+                mv.editMode = true;
+
+                var firstKey = Object.keys(mv.selected)[0];
+                mv.task = angular.copy(mv.selected[firstKey]);
+
+                if (mv.task.hasOwnProperty("dueDate")) {
+                    mv.task.dueDate = new Date(mv.task.dueDate);
+                }
+            } else {
+                mv.editMode = false;
+                mv.task = {};
+            }
+
+            _modal.show();
+        };
+
+        mv.hideForm = function() {
+            mv.task = {};
+            _modal.hide();
+        };
+
+        mv.hasOnlySelected = function() {
+            return (!angular.equals({}, mv.selected) && mv.selectedCount == 1);
+        }
 
         mv.hasSelected = function() {
             return !angular.equals({}, mv.selected);
-        };
-
-        mv.checkSelected = function(id) {
-            if (!mv.selected[id]) {
-                delete mv.selected[id];
-            }
-
-            if (!mv.hasSelected() && mv.selectedAll) {
-                mv.selectedAll = false;
-            }
         };
 
         mv.selectAll = function() {
@@ -86,51 +100,47 @@
 
                 if (mv.selectedAll) {
                     for (var i = 0; i < mv.tasks.length; i++) {
-                        mv.selected[mv.tasks[i]._id] = true;
+                        mv.selected[mv.tasks[i]._id] = mv.tasks[i];
+                        mv.selectedCount++;
                     }
                 } else {
-                    mv.selected = {};
+                    mv.unselectAll();
                 }
 
-                _popover.hide();
+                mv.closeMoreActions();
             }
         };
 
-        mv.save = function() {
-            taskService.save(mv.task)
-                .then(function() {
-                    if ($state.params.id) {
-                        toastService.show(i18n.common.messages.success.updated);
-                    } else {
-                        toastService.show(i18n.common.messages.success.created);
-                    }
-
-                    $state.go(mv.listMode).then(function() {
-                        mv.refreshList();
-                    });
-                })
-                .catch(function(error) {
-                    console.error(error);
-                });
+        mv.unselectAll = function() {
+            mv.selected = {};
+            mv.selectedAll = false;
+            mv.selectedCount = 0;
         };
 
-        mv.remove = function() {
-            popupService.remove().then(function() {
-                taskService.remove($state.params.id)
+        mv.save = function() {
+            if (mv.taskForm.$invalid) {
+                toastService.show(i18n.common.validations.requiredFields);
+            } else {
+                taskService.save(mv.task)
                     .then(function() {
-                        toastService.show(i18n.common.messages.success.removed);
+                        if (mv.task.hasOwnProperty("_id")) {
+                            toastService.show(i18n.common.messages.success.updated);
 
-                        $state.go(mv.listMode).then(function() {
-                            mv.refreshList();
-                        });
+                        } else {
+                            toastService.show(i18n.common.messages.success.created);
+                        }
+
+                        mv.unselectAll();
+                        mv.refreshList();
+                        mv.hideForm();
                     })
                     .catch(function(error) {
                         console.error(error);
                     });
-            });
+            }
         };
 
-        mv.removeSelected = function() {
+        mv.remove = function() {
             popupService.remove().then(function() {
                 var tasksToRemove = [];
 
@@ -140,7 +150,7 @@
 
                 taskService.remove(tasksToRemove)
                     .then(function() {
-                        mv.selected = {};
+                        mv.unselectAll();
                         toastService.show(i18n.common.messages.success.removedSelected);
                         mv.refreshList();
                     });
@@ -164,33 +174,10 @@
             });
         };
 
-        $scope.$on("$ionicView.beforeEnter", function() {
-            if (!$state.is(mv.listMode)) {
-                mv.task = {};
-                mv.minDate = new Date();
-                mv.taskForm.$setPristine();
-
-                if ($state.params.id) {
-                    taskService.get($state.params.id)
-                        .then(function(task) {
-                            mv.task = task;
-
-                            if (mv.task.hasOwnProperty("dueDate")) {
-                                mv.task.dueDate = new Date(task.dueDate);
-                            }
-                        });
-                }
-            }
+        $scope.$on("$ionicView.beforeEnter", function(event, data) {
+            mv.refreshList();
+            mv.refreshProjects();
         });
-
-        $scope.$on('$stateChangeSuccess',
-            function(event, toState, toParams, fromState, fromParams, options) {
-                if (fromState.name != "" && fromState.name.indexOf(STATE.TASKS.BASE) == -1) {
-                    mv.refreshList();
-                    mv.refreshProjects();
-                }
-            }
-        );
 
         $scope.$on('$destroy', function() {
             _popover.remove();
@@ -201,15 +188,13 @@
             mv.tasks = [];
             mv.task = {};
             mv.selected = {};
+            mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.newMode = STATE.TASKS.NEW;
-            mv.editMode = STATE.TASKS.EDIT;
-            mv.listMode = STATE.TASKS.LIST;
-            mv.showMode = STATE.TASKS.SHOW;
+            mv.editMode = false;
+            mv.fields = CRUD_FIELDS.TASKS;
 
             _initPopover();
-            mv.refreshList();
-            mv.refreshProjects();
+            _initModal();
         })();
     }
 

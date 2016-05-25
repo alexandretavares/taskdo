@@ -1,11 +1,8 @@
 <ion-popover-view class="taskdo-popover">
     <ion-content>
         <div class="list">
-            <a class="item ng-hide" ng-show="mv.isListMode()" ng-click="mv.selectAll()">
+            <a class="item" ng-click="mv.selectAll()">
                 {{(mv.selectedAll ? 'i18n.common.moreActions.unselectAll' : 'i18n.common.moreActions.selectAll') | translate}}
-            </a>
-            <a class="item ng-hide" ng-show="!mv.isListMode()" ng-click="mv.closeMoreActions()">
-                {{'i18n.common.moreActions.ignore' | translate}}
             </a>
         </div>
     </ion-content>

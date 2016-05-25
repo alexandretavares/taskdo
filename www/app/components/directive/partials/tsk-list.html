@@ -12,7 +12,8 @@
             </div>
         </div>
 
-        <div class="item item-light item-avatar ink"
+        <div class="item item-light item-avatar"
+            ng-class="{'activated': wasSelected(item._id)}"
             on-drag-left="onDragLeft($event)"
             on-drag-right="onDragRight($event)"
             on-release="onRelease($event)"
@@ -20,7 +21,7 @@
 
             <div class="item-image stable-bg" ng-click="mark(item)"
                 ng-class="wasSelected(item._id) ? 'purple-bg' : 'stable-bg'">
-                <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : 'work'}}</i>
+                <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : avatarIcon}}</i>
             </div>
             <div>
                 <h2 ng-bind="format(item, fields[0])"></h2>

@@ -1,47 +1,37 @@
-<ng-form class="form" name="mv.taskForm" novalidate>
-    <ion-view>
-        <ion-nav-title translate="i18n.tasks.form.title"></ion-nav-title>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-royal" align-title="left">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.hideForm()"></button>
+        </div>
 
-        <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-android-arrow-back"
-                    ng-click="mv.goBack()"></button>
-        </ion-nav-buttons>
-        <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-android-delete ng-hide"
-                    ng-click="mv.remove()" ng-show="mv.isEditMode()"></button>
+        <h1 class="title" translate="i18n.tasks.form.title"></h1>
 
-            <button class="button button-icon button-clear ion-android-done" ng-click="mv.save()"
-                    ng-disabled="mv.isInvalidForm()"></button>
-        </ion-nav-buttons>
+        <div class="buttons buttons-right header-item">
+            <span class="right-buttons">
+                <button class="button button-fab button-purple" ng-click="mv.save()">
+                    <i class="icon ion-android-done"></i>
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
 
-        <ion-content overflow-scroll="false">
+    <ion-content overflow-scroll="false">
+        <ng-form name="mv.taskForm">
             <div class="list padding-horizontal">
-                <label class="item item-input"
-                    ng-class="{'has-error' : mv.taskForm.taskName.$invalid
-                    && mv.taskForm.taskName.$dirty}">
-
+                <label class="item item-input item-stacked-label">
                     <span class="input-label" translate="i18n.tasks.form.fields.name"></span>
                     <input name="taskName" type="text"
+                        placeholder="{{'i18n.tasks.form.fields.name' | translate}}"
                         ng-model="mv.task.name" ng-model-options="{debounce: 300}"
                         ng-minlength="3" ng-maxlength="25" required>
                 </label>
-                <tsk-error-messages field="mv.taskForm.taskName"
-                    min-length="3" max-length="25"></tsk-error-messages>
 
-                <label class="item item-input">
-                    <span class="input-label" translate="i18n.tasks.form.fields.notes"></span>
-                    <textarea name="taskNotes" ng-model="mv.task.notes"></textarea>
-                </label>
-
-                <label class="item item-input"
-                    ng-class="{'has-error' : mv.taskForm.taskDueDate.$invalid
-                    && mv.taskForm.taskDueDate.$dirty}">
-
+                <label class="item item-input item-stacked-label">
                     <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
                     <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
                         min="{{mv.minDate | date:'yyyy-MM-dd'}}" required>
                 </label>
-                <tsk-error-messages field="mv.taskForm.taskDueDate"></tsk-error-messages>
 
                 <label class="item item-input item-select">
                     <div class="input-label" translate="i18n.tasks.form.fields.project"></div>
@@ -50,11 +40,17 @@
                     </select>
                 </label>
 
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate="i18n.tasks.form.fields.notes"></span>
+                    <textarea name="taskNotes" ng-model="mv.task.notes"
+                        placeholder="{{'i18n.tasks.form.fields.notes' | translate}}"></textarea>
+                </label>
+
                 <ion-toggle class="ng-hide" toggle-class="toggle-royal"
-                    ng-model="mv.task.finished" ng-show="mv.isEditMode()">
+                    ng-model="mv.task.finished" ng-show="mv.editMode">
                     {{'i18n.tasks.form.fields.finished' | translate}}
                 </ion-toggle>
             </div>
-        </ion-content>
-    </ion-view>
-</ng-form>
+        </ng-form>
+    </ion-content>
+</ion-modal-view>

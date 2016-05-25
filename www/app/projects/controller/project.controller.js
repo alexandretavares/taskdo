@@ -3,13 +3,11 @@
 
     angular.module("taskdo.projects").controller("ProjectController", ProjectController);
 
-    ProjectController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
-        '$ionicModal', 'STATE', 'projectService', 'toastService', 'popupService',
-        'i18nService', '$timeout', 'ionicMaterialInk', 'CRUD_FIELDS'];
+    ProjectController.$inject = ['$scope', '$ionicPopover', '$ionicModal', 'projectService',
+        'toastService', 'popupService', 'i18nService', '$timeout', 'ionicMaterialInk', 'CRUD_FIELDS'];
 
-    function ProjectController($scope, $state, $ionicHistory, $ionicPopover,
-        $ionicModal, STATE, projectService, toastService, popupService, i18n,
-        $timeout, ionicMaterialInk, CRUD_FIELDS) {
+    function ProjectController($scope, $ionicPopover, $ionicModal, projectService,
+        toastService, popupService, i18n, $timeout, ionicMaterialInk, CRUD_FIELDS) {
 
         var mv = this;
         var _popover = null;
@@ -73,10 +71,6 @@
             _modal.hide();
         };
 
-        mv.isListMode = function() {
-            return $state.is(mv.listMode);
-        };
-
         mv.hasOnlySelected = function() {
             return (!angular.equals({}, mv.selected) && mv.selectedCount == 1);
         }
@@ -110,7 +104,7 @@
 
         mv.save = function() {
             if (mv.projectForm.$invalid) {
-                toastService.show("Campos obrigatórios não preenchidos");
+                toastService.show(i18n.common.validations.requiredFields);
             } else {
                 projectService.save(mv.project)
                     .then(function() {
@@ -148,10 +142,6 @@
             });
         };
 
-        mv.onHold = function(project) {
-            mv.mark(project);
-        };
-
         $scope.$on('$destroy', function() {
             _popover.remove();
         });
@@ -162,7 +152,6 @@
             mv.selected = {};
             mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.listMode = STATE.PROJECTS.LIST;
             mv.fields = CRUD_FIELDS.PROJECTS;
 
             _initPopover();

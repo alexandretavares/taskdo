@@ -10,6 +10,7 @@
 
         return {
             scope: {
+                icon: '@',
                 fields: '=',
                 collection: '=',
                 selected: '=',
@@ -18,17 +19,26 @@
                 swipeLeft: '=',
                 swipeRight: '='
             },
-            restrict: "E",
             templateUrl: "app/components/directive/partials/tsk-list.html",
+            restrict: "E",
             link: function(scope, element, attr) {
                 scope.swipingRight = false;
                 scope.swipingLeft = false;
+                scope.avatarIcon = (scope.icon) ? scope.icon : "star";
 
                 var _dragItem = function(event) {
                     var deltaX = event.gesture.deltaX;
 
                     transformService.translateX(event.currentTarget, deltaX, 'none');
                     $ionicScrollDelegate.freezeScroll(true);
+                };
+
+                var _deepValue = function(obj, path) {
+                    for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
+                        obj = obj[path[i]];
+                    };
+
+                    return obj;
                 };
 
                 scope.wasSelected = function(id) {
@@ -56,9 +66,9 @@
 
                 scope.format = function(item, field) {
                     if (field.type == "date") {
-                        return $filter('date')(item[field.name], 'dd/MM/yyyy');
+                        return $filter('date')(_deepValue(item, field.name), 'dd/MM/yyyy');
                     } else {
-                        return item[field.name];
+                        return _deepValue(item, field.name);
                     }
                 };
 

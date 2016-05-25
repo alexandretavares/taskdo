@@ -5,12 +5,7 @@
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: "app.projects",
-        TASKS: {
-            BASE: "app.tasks",
-            LIST: "app.tasks.list",
-            NEW: "app.tasks.new",
-            EDIT: "app.tasks.edit"
-        },
+        TASKS: "app.tasks",
         SETTINGS: "app.settings",
         ABOUT: "app.about"
     };
@@ -30,7 +25,7 @@
                 I18N: "i18n.menu.projects"
             },
             TASKS: {
-                STATE: APP_STATE.TASKS.LIST,
+                STATE: APP_STATE.TASKS,
                 ICON: "description",
                 I18N: "i18n.menu.tasks"
             }
@@ -102,7 +97,7 @@
         ],
         TASKS: [
             { name: "name", type: "string" },
-            { name: "createdDate", type: "date" }
+            { name: "project.name", type: "string" }
         ]
     });
 

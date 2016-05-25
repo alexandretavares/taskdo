@@ -38,7 +38,8 @@
                 "required": "Campo obrigatório",
                 "minlength": "Tamanho mínimo: {{minlength}} caracteres",
                 "maxlength": "Tamanho máximo: {{maxlength}} caracteres",
-                "invalidDate": "Data inválida"
+                "invalidDate": "Data inválida",
+                "requiredFields": "Campos obrigatórios não preenchidos"
             },
             "messages": {
                 "success": {
