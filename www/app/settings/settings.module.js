@@ -10,7 +10,7 @@
                 url: "/settings",
                 views: {
                     'content-menu': {
-                        templateUrl: "app/settings/partials/setting-form.html",
+                        templateUrl: "app/settings/partials/setting-list.html",
                         controller: "SettingController",
                         controllerAs: "mv"
                     }

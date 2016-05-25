@@ -1,6 +1,41 @@
-<ng-form class="form" name="mv.settingForm" novalidate>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-royal" align-title="left">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.hideModal(mv.MODAL.FORM)"></button>
+        </div>
+
+        <h1 class="title" translate="i18n.settings.form.title"></h1>
+
+        <div class="buttons buttons-right header-item">
+            <span class="right-buttons">
+                <button class="button button-fab button-purple" ng-click="mv.save()">
+                    <i class="icon ion-android-done"></i>
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+        <ng-form name="mv.settingForm">
+            <div class="list padding">
+                <label class="item item-input item-select">
+                    <div class="input-label" translate="i18n.settings.form.fields.language"></div>
+                      <select ng-model="mv.setting.language"
+                            ng-options="('i18n.language.' + language) | translate for language in mv.languages">
+                    </select>
+                </label>
+            </div>
+        </ng-form>
+    </ion-content>
+</ion-modal-view>
+
+
+
+<!-- <ng-form class="form" name="mv.settingForm" novalidate>
     <ion-view>
         <ion-nav-title translate="i18n.settings.form.title"></ion-nav-title>
+
         <ion-nav-buttons side="right">
             <button class="button button-icon button-clear ion-android-done" ng-click="mv.save()"></button>
 
@@ -19,4 +54,4 @@
             </div>
         </ion-content>
     </ion-view>
-</ng-form>
+</ng-form> -->

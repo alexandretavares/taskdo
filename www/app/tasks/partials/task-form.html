@@ -27,17 +27,17 @@
                         ng-minlength="3" ng-maxlength="25" required>
                 </label>
 
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
-                    <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
-                        min="{{mv.minDate | date:'yyyy-MM-dd'}}" required>
-                </label>
-
                 <label class="item item-input item-select">
                     <div class="input-label" translate="i18n.tasks.form.fields.project"></div>
                     <select ng-model="mv.task.project_id" required
                         ng-options="project._id as project.name for project in mv.projects">
                     </select>
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
+                    <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy"
+                        min="{{mv.minDate | date:'yyyy-MM-dd'}}" required>
                 </label>
 
                 <label class="item item-input item-stacked-label">

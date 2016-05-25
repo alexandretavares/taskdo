@@ -21,7 +21,6 @@
             "projects": "Projetos",
             "tasks": "Tarefas",
             "settings": "Configurações",
-            "about": "Sobre",
             "exit": "Sair",
             "management": "Gerenciamento",
             "button": {
@@ -101,8 +100,9 @@
             }
         },
         "settings": {
-            "moreActions": {
-                "discard": "Descartar alterações"
+            "list": {
+                "general": "Gerais",
+                "about": "Sobre"
             },
             "form": {
                 "title": "Configurações",
@@ -110,16 +110,16 @@
                     "language": "Idioma"
                 }
             },
+            "about": {
+                "title": "Sobre",
+                "version": "Versão: {{version}}",
+                "text": "Esta é uma aplicação para registrar tarefas a fazer. É possível criar projetos para organizar suas tarefas."
+            },
             "messages": {
                 "success": {
                     "updated": "Configurações atualizadas com sucesso"
                 }
             }
-        },
-        "about": {
-            "title": "Sobre",
-            "version": "Versão: {{version}}",
-            "text": "Esta é uma aplicação para registrar tarefas a fazer. É possível criar projetos para organizar suas tarefas."
         }
     }
 }

@@ -13,8 +13,7 @@
             'taskdo.dashboard',
             'taskdo.settings',
             'taskdo.projects',
-            'taskdo.tasks',
-            'taskdo.about'
+            'taskdo.tasks'
         ]
     ).run(run);
 

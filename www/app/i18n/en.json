@@ -21,7 +21,6 @@
             "projects": "Projects",
             "tasks": "Tasks",
             "settings": "Settings",
-            "about": "About",
             "exit": "Exit",
             "management": "Management",
             "button": {
@@ -101,8 +100,9 @@
             }
         },
         "settings": {
-            "moreActions": {
-                "discard": "Discard changes"
+            "list": {
+                "general": "General",
+                "about": "About"
             },
             "form": {
                 "title": "Settings",
@@ -110,16 +110,16 @@
                     "language": "Language"
                 }
             },
+            "about": {
+                "title": "About",
+                "version": "Version: {{version}}",
+                "text": "This is an app that store tasks to do. You can create projects to organize your tasks."
+            },
             "messages": {
                 "success": {
                     "updated": "Successfully updated settings"
                 }
             }
-        },
-        "about": {
-            "title": "About",
-            "version": "Version: {{version}}",
-            "text": "This is an app that store tasks to do. You can create projects to organize your tasks."
         }
     }
 }

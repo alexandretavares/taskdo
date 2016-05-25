@@ -1,0 +1,30 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-royal" align-title="left">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.hideModal(mv.MODAL.ABOUT)"></button>
+        </div>
+
+        <h1 class="title" translate="i18n.settings.about.title"></h1>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+        <div class="list card">
+            <div class="item">
+                <h2>TaskDo</h2>
+                <p translate="i18n.settings.about.version" translate-values="{version: '0.5.0'}"></p>
+            </div>
+
+            <div class="item item-body">
+                <p translate="i18n.settings.about.text"></p>
+                <p>
+                    <a href="javascript:void(0)" class="subdued">Ionic</a>
+                    <a href="javascript:void(0)" class="subdued">AngularJS</a>
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="subdued">2016</a>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

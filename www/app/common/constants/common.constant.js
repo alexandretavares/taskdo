@@ -6,8 +6,7 @@
         DASHBOARD: "app.dashboard",
         PROJECTS: "app.projects",
         TASKS: "app.tasks",
-        SETTINGS: "app.settings",
-        ABOUT: "app.about"
+        SETTINGS: "app.settings"
     };
 
     angular.module("taskdo.common").constant("STATE", APP_STATE);
@@ -35,11 +34,6 @@
                 STATE: APP_STATE.SETTINGS,
                 ICON: "settings",
                 I18N: "i18n.menu.settings"
-            },
-            ABOUT: {
-                STATE: APP_STATE.ABOUT,
-                ICON: "info",
-                I18N: "i18n.menu.about"
             }
         }
     });
