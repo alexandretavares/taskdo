@@ -6,8 +6,8 @@
 
     function dashboardService(taskService) {
 
-        this.listIncompleteTasks = function() {
-            return taskService.listIncompleteTasks();
+        this.listOpenedTasks = function() {
+            return taskService.listOpened();
         };
 
     }

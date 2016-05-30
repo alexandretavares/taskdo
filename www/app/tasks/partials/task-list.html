@@ -12,6 +12,8 @@
                     ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
 
             <span>{{mv.selectedCount}}</span>
+            <button class="button button-icon button-clear ion-android-arrow-dropdown"
+                    ng-click="mv.showMoreActions($event)" ng-show="mv.hasSelected()"></button>
         </div>
 
         <h1 class="title"></h1>
@@ -20,21 +22,27 @@
             <button class="button button-icon button-clear ion-android-create"
                     ng-click="mv.showForm(true)" ng-show="mv.hasOnlySelected()"></button>
 
+            <button class="button button-icon button-clear ion-android-done"
+                    ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
+
             <button class="button button-icon button-clear ion-android-delete"
                     ng-click="mv.remove()" ng-show="mv.hasSelected()"></button>
-            <button class="button button-icon button-clear ion-android-more-vertical"
-                    ng-click="mv.showMoreActions($event)"></button>
         </div>
     </ion-header-bar>
 
     <ion-content overflow-scroll="false">
         <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"
             selected-count="mv.selectedCount" selected-all="mv.selectedAll"
-            selected="mv.selected" swipe-left="true" swipe-right="true">
+            selected="mv.selected" drag-left="false" drag-right="true"
+            on-drag-right-complete="mv.onDragRightComplete(id)">
         </tsk-list>
     </ion-content>
 
-    <button class="button button-fab button-fab-bottom-right button-royal" ng-click="mv.showForm()">
+    <button class="button button-fab button-fab-bottom-right button-purple"
+        ng-class="{'has-snackbar' : mv.snackbarVisible}"
+        ng-click="mv.showForm()" ng-show="!mv.hasSelected()">
         <i class="icon ion-android-add"></i>
     </button>
+
+    <tsk-snackbar show="mv.snackbarVisible" on-undo="mv.undoFinish()"></tsk-snackbar>
 </ion-view>

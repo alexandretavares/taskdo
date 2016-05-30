@@ -79,27 +79,19 @@
             return !angular.equals({}, mv.selected);
         };
 
-        mv.selectAll = function() {
-            if (mv.projects.length > 0) {
-                mv.selectedAll = !mv.selectedAll;
-
-                if (mv.selectedAll) {
-                    for (var i = 0; i < mv.projects.length; i++) {
-                        mv.selected[mv.projects[i]._id] = mv.projects[i];
-                        mv.selectedCount++;
-                    }
-                } else {
-                    mv.unselectAll();
-                }
-
-                mv.closeMoreActions();
-            }
+        mv.toggleSelectAll = function() {
+            mv.selectedAll = !mv.selectedAll;
+            mv.closeMoreActions();
         };
 
         mv.unselectAll = function() {
             mv.selected = {};
             mv.selectedAll = false;
             mv.selectedCount = 0;
+        };
+
+        mv.onDragLeftComplete = function(id) {
+            //TODO
         };
 
         mv.save = function() {

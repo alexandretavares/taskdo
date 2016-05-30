@@ -5,7 +5,10 @@
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: "app.projects",
-        TASKS: "app.tasks",
+        TASKS: {
+            OPENED: "app.tasks-opened",
+            FINISHED: "app.tasks-finished"
+        },
         SETTINGS: "app.settings"
     };
 
@@ -24,7 +27,7 @@
                 I18N: "i18n.menu.projects"
             },
             TASKS: {
-                STATE: APP_STATE.TASKS,
+                STATE: APP_STATE.TASKS.OPENED,
                 ICON: "description",
                 I18N: "i18n.menu.tasks"
             }

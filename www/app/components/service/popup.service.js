@@ -36,6 +36,10 @@
             return _confirmPopup(i18n.common.popup.finish);
         };
 
+        this.restore = function() {
+            return _confirmPopup(i18n.common.popup.restore);
+        };
+
         this.exit = function(callback) {
             return _confirmPopup(i18n.common.popup.exit);
         };

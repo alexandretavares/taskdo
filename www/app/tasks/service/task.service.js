@@ -7,20 +7,7 @@
     function taskService(TABLE, Database) {
         var db = new Database(TABLE.TASK);
 
-        this.list = function() {
-            return db.find({}, {
-                "$join": [{
-                    "project": {
-                        "_id": "project_id",
-                        "$as": "project",
-                        "$required": true,
-                        "$multi": false
-                    }
-                }]
-            });
-        };
-
-        this.listIncompleteTasks = function() {
+        this.listOpened = function() {
             return db.find(
                 {
                     $or: [
@@ -28,6 +15,25 @@
                         { finished: { $exists: false } }
                     ]
                 },
+                {
+                    "$join": [{
+                        "project": {
+                            "_id": "project_id",
+                            "$as": "project",
+                            "$required": true,
+                            "$multi": false
+                        }
+                    }],
+                    "$orderBy": {
+                        "dueDate": 1
+                    }
+                }
+            );
+        };
+
+        this.listFinished = function() {
+            return db.find(
+                { finished: true },
                 {
                     "$join": [{
                         "project": {
@@ -66,6 +72,10 @@
 
         this.finish = function(ids) {
             return db.update(ids, {finished: true});
+        };
+
+        this.restore = function(ids) {
+            return db.update(ids, {finished: false});
         };
     }
 

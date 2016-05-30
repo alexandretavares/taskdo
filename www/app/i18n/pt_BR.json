@@ -54,17 +54,27 @@
                     "no": "Não"
                 },
                 "remove": {
-                    "title": "Remover registro(s)",
-                    "content": "Deseja remover o(s) registro(s)?"
+                    "title": "Remover",
+                    "content": "Deseja remover os registros?"
                 },
                 "finish": {
-                    "title": "Finalizar registro(s)",
-                    "content": "Deseja finalizar o(s) registro(s)?"
+                    "title": "Finalizar",
+                    "content": "Deseja finalizar os registros?"
+                },
+                "restore": {
+                    "title": "Restaurar",
+                    "content": "Deseja restaurar os registros?"
                 },
                 "exit": {
                     "title": "Sair",
                     "content": "Deseja sair da aplicação?"
                 }
+            }
+        },
+        "components": {
+            "snackbar": {
+                "text": "Concluído",
+                "button": "Desfazer"
             }
         },
         "projects": {
@@ -80,8 +90,11 @@
             }
         },
         "tasks": {
+            "moreActions": {
+                "finished": "Tarefas finalizadas"
+            },
             "list": {
-                "title": "Tarefas"
+                "title": "Tarefas abertas"
             },
             "form": {
                 "title": "Tarefa",
@@ -93,9 +106,13 @@
                     "notes": "Notas"
                 }
             },
+            "finished": {
+                "title": "Tarefas finalizadas"
+            },
             "messages": {
                 "success": {
-                    "finished": "Tarefas finalizadas com sucesso"
+                    "finished": "Registros finalizados com sucesso",
+                    "restored": "Registros restaurados com sucesso"
                 }
             }
         },

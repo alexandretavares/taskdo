@@ -54,17 +54,27 @@
                     "no": "No"
                 },
                 "remove": {
-                    "title": "Remove records",
+                    "title": "Remove",
                     "content": "Do you want to remove the records?"
                 },
                 "finish": {
-                    "title": "Finish records",
+                    "title": "Finish",
                     "content": "Do you want to finish the records?"
+                },
+                "restore": {
+                    "title": "Restore",
+                    "content": "Do you want to restore the records?"
                 },
                 "exit": {
                     "title": "Exit",
                     "content": "Do you want to exit the application?"
                 }
+            }
+        },
+        "components": {
+            "snackbar": {
+                "text": "Completed",
+                "button": "Undo"
             }
         },
         "projects": {
@@ -80,8 +90,11 @@
             }
         },
         "tasks": {
+            "moreActions": {
+                "finished": "Finished tasks"
+            },
             "list": {
-                "title": "Tasks"
+                "title": "Opened tasks"
             },
             "form": {
                 "title": "Task",
@@ -93,9 +106,13 @@
                     "notes": "Notes"
                 }
             },
+            "finished": {
+                "title": "Finished tasks"
+            },
             "messages": {
                 "success": {
-                    "finished": "Successfully finished tasks"
+                    "finished": "Successfully finished records",
+                    "restored": "Successfully restored records"
                 }
             }
         },

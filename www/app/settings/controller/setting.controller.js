@@ -3,9 +3,10 @@
 
     angular.module("taskdo.settings").controller("SettingController", SettingController);
     SettingController.$inject = ['$scope', 'i18nService', 'toastService',
-        '$ionicModal', 'settingService'];
+        '$ionicModal', 'settingService', 'ionicMaterialInk', '$timeout'];
 
-    function SettingController($scope, i18n, toastService, $ionicModal, settingService) {
+    function SettingController($scope, i18n, toastService, $ionicModal,
+        settingService, ionicMaterialInk, $timeout) {
 
         var mv = this;
         var _partials = "app/settings/partials/";
@@ -40,7 +41,7 @@
                 });
             }
         };
-        
+
         mv.save = function() {
             settingService.save(mv.setting).then(function() {
                 mv.visibleModal = false;
@@ -64,6 +65,10 @@
                 }
 
                 mv.defaultSetting = angular.copy(mv.setting);
+
+                $timeout(function() {
+                    ionicMaterialInk.displayEffect();
+                }, 300);
             });
         });
 

@@ -1,25 +1,27 @@
 <div class="list advanced">
     <div class="item item-complex" ng-repeat="item in collection">
         <!-- item options -->
-        <div class="item item-avatar-left item-options-full balanced-bg" ng-show="swipingRight">
+        <div class="item item-avatar-left item-options-full balanced-bg ng-hide" ng-show="draggingRight">
             <div class="item-image">
                 <i class="icon light material-icons">done</i>
             </div>
         </div>
-        <div class="item item-avatar-right item-options-full assertive-bg" ng-show="swipingLeft">
+        <div class="item item-avatar-right item-options-full assertive-bg ng-hide" ng-show="draggingLeft">
             <div class="item-image">
                 <i class="icon light material-icons">&#xE16C;</i>
             </div>
         </div>
 
-        <div class="item item-light item-avatar"
+        <div class="item item-light item-avatar ink"
             ng-class="{'activated': wasSelected(item._id)}"
-            on-drag-left="onDragLeft($event)"
-            on-drag-right="onDragRight($event)"
+            on-drag-left="onDragLeft($event, item._id)"
+            on-drag-right="onDragRight($event, item._id)"
             on-release="onRelease($event)"
-            on-hold="mark(item)">
+            on-swipe-left="onSwipeLeft($event, item._id)"
+            on-swipe-right="onSwipeRight($event, item._id)"
+            on-hold="toggleMark(item)">
 
-            <div class="item-image stable-bg" ng-click="mark(item)"
+            <div class="item-image stable-bg" ng-click="toggleMark(item)"
                 ng-class="wasSelected(item._id) ? 'purple-bg' : 'stable-bg'">
                 <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : avatarIcon}}</i>
             </div>

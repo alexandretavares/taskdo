@@ -1,5 +1,10 @@
 <ion-view hide-nav-bar="mv.hasSelected()">
-    <ion-nav-title translate="i18n.projects.list.title"></ion-nav-title>
+    <ion-nav-title translate="i18n.tasks.finished.title"></ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-android-close"
+                ng-click="mv.goBack()"></button>
+    </ion-nav-buttons>
 
     <ion-header-bar align-title="left" class="bar-purple">
         <div class="buttons buttons-left header-item">
@@ -13,23 +18,19 @@
 
         <h1 class="title"></h1>
 
-        <div class="buttons buttons-right header-item">
-            <button class="button button-icon button-clear ion-android-create"
-                    ng-click="mv.showForm(true)" ng-show="mv.hasOnlySelected()"></button>
+        <div class="buttons buttons-right header-item" ng-show="mv.hasSelected()">
+            <button class="button button-icon button-clear ion-reply"
+                    ng-click="mv.restore()"></button>
 
             <button class="button button-icon button-clear ion-android-delete"
-                    ng-click="mv.removeSelected()" ng-show="mv.hasSelected()"></button>
+                    ng-click="mv.remove()"></button>
         </div>
     </ion-header-bar>
 
     <ion-content overflow-scroll="false">
-        <tsk-list icon="work" fields="mv.fields" collection="mv.projects"
+        <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"
             selected-count="mv.selectedCount" selected-all="mv.selectedAll"
-            selected="mv.selected" drag-left="false" on-drag-left-complete="mv.onDragLeftComplete(id)">
+            selected="mv.selected">
         </tsk-list>
     </ion-content>
-
-    <button class="button button-fab button-fab-bottom-right button-royal" ng-click="mv.showForm()">
-        <i class="icon ion-android-add"></i>
-    </button>
 </ion-view>

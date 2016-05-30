@@ -2,9 +2,12 @@
     'use strict';
 
     angular.module("taskdo.dashboard").controller("DashboardController", DashboardController);
-    DashboardController.$inject = ['$scope', 'dashboardService', 'CRUD_FIELDS'];
+    DashboardController.$inject = ['$scope', 'dashboardService', 'CRUD_FIELDS',
+        '$timeout', 'ionicMaterialInk'];
 
-    function DashboardController($scope, dashboardService, CRUD_FIELDS) {
+    function DashboardController($scope, dashboardService, CRUD_FIELDS,
+        $timeout, ionicMaterialInk) {
+
         var mv = this;
         var _indexedTasks = [];
 
@@ -26,8 +29,12 @@
         $scope.$on("$ionicView.beforeEnter", function() {
             _indexedTasks = [];
 
-            dashboardService.listIncompleteTasks().then(function(tasks) {
+            dashboardService.listOpenedTasks().then(function(tasks) {
                 mv.tasks = tasks;
+
+                $timeout(function() {
+                    ionicMaterialInk.displayEffect();
+                }, 300);
             });
         });
 
