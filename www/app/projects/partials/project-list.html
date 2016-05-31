@@ -25,7 +25,8 @@
     <ion-content overflow-scroll="false">
         <tsk-list icon="work" fields="mv.fields" collection="mv.projects"
             selected-count="mv.selectedCount" selected-all="mv.selectedAll"
-            selected="mv.selected" drag-left="false" on-drag-left-complete="mv.onDragLeftComplete(id)">
+            selected="mv.selected" on-row-click="mv.onRowClick(item)"
+            drag-left="false" on-drag-left-complete="mv.onDragLeftComplete(id)">
         </tsk-list>
     </ion-content>
 

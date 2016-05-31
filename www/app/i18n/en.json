@@ -1,5 +1,8 @@
 {
     "i18n": {
+        "default": {
+            "project": "Inbox"
+        },
         "dashboard": {
             "title": "Home",
             "noTasks": "There are not open tasks"
@@ -18,6 +21,9 @@
         },
         "menu": {
             "home": "Home",
+            "inbox": "Inbox",
+            "today": "Today",
+            "week": "Week",
             "projects": "Projects",
             "tasks": "Tasks",
             "settings": "Settings",
@@ -79,7 +85,7 @@
         },
         "projects": {
             "list": {
-                "title": "Projects",
+                "title": "All projects",
                 "createdIn": "Created in: {{createdIn | date : 'dd/MM/yyyy'}}"
             },
             "form": {
@@ -94,7 +100,9 @@
                 "finished": "Finished tasks"
             },
             "list": {
-                "title": "Opened tasks"
+                "all": "All tasks",
+                "today": "Today",
+                "week": "Week"
             },
             "form": {
                 "title": "Task",

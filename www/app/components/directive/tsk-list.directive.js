@@ -25,7 +25,8 @@
                 dragLeft: '=?',
                 onDragLeftComplete: '&?',
                 dragRight: '=?',
-                onDragRightComplete: '&?'
+                onDragRightComplete: '&?',
+                onRowClick: '&?'
             },
             templateUrl: "app/components/directive/partials/tsk-list.html",
             restrict: "E",
@@ -236,6 +237,12 @@
                                 scope.draggingRight = false;
                             }, CALLBACK_TIMEOUT);
                         });
+                    }
+                };
+
+                scope.rowClick = function(item) {
+                    if (scope.onRowClick) {
+                        scope.onRowClick({item: item});
                     }
                 };
 

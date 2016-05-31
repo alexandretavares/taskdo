@@ -25,9 +25,9 @@
                 ng-class="wasSelected(item._id) ? 'purple-bg' : 'stable-bg'">
                 <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : avatarIcon}}</i>
             </div>
-            <div>
+            <div ng-click="rowClick(item)">
                 <h2 ng-bind="format(item, fields[0])"></h2>
-                <p ng-bind="format(item, fields[1])"></p>
+                <p>{{format(item, fields[1]) | translate}}</p>
             </div>
         </div>
     </div>

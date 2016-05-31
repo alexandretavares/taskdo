@@ -1,5 +1,9 @@
 <ion-view hide-nav-bar="mv.hasSelected()">
-    <ion-nav-title translate="i18n.tasks.list.title"></ion-nav-title>
+    <ion-nav-title>{{mv.pageTitle | translate}}</ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical"
@@ -8,10 +12,13 @@
 
     <ion-header-bar align-title="left" class="bar-purple">
         <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.goBack()" ng-show="!mv.hasSelected()"></button>
+
             <button class="button button-icon button-clear ion-android-arrow-back"
                     ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
 
-            <span>{{mv.selectedCount}}</span>
+            <span ng-show="mv.hasSelected()">{{mv.selectedCount}}</span>
             <button class="button button-icon button-clear ion-android-arrow-dropdown"
                     ng-click="mv.showMoreActions($event)" ng-show="mv.hasSelected()"></button>
         </div>

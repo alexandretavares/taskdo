@@ -4,10 +4,12 @@
     angular.module("taskdo.projects").controller("ProjectController", ProjectController);
 
     ProjectController.$inject = ['$scope', '$ionicPopover', '$ionicModal', 'projectService',
-        'toastService', 'popupService', 'i18nService', '$timeout', 'ionicMaterialInk', 'CRUD_FIELDS'];
+        'toastService', 'popupService', 'i18nService', '$timeout', 'ionicMaterialInk',
+        'LIST_FIELDS', '$state', 'STATE'];
 
     function ProjectController($scope, $ionicPopover, $ionicModal, projectService,
-        toastService, popupService, i18n, $timeout, ionicMaterialInk, CRUD_FIELDS) {
+        toastService, popupService, i18n, $timeout, ionicMaterialInk,
+        LIST_FIELDS, $state, STATE) {
 
         var mv = this;
         var _popover = null;
@@ -134,6 +136,10 @@
             });
         };
 
+        mv.onRowClick = function(project) {
+            $state.go(STATE.TASKS.OPENED, {project: project});
+        };
+
         $scope.$on('$destroy', function() {
             _popover.remove();
         });
@@ -144,7 +150,7 @@
             mv.selected = {};
             mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.fields = CRUD_FIELDS.PROJECTS;
+            mv.fields = LIST_FIELDS.PROJECTS;
 
             _initPopover();
             _initModal();

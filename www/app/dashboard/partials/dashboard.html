@@ -18,7 +18,7 @@
             <ion-item type="item-text-wrap" class="item ink" ng-repeat="task in tasks">
                 <a class="item-no-decoration">
                     <h2 ng-bind="task.name"></h2>
-                    <p ng-bind="task.project.name"></p>
+                    <p>{{task.project.name | translate}}</p>
                 </a>
             </ion-item>
         </ion-list>

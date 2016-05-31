@@ -1,18 +1,33 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="false" delegate-handle="mainMenu">
     <!-- Left menu -->
     <ion-side-menu side="left" width="305">
         <ion-content overflow-scroll="false" class="has-footer">
             <div class="list dark">
-                <a menu-close class="item item-icon-left" ui-sref="{{menuItem.STATE}}"
-                    ng-repeat="menuItem in mv.MENU.GENERAL">
-                    <i class="icon material-icons">{{menuItem.ICON}}</i>{{menuItem.I18N | translate}}
+                <a menu-close class="item item-icon-left" ui-sref="{{mv.STATE.DASHBOARD}}">
+                    <i class="icon material-icons">home</i>{{'i18n.menu.home' | translate}}
                 </a>
-
-                <a menu-close class="item item-icon-left" ui-sref="{{menuItem.STATE}}"
-                    ng-repeat="menuItem in mv.MENU.MANAGEMENT">
-                    <i class="icon material-icons">{{menuItem.ICON}}</i>{{menuItem.I18N | translate}}
+                <a menu-close class="item item-icon-left"
+                    ui-sref="{{mv.STATE.TASKS.OPENED}}({project: mv.defaultProject})">
+                    <i class="icon material-icons">inbox</i>{{'i18n.menu.inbox' | translate}}
                 </a>
-
+                <a menu-close class="item item-icon-left"
+                    ui-sref="{{mv.STATE.TASKS.OPENED}}({project: null, dateFilter: 'today'})">
+                    <i class="icon material-icons">today</i>{{'i18n.menu.today' | translate}}
+                </a>
+                <a menu-close class="item item-icon-left"
+                    ui-sref="{{mv.STATE.TASKS.OPENED}}({project: null, dateFilter: mv.DATE_FILTER.WEEK})">
+                    <i class="icon material-icons">&#xE916;</i>{{'i18n.menu.week' | translate}}
+                </a>
+                <a menu-close class="item item-icon-left" ui-sref="{{mv.STATE.PROJECTS}}">
+                    <i class="icon material-icons">work</i>{{'i18n.menu.projects' | translate}}
+                </a>
+                <a menu-close class="item item-icon-left"
+                    ui-sref="{{mv.STATE.TASKS.OPENED}}({project: null})">
+                    <i class="icon material-icons">description</i>{{'i18n.menu.tasks' | translate}}
+                </a>
+                <a menu-close class="item item-icon-left" ui-sref="{{mv.STATE.SETTINGS}}">
+                    <i class="icon material-icons">settings</i>{{'i18n.menu.settings' | translate}}
+                </a>
                 <a class="item item-icon-left" href="javascript:void(0)" ng-click="mv.exit()">
                     <i class="icon material-icons">&#xE879;</i>{{'i18n.menu.exit' | translate}}
                 </a>

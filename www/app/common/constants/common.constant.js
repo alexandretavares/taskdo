@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var APP_STATE = {
+    angular.module("taskdo.common").constant("STATE", {
         BASE: "app",
         DASHBOARD: "app.dashboard",
         PROJECTS: "app.projects",
@@ -10,37 +10,7 @@
             FINISHED: "app.tasks-finished"
         },
         SETTINGS: "app.settings"
-    };
-
-    angular.module("taskdo.common").constant("STATE", APP_STATE);
-
-    angular.module("taskdo.common").constant("MENU", {
-        GENERAL: {
-            DASHBOARD: {
-                STATE: APP_STATE.DASHBOARD,
-                ICON: "home",
-                I18N: "i18n.menu.home"
-            },
-            PROJECTS: {
-                STATE: APP_STATE.PROJECTS,
-                ICON: "work",
-                I18N: "i18n.menu.projects"
-            },
-            TASKS: {
-                STATE: APP_STATE.TASKS.OPENED,
-                ICON: "description",
-                I18N: "i18n.menu.tasks"
-            }
-        },
-        MANAGEMENT: {
-            SETTINGS: {
-                STATE: APP_STATE.SETTINGS,
-                ICON: "settings",
-                I18N: "i18n.menu.settings"
-            }
-        }
     });
-
 
     angular.module("taskdo.common").constant("PRIORITY", {
         CRITICAL: {
@@ -87,7 +57,12 @@
         SETTING: "setting"
     });
 
-    angular.module("taskdo.common").constant("CRUD_FIELDS", {
+    angular.module("taskdo.common").constant("DATE_FILTER", {
+        WEEK: "WEEK",
+        TODAY: "TODAY"
+    });
+
+    angular.module("taskdo.common").constant("LIST_FIELDS", {
         DASHBOARD: [
             { name: "name", type: "string" },
             { name: "project.name", type: "string" }

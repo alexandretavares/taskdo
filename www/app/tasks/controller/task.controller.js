@@ -3,21 +3,25 @@
 
     angular.module("taskdo.tasks").controller("TaskController", TaskController);
 
-    TaskController.$inject = ['$scope', '$state', '$ionicPopover', '$ionicModal', '$timeout',
-        'CRUD_FIELDS', 'STATE', 'i18nService', 'toastService', 'popupService',
-        'taskService', 'projectService', 'ionicMaterialInk'];
+    TaskController.$inject = ['$scope', '$state', '$ionicPopover', '$ionicModal',
+        '$timeout', 'LIST_FIELDS', 'STATE', 'i18nService', 'toastService',
+        'popupService', 'taskService', 'projectService', 'ionicMaterialInk',
+        'defaultProject', 'utilService', 'DATE_FILTER'];
 
-    function TaskController($scope, $state, $ionicPopover, $ionicModal, $timeout,
-        CRUD_FIELDS, STATE, i18n, toastService, popupService,
-        taskService, projectService, ionicMaterialInk) {
+    function TaskController($scope, $state, $ionicPopover, $ionicModal,
+        $timeout, LIST_FIELDS, STATE, i18n, toastService, popupService,
+        taskService, projectService, ionicMaterialInk, defaultProject,
+        utilService, DATE_FILTER) {
 
         var mv = this;
         var _lastFinished = null;
         var _partialsPath = "app/tasks/partials/";
 
+        var _startDate = null;
+        var _endDate = null;
+        var _projectId = null;
         var _popover = null;
         var _modalForm = null;
-        var _modalOptions = { scope: $scope, animation: 'slide-in-up' };
 
         mv.isStateFinished = function() {
             return $state.is(STATE.TASKS.FINISHED);
@@ -25,7 +29,11 @@
 
         mv.goStateFinished = function() {
             mv.closeMoreActions();
-            $state.go(STATE.TASKS.FINISHED);
+            $state.go(STATE.TASKS.FINISHED, {project_id: _projectId});
+        };
+
+        mv.goBack = function() {
+            $state.go(STATE.PROJECTS);
         };
 
         mv.showMoreActions = function($event) {
@@ -44,13 +52,13 @@
 
                 var firstKey = Object.keys(mv.selected)[0];
                 mv.task = angular.copy(mv.selected[firstKey]);
-
-                if (mv.task.hasOwnProperty("dueDate")) {
-                    mv.task.dueDate = new Date(mv.task.dueDate);
-                }
             } else {
                 mv.task = {};
                 mv.editMode = false;
+
+                if (_projectId != null) {
+                    mv.task.project_id = _projectId;
+                }
             }
 
             _modalForm.show();
@@ -82,7 +90,7 @@
         };
 
         mv.refreshList = function() {
-            taskService.listOpened()
+            taskService.listByProject(_projectId, _startDate, _endDate)
                 .then(function(tasks) {
                     mv.tasks = tasks;
 
@@ -97,7 +105,7 @@
         };
 
         mv.refreshProjects = function() {
-            projectService.list()
+            projectService.listAll()
                 .then(function(projects) {
                     mv.projects = projects;
                 })
@@ -183,7 +191,27 @@
         };
 
         $scope.$on("$ionicView.beforeEnter", function(event, data) {
-            mv.minDate = new Date();
+            var project = $state.params.project;
+            var dateFilter = $state.params.dateFilter;
+
+            if (project) {
+                _projectId = $state.params.project._id;
+                mv.pageTitle = $state.params.project.name;
+            } else if (dateFilter) {
+                if (dateFilter == DATE_FILTER.WEEK) {
+                    var weekRange = utilService.getWeekRangeOfDate(new Date());
+                    _startDate = weekRange.start;
+                    _endDate = weekRange.end;
+
+                    mv.pageTitle = i18n.tasks.list.week;
+                } else {
+                    _endDate = new Date();
+                    mv.pageTitle = i18n.tasks.list.today;
+                }
+            } else {
+                mv.pageTitle = i18n.tasks.list.all;
+            }
+
             mv.refreshList();
             mv.refreshProjects();
         });
@@ -197,12 +225,14 @@
             mv.tasks = [];
             mv.task = {};
             mv.selected = {};
+            mv.pageTitle = "";
+            mv.editMode = false;
             mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.editMode = false;
             mv.snackbarVisible = false;
-            mv.fields = CRUD_FIELDS.TASKS;
             mv.stateFinished = STATE.TASKS.FINISHED;
+            mv.fields = LIST_FIELDS.TASKS;
+            mv.defaultProject = defaultProject;
 
             $ionicPopover.fromTemplateUrl(_partialsPath + 'task-more-actions.html', {
                 scope: $scope
@@ -210,11 +240,12 @@
                 _popover = popover;
             });
 
-            $ionicModal.fromTemplateUrl(_partialsPath + 'task-form.html', _modalOptions)
-                .then(function(modal) {
-                    _modalForm = modal;
-                });
-
+            $ionicModal.fromTemplateUrl(_partialsPath + 'task-form.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                _modalForm = modal;
+            });
         })();
 
     }

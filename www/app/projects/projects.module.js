@@ -6,7 +6,7 @@
 
     function config($stateProvider, STATE) {
         $stateProvider.state(STATE.PROJECTS, {
-            url: "/projects/list",
+            url: "/projects",
             views: {
                 'content-menu': {
                     templateUrl: "app/projects/partials/project-list.html",

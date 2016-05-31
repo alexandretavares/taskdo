@@ -1,5 +1,8 @@
 {
     "i18n": {
+        "default": {
+            "project": "Entrada"
+        },
         "dashboard": {
             "title": "Início",
             "noTasks": "Não existem tarefas em aberto"
@@ -18,6 +21,9 @@
         },
         "menu": {
             "home": "Início",
+            "inbox": "Entrada",
+            "today": "Hoje",
+            "week": "Semana",
             "projects": "Projetos",
             "tasks": "Tarefas",
             "settings": "Configurações",
@@ -79,7 +85,7 @@
         },
         "projects": {
             "list": {
-                "title": "Projetos",
+                "title": "Todos os projetos",
                 "createdIn": "Criado em: {{createdIn | date : 'dd/MM/yyyy'}}"
             },
             "form": {
@@ -94,7 +100,9 @@
                 "finished": "Tarefas finalizadas"
             },
             "list": {
-                "title": "Tarefas abertas"
+                "all": "Todas as tarefas",
+                "today": "Hoje",
+                "week": "Semana"
             },
             "form": {
                 "title": "Tarefa",

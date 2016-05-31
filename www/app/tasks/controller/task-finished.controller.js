@@ -4,14 +4,15 @@
     angular.module("taskdo.tasks").controller("TaskFinishedController", TaskFinishedController);
 
     TaskFinishedController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
-        'STATE', 'CRUD_FIELDS', 'i18nService', 'toastService', 'popupService',
+        'STATE', 'LIST_FIELDS', 'i18nService', 'toastService', 'popupService',
         'taskService', 'ionicMaterialInk', '$timeout'];
 
     function TaskFinishedController($scope, $state, $ionicHistory, $ionicPopover,
-        STATE, CRUD_FIELDS, i18n, toastService, popupService, taskService,
+        STATE, LIST_FIELDS, i18n, toastService, popupService, taskService,
         ionicMaterialInk, $timeout) {
 
         var mv = this;
+        var _projectId = null;
         var _popover = null;
         var _partialsPath = "app/tasks/partials/";
 
@@ -47,7 +48,7 @@
         };
 
         mv.refreshList = function() {
-            taskService.listFinished()
+            taskService.listFinished(_projectId)
                 .then(function(tasks) {
                     mv.tasks = tasks;
 
@@ -96,6 +97,7 @@
         };
 
         $scope.$on("$ionicView.beforeEnter", function(event, data) {
+            _projectId = $state.params.project_id;
             mv.refreshList();
         });
 
@@ -108,7 +110,7 @@
             mv.selected = {};
             mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.fields = CRUD_FIELDS.TASKS;
+            mv.fields = LIST_FIELDS.TASKS;
             mv.stateFinished = STATE.TASKS.FINISHED;
 
             $ionicPopover.fromTemplateUrl(_partialsPath + 'task-more-actions.html', {

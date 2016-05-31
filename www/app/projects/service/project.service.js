@@ -5,10 +5,15 @@
     projectService.$inject = ['TABLE', 'Database', 'taskService'];
 
     function projectService(TABLE, Database, taskService) {
+        var that = this;
         var db = new Database(TABLE.PROJECT);
 
-        this.list = function() {
+        this.listAll = function() {
             return db.list();
+        };
+
+        this.list = function() {
+            return db.find({type: { $exists: false }});
         };
 
         this.save = function(project) {
@@ -40,6 +45,20 @@
                     return false;
                 });
         };
+
+        this.getDefault = function() {
+            return db.findOne({type: "default"}).then(function(project) {
+                if (project != null) {
+                    return project;
+                } else {
+                    return that.save({name: "i18n.default.project", type: "default"})
+                                .then(function(newProject) {
+                                    return newProject;
+                                });
+                }
+            });
+        };
+
     }
 
 })();

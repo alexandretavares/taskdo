@@ -2,9 +2,12 @@
     'use strict';
 
     angular.module("taskdo.common").controller("MenuController", MenuController);
-    MenuController.$inject = ['$scope', 'MENU', 'popupService', 'ionicMaterialInk', '$timeout'];
+    MenuController.$inject = ['$scope', 'STATE', 'popupService', 'ionicMaterialInk',
+        '$timeout', 'defaultProject', 'DATE_FILTER'];
 
-    function MenuController($scope, MENU, popupService, ionicMaterialInk, $timeout) {
+    function MenuController($scope, STATE, popupService, ionicMaterialInk,
+        $timeout, defaultProject, DATE_FILTER) {
+
         var mv = this;
 
         mv.exit = function() {
@@ -14,7 +17,9 @@
         };
 
         (function() {
-            mv.MENU = MENU;
+            mv.STATE = STATE;
+            mv.DATE_FILTER = DATE_FILTER;
+            mv.defaultProject = defaultProject;
 
             $timeout(function() {
                 ionicMaterialInk.displayEffect();

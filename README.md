@@ -3,7 +3,7 @@
 It is a mobile hybrid app Ionic-based (v1) that store tasks todo. You can create projects to organize your tasks.
 
 ### Version
-0.7.0
+0.8.0
 
 ### Tech
 

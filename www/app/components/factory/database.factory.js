@@ -29,6 +29,20 @@
                 });
             };
 
+            this.findOne = function(query, options) {
+                return $q(function(resolve, reject) {
+                    collection.load(function() {
+                        var docs = collection.find(query, options);
+
+                        if (docs.length > 0) {
+                            resolve(angular.copy(docs[0]));
+                        } else {
+                            resolve(null);
+                        }
+                    });
+                });
+            };
+
             this.find = function(query, options) {
                 return $q(function(resolve, reject) {
                     collection.load(function() {
@@ -61,9 +75,15 @@
             };
 
             this.save = function(obj) {
-                var entity = angular.copy(obj);
-
                 return $q(function(resolve, reject) {
+                    var entity = angular.copy(obj);
+
+                    angular.forEach(entity, function(value, key) {
+                        if (value instanceof Date) {
+                            entity[key] = _db.make(value);
+                        }
+                    });
+
                     if (entity.hasOwnProperty("_id")) {
                         collection.update({_id: entity._id}, entity);
                     } else {

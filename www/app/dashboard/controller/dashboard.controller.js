@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module("taskdo.dashboard").controller("DashboardController", DashboardController);
-    DashboardController.$inject = ['$scope', 'dashboardService', 'CRUD_FIELDS',
+    DashboardController.$inject = ['$scope', 'dashboardService', 'LIST_FIELDS',
         '$timeout', 'ionicMaterialInk'];
 
-    function DashboardController($scope, dashboardService, CRUD_FIELDS,
+    function DashboardController($scope, dashboardService, LIST_FIELDS,
         $timeout, ionicMaterialInk) {
 
         var mv = this;
@@ -43,7 +43,7 @@
             mv.selected = {};
             mv.selectedCount = 0;
             mv.selectedAll = false;
-            mv.fields = CRUD_FIELDS.DASHBOARD;
+            mv.fields = LIST_FIELDS.DASHBOARD;
         })();
     }
 

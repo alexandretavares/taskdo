@@ -18,9 +18,9 @@
         ]
     ).run(run);
 
-    run.$inject = ['$ionicPlatform','settingService', 'i18nService'];
+    run.$inject = ['$ionicPlatform', 'i18nService', 'settingService', 'projectService', 'defaultProject'];
 
-    function run($ionicPlatform, settingService, i18n) {
+    function run($ionicPlatform, i18n, settingService, projectService, defaultProject) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
               // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -50,6 +50,11 @@
                        i18n.refresh();
                    }
                 }
+            });
+
+            //Default project
+            projectService.getDefault().then(function(project) {
+                angular.extend(defaultProject, project);
             });
 
         });

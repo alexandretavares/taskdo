@@ -8,6 +8,10 @@
         $stateProvider
             .state(STATE.TASKS.OPENED, {
                 url: "/tasks",
+                params: {
+                    project: null,
+                    dateFilter: null
+                },
                 views: {
                     'content-menu': {
                         templateUrl: "app/tasks/partials/task-list.html",
@@ -18,6 +22,9 @@
             })
             .state(STATE.TASKS.FINISHED, {
                 url: "/tasks-finished",
+                params: {
+                    project_id: null
+                },
                 views: {
                     'content-menu': {
                         templateUrl: "app/tasks/partials/task-finished.html",
