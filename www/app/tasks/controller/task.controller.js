@@ -4,22 +4,20 @@
     angular.module("taskdo.tasks").controller("TaskController", TaskController);
 
     TaskController.$inject = ['$scope', '$state', '$ionicPopover', '$ionicModal',
-        '$timeout', 'LIST_FIELDS', 'STATE', 'i18nService', 'toastService',
-        'popupService', 'taskService', 'projectService', 'ionicMaterialInk',
-        'defaultProject', 'utilService', 'DATE_FILTER'];
+        'LIST_FIELDS', 'STATE', 'i18nService', 'toastService', 'popupService',
+        'taskService', 'projectService', 'defaultProject', 'utilService'];
 
     function TaskController($scope, $state, $ionicPopover, $ionicModal,
-        $timeout, LIST_FIELDS, STATE, i18n, toastService, popupService,
-        taskService, projectService, ionicMaterialInk, defaultProject,
-        utilService, DATE_FILTER) {
+        LIST_FIELDS, STATE, i18n, toastService, popupService, taskService,
+        projectService, defaultProject, utilService) {
 
         var mv = this;
-        var _lastFinished = null;
         var _partialsPath = "app/tasks/partials/";
 
+        var _lastFinished = null;
+        var _projectId = null;
         var _startDate = null;
         var _endDate = null;
-        var _projectId = null;
         var _popover = null;
         var _modalForm = null;
 
@@ -29,7 +27,12 @@
 
         mv.goStateFinished = function() {
             mv.closeMoreActions();
-            $state.go(STATE.TASKS.FINISHED, {project_id: _projectId});
+
+            $state.go(STATE.TASKS.FINISHED, {
+                project_id: _projectId,
+                start: _startDate,
+                end: _endDate
+            });
         };
 
         mv.goBack = function() {
@@ -90,22 +93,17 @@
         };
 
         mv.refreshList = function() {
-            taskService.listByProject(_projectId, _startDate, _endDate)
+            taskService.listOpened(_projectId, _startDate, _endDate)
                 .then(function(tasks) {
                     mv.tasks = tasks;
-
-                    $timeout(function() {
-                        ionicMaterialInk.displayEffect();
-                    }, 300);
                 })
                 .catch(function(error) {
-                    mv.tasks = [];
                     console.error(error);
                 });
         };
 
         mv.refreshProjects = function() {
-            projectService.listAll()
+            projectService.list()
                 .then(function(projects) {
                     mv.projects = projects;
                 })
@@ -120,18 +118,18 @@
             } else {
                 taskService.save(mv.task)
                     .then(function() {
-                        mv.hideForm().then(function() {
-                            if (mv.task.hasOwnProperty("_id")) {
-                                toastService.show(i18n.common.messages.success.updated);
-                            } else {
-                                toastService.show(i18n.common.messages.success.created);
-                            }
+                        if (mv.task.hasOwnProperty("_id")) {
+                            toastService.show(i18n.common.messages.success.updated);
+                        } else {
+                            toastService.show(i18n.common.messages.success.created);
+                        }
 
-                            mv.unselectAll();
-                            mv.refreshList();
-                        });
+                        mv.unselectAll();
+                        mv.refreshList();
+                        mv.hideForm();
                     })
                     .catch(function(error) {
+                        toastService.show(i18n.common.messages.error.duplicated);
                         console.error(error);
                     });
             }
@@ -190,26 +188,42 @@
                 });
         };
 
-        $scope.$on("$ionicView.beforeEnter", function(event, data) {
-            var project = $state.params.project;
-            var dateFilter = $state.params.dateFilter;
+        mv.canShowFinished = function() {
+            return !$state.is(STATE.TASKS.TODAY) && !$state.is(STATE.TASKS.WEEK);
+        };
 
-            if (project) {
-                _projectId = $state.params.project._id;
-                mv.pageTitle = $state.params.project.name;
-            } else if (dateFilter) {
-                if (dateFilter == DATE_FILTER.WEEK) {
+        $scope.$on("$ionicView.beforeEnter", function(event, data) {
+            _projectId = null;
+            _startDate = null;
+            _endDate = null;
+
+            switch ($state.current.name) {
+                case STATE.TASKS.INBOX:
+                    _projectId = defaultProject._id;
+                    mv.pageTitle = defaultProject.name;
+                    break;
+                case STATE.TASKS.TODAY:
+                    _endDate = new Date();
+                    mv.pageTitle = i18n.tasks.list.today;
+                    break;
+                case STATE.TASKS.WEEK:
                     var weekRange = utilService.getWeekRangeOfDate(new Date());
                     _startDate = weekRange.start;
                     _endDate = weekRange.end;
 
                     mv.pageTitle = i18n.tasks.list.week;
-                } else {
-                    _endDate = new Date();
-                    mv.pageTitle = i18n.tasks.list.today;
-                }
-            } else {
-                mv.pageTitle = i18n.tasks.list.all;
+                    break;
+                case STATE.TASKS.BY_PROJECT:
+                    var project = $state.params.project;
+
+                    if (project) {
+                        _projectId = project._id;
+                        mv.pageTitle = project.name;
+                    }
+
+                    break;
+                default:
+                    mv.pageTitle = i18n.tasks.list.all;
             }
 
             mv.refreshList();
@@ -232,7 +246,6 @@
             mv.snackbarVisible = false;
             mv.stateFinished = STATE.TASKS.FINISHED;
             mv.fields = LIST_FIELDS.TASKS;
-            mv.defaultProject = defaultProject;
 
             $ionicPopover.fromTemplateUrl(_partialsPath + 'task-more-actions.html', {
                 scope: $scope
@@ -242,7 +255,8 @@
 
             $ionicModal.fromTemplateUrl(_partialsPath + 'task-form.html', {
                 scope: $scope,
-                animation: 'slide-in-up'
+                animation: 'slide-in-up',
+                focusFirstInput: true
             }).then(function(modal) {
                 _modalForm = modal;
             });

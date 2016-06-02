@@ -1,26 +1,60 @@
 <ion-view>
     <ion-nav-title translate="i18n.dashboard.title"></ion-nav-title>
-    <ion-content overflow-scroll="false">
 
-        <div ng-show="!mv.tasks.length" class="list card ng-hide">
-            <div class="item">
-                <p translate="i18n.dashboard.noTasks"></p>
-            </div>
-        </div>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
 
-        <ion-list ng-show="mv.tasks.length"
-            ng-repeat="(dueDate, tasks) in (mv.tasks | groupBy: 'dueDate')">
+    <ion-content scroll="false">
+          <section class="dashboard-container">
+              <div class="row icon-row">
+                  <div class="col text-center">
+                      <a class="item-image button button-stable"
+                        ui-sref="{{mv.STATE.TASKS.INBOX}}">
+                          <i class="icon light material-icons md-48 md-dark">inbox</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.inbox"></div>
+                  </div>
+                  <div class="col text-center">
+                      <a class="item-image button button-stable"
+                        ui-sref="{{mv.STATE.TASKS.TODAY}}">
+                          <i class="icon light material-icons md-48 md-dark">today</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.today"></div>
+                  </div>
+              </div>
 
-            <ion-item class="item item-divider">
-                {{dueDate | date: 'dd/MM/yyyy'}}
-            </ion-item>
+              <div class="row icon-row">
+                  <div class="col text-center">
+                      <a class="item-image button button-stable"
+                        ui-sref="{{mv.STATE.TASKS.WEEK}}">
+                          <i class="icon light material-icons md-48 md-dark">&#xE916;</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.week"></div>
+                  </div>
+                  <div class="col text-center">
+                      <a class="item-image button button-stable"
+                        ui-sref="{{mv.STATE.TASKS.ALL}}">
+                          <i class="icon light material-icons md-48 md-dark">description</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.tasks"></div>
+                  </div>
+              </div>
 
-            <ion-item type="item-text-wrap" class="item ink" ng-repeat="task in tasks">
-                <a class="item-no-decoration">
-                    <h2 ng-bind="task.name"></h2>
-                    <p>{{task.project.name | translate}}</p>
-                </a>
-            </ion-item>
-        </ion-list>
-    </ion-content>
+              <div class="row icon-row">
+                  <div class="col text-center">
+                      <a class="item-image button button-stable" ui-sref="{{mv.STATE.PROJECTS}}">
+                          <i class="icon light material-icons md-48 md-dark">work</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.projects"></div>
+                  </div>
+                  <div class="col text-center">
+                      <a class="item-image button button-stable" ui-sref="{{mv.STATE.SETTINGS}}">
+                          <i class="icon light material-icons md-48 md-dark">settings</i>
+                      </a>
+                      <div class="item-image-text" translate="i18n.menu.settings"></div>
+                  </div>
+              </div>
+          </section>
+      </ion-content>
 </ion-view>

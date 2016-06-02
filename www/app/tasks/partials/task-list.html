@@ -7,7 +7,7 @@
 
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical"
-            ng-click="mv.showMoreActions($event)"></button>
+            ng-click="mv.showMoreActions($event)" ng-show="mv.canShowFinished()"></button>
     </ion-nav-buttons>
 
     <ion-header-bar align-title="left" class="bar-purple">

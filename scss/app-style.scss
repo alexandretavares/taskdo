@@ -1,9 +1,6 @@
-.taskdo-popover {
-    height: auto !important;
-
-    ion-content {
-        top: 0;
-        position: relative;
+.list {
+    .item.activated {
+        background-color: #D9D9D9;
     }
 }
 
@@ -36,20 +33,10 @@
     color: #fff;
 }
 
-.menu-open .menu-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 11;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 1;
-    -webkit-transition: 0.1s opacity linear;
-    transition: 0.1s opacity linear;
+.bar.bar-royal {
+    background-image: none;
 }
 
-// Customize bar elements
 .bar .button {
     min-height: 54px !important;
     max-height: 54px !important;
@@ -59,56 +46,9 @@
     line-height: 55px;
 }
 
-.item.active {
-    background-color: #D9D9D9 !important;
-}
-
-// List component
-.list.advanced {
-
-    .item-options-full-right {
-        .item-avatar {
-            padding-right: $item-avatar-width + ($item-padding * 2) !important;
-            padding-left: 0 !important;
-        }
-
-        .item-options-full {
-            img:first-child, .item-image {
-                padding-left: 0 !important;
-
-                right: $item-padding !important;
-            }
-        }
-    }
-
-    .item-avatar {
-        padding-left: 72px !important;
-    }
-
-    .item-image .icon {
-        margin-top: 7px;
-    }
-
-    .item-avatar.activated {
+.item {
+    &.active, &.clicked {
         background-color: #D9D9D9 !important;
-    }
-
-    .item-options-full {
-        position: absolute;
-        top: 0;
-        z-index: 1;
-        height: 100%;
-        width: 100%;
-        margin: -1px;
-
-        &.balanced-bg {
-            background-color: $balanced;
-        }
-
-        &.assertive-bg {
-            background-color: $assertive;
-        }
-
     }
 }
 
@@ -119,40 +59,6 @@
         animation: slideInUp 0.4s;
     }
 }
-
-.snackbar {
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 6px 0 6px 0;
-    position: fixed;
-    z-index: 1;
-    bottom: 0;
-
-    .snackbar-text {
-        float: left;
-        line-height: 36px;
-        padding-left: 24px;
-    }
-
-    .button {
-        padding-right: 24px;
-    }
-
-    &.ng-hide-remove {
-        -webkit-animation: fadeInUp 0.5s;
-        animation: fadeInUp 0.5s;
-    }
-
-    // &.ng-hide-add {
-    //     -webkit-animation: fadeOutDown 0.6s;
-    //     animation: fadeOutDown 0.6s;
-    // }
-}
-
-
 
 @-webkit-keyframes slideInUp {
   from {
@@ -180,6 +86,71 @@
   }
 }
 
+.dashboard-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    height: 100%;
+
+    > .row {
+        -webkit-flex: 1;
+    }
+
+    .icon-row {
+        -webkit-align-items: center;
+
+        .item-image {
+            border-radius: 50%;
+            height: 72px;
+            width: 72px;
+            padding: 0;
+            margin: 0 auto;
+            background-color: $purple;
+
+            .icon {
+                padding-top: 12px;
+                color: $light;
+            }
+
+            &.activated {
+                opacity: 0.5;
+            }
+        }
+
+        .item-image-text {
+            padding-top: 5px;
+        }
+    }
+}
+
+// Menu
+.menu-avatar-text {
+    top: 40px;
+    left: 96px;
+    position: absolute;
+}
+
+.menu .bar.bar-header.expanded {
+    min-height: 100px !important;
+}
+
+.has-expanded-header-avatar {
+    top: 100px;
+}
+
+.menu-open .menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    -webkit-transition: 0.1s opacity linear;
+    transition: 0.1s opacity linear;
+}
+
+// Animations
 @-webkit-keyframes slideOutDown {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -206,7 +177,6 @@
   }
 }
 
-// Animations
 @-webkit-keyframes fadeInUp {
   from {
     opacity: 0;

@@ -5,13 +5,14 @@
     settingService.$inject = ['TABLE', 'Database', '$q'];
 
     function settingService(TABLE, Database, $q) {
+        var that = this;
         var db = new Database(TABLE.SETTING);
 
         this.getLanguage = function() {
             return $q(function(resolve, reject) {
-                db.list().then(function(docs) {
-                    if (docs.length > 0) {
-                        resolve(docs[0].language);
+                that.get().then(function(setting) {
+                    if (setting) {
+                        resolve(setting.language);
                     } else {
                         resolve(null);
                     }
@@ -24,17 +25,8 @@
         };
 
         this.get = function() {
-            return $q(function(resolve, reject) {
-                db.list().then(function(docs) {
-                    if (docs.length > 0) {
-                        resolve(angular.copy(docs[0]));
-                    } else {
-                        resolve(null);
-                    }
-                });
-            });
+            return db.findOne({}, {});
         };
-
     }
 
 })();

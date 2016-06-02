@@ -12,22 +12,27 @@
             </div>
         </div>
 
-        <div class="item item-light item-avatar ink"
-            ng-class="{'activated': wasSelected(item._id)}"
+        <div class="item item-light item-avatar"
+            ng-class="{'activated': wasSelected(item._id), 'clicked': clickedItem}"
             on-drag-left="onDragLeft($event, item._id)"
             on-drag-right="onDragRight($event, item._id)"
-            on-release="onRelease($event)"
             on-swipe-left="onSwipeLeft($event, item._id)"
             on-swipe-right="onSwipeRight($event, item._id)"
-            on-hold="toggleMark(item)">
+            on-release="onRelease($event); clickedItem = false"
+            on-touch="clickedItem = true">
 
-            <div class="item-image stable-bg" ng-click="toggleMark(item)"
+            <div class="item-image" ng-click="toggleMark(item)"
                 ng-class="wasSelected(item._id) ? 'purple-bg' : 'stable-bg'">
                 <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : avatarIcon}}</i>
             </div>
-            <div ng-click="rowClick(item)">
-                <h2 ng-bind="format(item, fields[0])"></h2>
-                <p>{{format(item, fields[1]) | translate}}</p>
+            <div ng-click="rowClick(item)" on-hold="toggleMark(item)" class="item-multi-line">
+                <h2 ng-bind="format(item, fields[0])" ng-class="{'only-field-title': fields.length == 1}"></h2>
+                <span class="item-note-left" ng-if="fields[1]">
+                    {{format(item, fields[1]) | translate}}
+                </span>
+                <span class="item-note item-note-right" ng-if="fields[2]">
+                    {{format(item, fields[2]) | translate}}
+                </span>
             </div>
         </div>
     </div>

@@ -6,7 +6,12 @@
         DASHBOARD: "app.dashboard",
         PROJECTS: "app.projects",
         TASKS: {
-            OPENED: "app.tasks-opened",
+            BASE: "app.tasks",
+            ALL: "app.tasks.all",
+            INBOX: "app.tasks.inbox",
+            TODAY: "app.tasks.today",
+            WEEK: "app.tasks.week",
+            BY_PROJECT: "app.tasks.by-project",
             FINISHED: "app.tasks-finished"
         },
         SETTINGS: "app.settings"
@@ -57,23 +62,14 @@
         SETTING: "setting"
     });
 
-    angular.module("taskdo.common").constant("DATE_FILTER", {
-        WEEK: "WEEK",
-        TODAY: "TODAY"
-    });
-
     angular.module("taskdo.common").constant("LIST_FIELDS", {
-        DASHBOARD: [
-            { name: "name", type: "string" },
-            { name: "project.name", type: "string" }
-        ],
         PROJECTS: [
-            { name: "name", type: "string" },
-            { name: "createdDate", type: "date" }
+            { name: "name", type: "string" }
         ],
         TASKS: [
             { name: "name", type: "string" },
-            { name: "project.name", type: "string" }
+            { name: "project.name", type: "string" },
+            { name: "dueDate", type: "date" }
         ]
     });
 

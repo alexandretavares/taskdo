@@ -1,6 +1,10 @@
 <ion-view hide-nav-bar="mv.hasSelected()">
     <ion-nav-title translate="i18n.projects.list.title"></ion-nav-title>
 
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+
     <ion-header-bar align-title="left" class="bar-purple">
         <div class="buttons buttons-left header-item">
             <button class="button button-icon button-clear ion-android-arrow-back"
@@ -25,12 +29,11 @@
     <ion-content overflow-scroll="false">
         <tsk-list icon="work" fields="mv.fields" collection="mv.projects"
             selected-count="mv.selectedCount" selected-all="mv.selectedAll"
-            selected="mv.selected" on-row-click="mv.onRowClick(item)"
-            drag-left="false" on-drag-left-complete="mv.onDragLeftComplete(id)">
+            selected="mv.selected" on-row-click="mv.onRowClick(item)">
         </tsk-list>
     </ion-content>
 
-    <button class="button button-fab button-fab-bottom-right button-royal" ng-click="mv.showForm()">
+    <button class="button button-fab button-fab-bottom-right button-purple" ng-click="mv.showForm()">
         <i class="icon ion-android-add"></i>
     </button>
 </ion-view>

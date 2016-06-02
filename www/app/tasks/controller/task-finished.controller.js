@@ -5,11 +5,10 @@
 
     TaskFinishedController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
         'STATE', 'LIST_FIELDS', 'i18nService', 'toastService', 'popupService',
-        'taskService', 'ionicMaterialInk', '$timeout'];
+        'taskService'];
 
     function TaskFinishedController($scope, $state, $ionicHistory, $ionicPopover,
-        STATE, LIST_FIELDS, i18n, toastService, popupService, taskService,
-        ionicMaterialInk, $timeout) {
+        STATE, LIST_FIELDS, i18n, toastService, popupService, taskService) {
 
         var mv = this;
         var _projectId = null;
@@ -51,10 +50,6 @@
             taskService.listFinished(_projectId)
                 .then(function(tasks) {
                     mv.tasks = tasks;
-
-                    $timeout(function() {
-                        ionicMaterialInk.displayEffect();
-                    }, 300);
                 })
                 .catch(function(error) {
                     mv.tasks = [];

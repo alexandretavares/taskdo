@@ -3,11 +3,9 @@
 
     angular.module("taskdo.settings").controller("SettingController", SettingController);
     SettingController.$inject = ['$scope', 'i18nService', 'toastService',
-        '$ionicModal', 'settingService', 'ionicMaterialInk', '$timeout'];
+        '$ionicModal', 'settingService'];
 
-    function SettingController($scope, i18n, toastService, $ionicModal,
-        settingService, ionicMaterialInk, $timeout) {
-
+    function SettingController($scope, i18n, toastService, $ionicModal, settingService) {
         var mv = this;
         var _partials = "app/settings/partials/";
 
@@ -20,19 +18,13 @@
 
         mv.showModal = function(modalName) {
             if (modalName == mv.MODAL.ABOUT) {
-                _modalAbout.show().then(function() {
-                    mv.visibleModal = true;
-                });
+                _modalAbout.show();
             } else {
-                _modalForm.show().then(function() {
-                    mv.visibleModal = true;
-                });
+                _modalForm.show();
             }
         };
 
         mv.hideModal = function(modalName) {
-            mv.visibleModal = false;
-
             if (modalName == mv.MODAL.ABOUT) {
                 _modalAbout.hide();
             } else {
@@ -44,8 +36,6 @@
 
         mv.save = function() {
             settingService.save(mv.setting).then(function() {
-                mv.visibleModal = false;
-
                 _modalForm.hide().then(function () {
                     mv.defaultSetting = angular.copy(mv.setting);
 
@@ -65,16 +55,11 @@
                 }
 
                 mv.defaultSetting = angular.copy(mv.setting);
-
-                $timeout(function() {
-                    ionicMaterialInk.displayEffect();
-                }, 300);
             });
         });
 
         (function() {
             mv.setting = {};
-            mv.visibleModal = false;
             mv.languages = i18n.getLanguages();
             mv.MODAL = { ABOUT: "ABOUT", FORM: "FORM" };
 

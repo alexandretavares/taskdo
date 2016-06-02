@@ -4,47 +4,22 @@
     angular.module("taskdo.projects").controller("ProjectController", ProjectController);
 
     ProjectController.$inject = ['$scope', '$ionicPopover', '$ionicModal', 'projectService',
-        'toastService', 'popupService', 'i18nService', '$timeout', 'ionicMaterialInk',
-        'LIST_FIELDS', '$state', 'STATE'];
+        'toastService', 'popupService', 'i18nService', 'LIST_FIELDS', '$state', 'STATE'];
 
     function ProjectController($scope, $ionicPopover, $ionicModal, projectService,
-        toastService, popupService, i18n, $timeout, ionicMaterialInk,
-        LIST_FIELDS, $state, STATE) {
+        toastService, popupService, i18n, LIST_FIELDS, $state, STATE) {
 
         var mv = this;
         var _popover = null;
         var _modal = null;
-
-        var _initPopover = function() {
-            if (_popover == null) {
-                $ionicPopover.fromTemplateUrl('app/projects/partials/project-more-actions.html', {
-                    scope: $scope
-                }).then(function(popover) {
-                    _popover = popover;
-                });
-            }
-        };
-
-        var _initModal = function() {
-            $ionicModal.fromTemplateUrl('app/projects/partials/project-form.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                _modal = modal;
-            });
-        };
+        var _partialsPath = "app/projects/partials/";
 
         mv.refreshList = function() {
-            projectService.list()
+            projectService.list(true)
                 .then(function(projects) {
                     mv.projects = projects;
-
-                    $timeout(function() {
-                        ionicMaterialInk.displayEffect();
-                    }, 300);
                 })
                 .catch(function(error) {
-                    mv.projects = [];
                     console.error(error);
                 });
         };
@@ -92,10 +67,6 @@
             mv.selectedCount = 0;
         };
 
-        mv.onDragLeftComplete = function(id) {
-            //TODO
-        };
-
         mv.save = function() {
             if (mv.projectForm.$invalid) {
                 toastService.show(i18n.common.validations.requiredFields);
@@ -104,7 +75,6 @@
                     .then(function() {
                         if (mv.project.hasOwnProperty("_id")) {
                             toastService.show(i18n.common.messages.success.updated);
-
                         } else {
                             toastService.show(i18n.common.messages.success.created);
                         }
@@ -114,6 +84,7 @@
                         mv.hideForm();
                     })
                     .catch(function(error) {
+                        toastService.show(i18n.common.messages.error.duplicated);
                         console.error(error);
                     });
             }
@@ -137,7 +108,7 @@
         };
 
         mv.onRowClick = function(project) {
-            $state.go(STATE.TASKS.OPENED, {project: project});
+            $state.go(STATE.TASKS.BY_PROJECT, {project: project});
         };
 
         $scope.$on('$destroy', function() {
@@ -152,8 +123,20 @@
             mv.selectedAll = false;
             mv.fields = LIST_FIELDS.PROJECTS;
 
-            _initPopover();
-            _initModal();
+            $ionicPopover.fromTemplateUrl(_partialsPath + 'project-more-actions.html', {
+                scope: $scope
+            }).then(function(popover) {
+                _popover = popover;
+            });
+
+            $ionicModal.fromTemplateUrl(_partialsPath +  'project-form.html', {
+                scope: $scope,
+                animation: 'slide-in-up',
+                focusFirstInput: true
+            }).then(function(modal) {
+                _modal = modal;
+            });
+
             mv.refreshList();
         })();
     }

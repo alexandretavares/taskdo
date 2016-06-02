@@ -1,0 +1,122 @@
+// popover
+.taskdo-popover {
+    height: auto !important;
+
+    ion-content {
+        top: 0;
+        position: relative;
+    }
+}
+
+// list component
+.list.advanced {
+
+    .item {
+        padding: 0;
+        margin: 0;
+
+        .item-multi-line {
+            min-height: 73px;
+            padding: 16px 10px 16px 0;
+
+            .only-field-title {
+                padding-top: 11px;
+            }
+        }
+    }
+
+    .item-complex {
+        border-color: #aaa;
+        border-left: none !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .item-note-left {
+        color: #aaa;
+    }
+
+    .item-note-right {
+        font-size: 12px;
+    }
+
+    .item-options-full-right {
+        .item-avatar {
+            padding-right: $item-avatar-width + ($item-padding * 2) !important;
+            padding-left: 0 !important;
+        }
+
+        .item-options-full {
+            img:first-child, .item-image {
+                padding-left: 0 !important;
+                right: $item-padding !important;
+            }
+        }
+    }
+
+    .item-avatar {
+        padding-left: 72px !important;
+    }
+
+    .item-image .icon {
+        margin-top: 7px;
+    }
+
+    .item-avatar.activated {
+        background-color: #D9D9D9 !important;
+    }
+
+    .item-options-full {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+
+        &.balanced-bg {
+            background-color: $balanced;
+        }
+
+        &.assertive-bg {
+            background-color: $assertive;
+        }
+
+    }
+} // end list component
+
+// snackbar
+.snackbar {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 6px 0 6px 0;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+
+    .snackbar-text {
+        float: left;
+        line-height: 36px;
+        padding-left: 24px;
+    }
+
+    .button {
+        padding-right: 24px;
+    }
+
+    &.ng-hide-remove {
+        -webkit-animation: fadeInUp 0.5s;
+        animation: fadeInUp 0.5s;
+    }
+
+    // &.ng-hide-add {
+    //     -webkit-animation: fadeOutDown 0.6s;
+    //     animation: fadeOutDown 0.6s;
+    // }
+
+} // end snackbar

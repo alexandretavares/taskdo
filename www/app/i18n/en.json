@@ -52,6 +52,9 @@
                     "updated": "Successfully updated record",
                     "removed": "Successfully removed record",
                     "removedSelected": "Successfully removed records"
+                },
+                "error": {
+                    "duplicated": "Duplicated record"
                 }
             },
             "popup": {

@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module("taskdo.tasks").service("taskService", taskService);
-    taskService.$inject = ['TABLE', 'Database'];
+    taskService.$inject = ['$q', 'TABLE', 'Database'];
 
-    function taskService(TABLE, Database) {
+    function taskService($q, TABLE, Database) {
         var db = new Database(TABLE.TASK);
 
         var options = {
@@ -21,19 +21,7 @@
             }
         };
 
-        this.listOpened = function() {
-            var query = {
-                dueDate: { $exists: true },
-                $or: [
-                    { finished: false },
-                    { finished: { $exists: false } }
-                ]
-            };
-
-            return db.find(query, options);
-        };
-
-        this.listByProject = function(projectId, start, end) {
+        this.listOpened = function(projectId, start, end) {
             var query = {
                 $or: [
                     { finished: false },
@@ -63,7 +51,7 @@
         };
 
         this.listFinished = function(projectId) {
-            var query = { finished: true };
+            var query = { "finished": true };
 
             if (projectId) {
                 query["project_id"] = projectId;
@@ -73,11 +61,34 @@
         };
 
         this.save = function(task) {
-            if (!task.hasOwnProperty("createdDate")) {
-                task.createdDate = new Date();
+            var deferred = $q.defer();
+            var query = { name: task.name, project_id: task.project_id };
+
+            if (task.hasOwnProperty("_id")) {
+                query["_id"] = { "$ne": task._id };
             }
 
-            return db.save(task);
+            db.findOne(query).then(function(doc) {
+                if (doc) {
+                    deferred.reject("Duplicated element on database");
+                } else {
+                    if (!task.hasOwnProperty("createdDate")) {
+                        task.createdDate = new Date();
+                    }
+
+                    db.save(task)
+                        .then(function(taskSaved) {
+                            deferred.resolve(taskSaved);
+                        })
+                        .catch(function(error) {
+                            deferred.reject(error);
+                        })
+                }
+            }).catch(function(error) {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
         };
 
         this.get = function(id) {

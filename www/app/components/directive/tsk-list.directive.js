@@ -18,7 +18,6 @@
                 fields: '=',
                 collection: '=',
                 icon: '@?',
-                editable: '=?',
                 selected: '=?',
                 selectedCount: '=?',
                 selectedAll: '=?',
@@ -34,12 +33,11 @@
                 var _watchByPass = false;
                 var _dragCompleted = false;
 
-                scope.editable = (scope.editable != undefined) ? scope.editable : true;
+                scope.draggingRight = false;
+                scope.draggingLeft = false;
                 scope.selected = scope.selected || {};
                 scope.selectedCount = scope.selectedCount || 0;
                 scope.selectedAll = scope.selectedAll || false;
-                scope.draggingRight = false;
-                scope.draggingLeft = false;
                 scope.avatarIcon = (scope.icon) ? scope.icon : null;
 
                 var _completeDragAnimation = function(target, deltaX) {
@@ -108,15 +106,11 @@
                 });
 
                 scope.toggleMark = function(item) {
-                    if (!scope.editable) {
-                        return;
-                    }
-
                     if (scope.selected[item._id]) {
                         scope.selectedCount--;
                         delete scope.selected[item._id];
 
-                        if (!scope.hasSelected()) {
+                        if (scope.selectedAll && (scope.selectedCount != scope.collection.length)) {
                             scope.selectedAll = false;
                             _watchByPass = true;
                         }
