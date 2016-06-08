@@ -18,9 +18,9 @@
         ]
     ).run(run);
 
-    run.$inject = ['$ionicPlatform', 'i18nService', 'settingService', 'projectService', 'defaultProject'];
+    run.$inject = ['$ionicPlatform'];
 
-    function run($ionicPlatform, i18n, settingService, projectService, defaultProject) {
+    function run($ionicPlatform) {
         $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
               // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -37,25 +37,11 @@
                 StatusBar.styleDefault();
             }
 
-            // Setting the language
-            settingService.getLanguage().then(function(lang) {
-                if (lang != null) {
-                    i18n.refresh(lang);
-                } else {
-                    if (typeof navigator.globalization !== "undefined") {
-                       navigator.globalization.getPreferredLanguage(function(language) {
-                           i18n.refresh(language.value.split("-")[0]);
-                       }, null);
-                   } else {
-                       i18n.refresh();
-                   }
-                }
-            });
-
-            //Default project
-            projectService.getDefault().then(function(project) {
-                angular.extend(defaultProject, project);
-            });
+            if (typeof navigator.splashscreen !== "undefined") {
+                setTimeout(function() {
+                    navigator.splashscreen.hide();
+                }, 100);
+            }
 
         });
     }

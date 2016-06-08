@@ -1,5 +1,5 @@
 {
-  "name": "TaskDo",
+  "name": "Taskdo",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#master",

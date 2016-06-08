@@ -60,7 +60,8 @@
             "popup": {
                 "buttons": {
                     "yes": "Yes",
-                    "no": "No"
+                    "no": "No",
+                    "ok": "OK"
                 },
                 "remove": {
                     "title": "Remove",
@@ -77,6 +78,12 @@
                 "exit": {
                     "title": "Exit",
                     "content": "Do you want to exit the application?"
+                },
+                "error": {
+                    "fatal": {
+                        "title": "Fatal error",
+                        "content": "An unknown error has occurred. The application will be closed."
+                    }
                 }
             }
         },
@@ -84,6 +91,20 @@
             "snackbar": {
                 "text": "Completed",
                 "button": "Undo"
+            },
+            "emptyPage": {
+                "projects": {
+                    "title": "No projects",
+                    "subtitle": "Click on + button to add a new project."
+                },
+                "tasks": {
+                    "title": "No tasks",
+                    "subtitle": "Click on + button to add a new task."
+                },
+                "finishedTasks": {
+                    "title": "No tasks",
+                    "subtitle": "There are no finished tasks."
+                }
             }
         },
         "projects": {

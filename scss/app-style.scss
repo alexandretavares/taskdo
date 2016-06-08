@@ -1,39 +1,82 @@
-.list {
-    .item.activated {
-        background-color: #D9D9D9;
+.icon {
+    &.material-icons {
+        &.home::after {
+            content: "\E88A";
+        }
+
+        &.inbox::after {
+            content: "\E156";
+        }
+
+        &.today::after {
+            content: "\E8DF";
+        }
+
+        &.week::after {
+            content: "\E916";
+        }
+
+        &.projects::after {
+            content: "\E8F9";
+        }
+
+        &.tasks::after {
+            content: "\E873";
+        }
+
+        &.finished::after {
+            content: "\E876";
+        }
+
+        &.settings::after {
+            content: "\E8B8";
+        }
+
+        &.exit::after {
+            content: "\E879";
+        }
     }
 }
 
-.button-purple,
-.bar .button-purple,
-.bar .button-purple:hover,
-.button-purple:hover,
-.bar .button-purple:active,
-.button-purple:active,
-.bar .button-purple.activated,
-.button-purple.activated {
-    background-color: $purple;
+.list-highlighted {
+    .item.activated {
+        background-color: #D9D9D9 !important;
+    }
+}
+
+.button-secondary,
+.bar .button-secondary,
+.bar .button-secondary:hover,
+.button-secondary:hover,
+.bar .button-secondary:active,
+.button-secondary:active,
+.bar .button-secondary.activated,
+.button-secondary.activated {
+    background-color: $secondary;
     color: #fff;
 }
 
-.button.button-purple.button-clear {
+.button.button-secondary.button-clear {
     border-color: transparent;
     background: none;
     box-shadow: none;
-    color: $purple;
+    color: $secondary;
 }
 
-.purple-bg {
-    background-color: $purple;
+.secondary-bg {
+    background-color: $secondary;
     color: #fff;
 }
 
-.bar-purple {
-    background-color: $purple;
+.bar-secondary {
+    background-color: $secondary;
     color: #fff;
 }
 
-.bar.bar-royal {
+.bar.bar-royal,
+.bar.bar-energized,
+.bar.bar-stable,
+.bar.bar-dark {
     background-image: none;
 }
 
@@ -60,32 +103,6 @@
     }
 }
 
-@-webkit-keyframes slideInUp {
-  from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 .dashboard-container {
     display: -webkit-flex;
     -webkit-flex-direction: column;
@@ -104,11 +121,11 @@
             width: 72px;
             padding: 0;
             margin: 0 auto;
-            background-color: $purple;
+            background-color: $secondary;
 
             .icon {
-                padding-top: 12px;
                 color: $light;
+                line-height: 72px;
             }
 
             &.activated {
@@ -117,7 +134,7 @@
         }
 
         .item-image-text {
-            padding-top: 5px;
+            padding-top: 15px;
         }
     }
 }
@@ -148,83 +165,4 @@
     opacity: 1;
     -webkit-transition: 0.1s opacity linear;
     transition: 0.1s opacity linear;
-}
-
-// Animations
-@-webkit-keyframes slideOutDown {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@keyframes slideOutDown {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@-webkit-keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@-webkit-keyframes fadeOutDown {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@keyframes fadeOutDown {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
 }

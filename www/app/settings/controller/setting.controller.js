@@ -7,7 +7,7 @@
 
     function SettingController($scope, i18n, toastService, $ionicModal, settingService) {
         var mv = this;
-        var _partials = "app/settings/partials/";
+        var PARTIALS_PATH = "app/settings/partials/";
 
         var _modalForm = null;
         var _modalAbout = null;
@@ -63,12 +63,12 @@
             mv.languages = i18n.getLanguages();
             mv.MODAL = { ABOUT: "ABOUT", FORM: "FORM" };
 
-            $ionicModal.fromTemplateUrl(_partials + 'setting-form.html', _modalOptions)
+            $ionicModal.fromTemplateUrl(PARTIALS_PATH + 'setting-form.html', _modalOptions)
                 .then(function(modal) {
                     _modalForm = modal;
                 });
 
-            $ionicModal.fromTemplateUrl(_partials + 'about.html', _modalOptions)
+            $ionicModal.fromTemplateUrl(PARTIALS_PATH + 'about.html', _modalOptions)
                 .then(function(modal) {
                     _modalAbout = modal;
                 });

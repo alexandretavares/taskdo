@@ -9,7 +9,7 @@
         var _template = '' +
             '<div class="snackbar ng-hide" ng-show="show">' +
                 '<div class="snackbar-text">{{\'i18n.components.snackbar.text\' | translate}}.</div>' +
-                '<button class="button button-small button-clear button-purple pull-right"'+
+                '<button class="button button-small button-clear button-secondary pull-right"'+
                     'ng-click="undo()">{{\'i18n.components.snackbar.button\' | translate}}</button>' +
             '</div>';
 

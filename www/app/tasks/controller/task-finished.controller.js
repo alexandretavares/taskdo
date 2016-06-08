@@ -5,10 +5,10 @@
 
     TaskFinishedController.$inject = ['$scope', '$state', '$ionicHistory', '$ionicPopover',
         'STATE', 'LIST_FIELDS', 'i18nService', 'toastService', 'popupService',
-        'taskService'];
+        'taskService', '$ionicLoading'];
 
     function TaskFinishedController($scope, $state, $ionicHistory, $ionicPopover,
-        STATE, LIST_FIELDS, i18n, toastService, popupService, taskService) {
+        STATE, LIST_FIELDS, i18n, toastService, popupService, taskService, $ionicLoading) {
 
         var mv = this;
         var _projectId = null;
@@ -47,6 +47,8 @@
         };
 
         mv.refreshList = function() {
+            $ionicLoading.show();
+
             taskService.listFinished(_projectId)
                 .then(function(tasks) {
                     mv.tasks = tasks;
@@ -54,6 +56,15 @@
                 .catch(function(error) {
                     mv.tasks = [];
                     console.error(error);
+                })
+                .finally(function() {
+                    $ionicLoading.hide().then(function() {
+                        if (mv.tasks.length == 0) {
+                            mv.isEmpty = true;
+                        } else {
+                            mv.isEmpty = false;
+                        }
+                    });
                 });
         };
 

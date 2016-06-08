@@ -5,7 +5,7 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
 
-    <ion-header-bar align-title="left" class="bar-purple">
+    <ion-header-bar align-title="left" class="bar-secondary">
         <div class="buttons buttons-left header-item">
             <button class="button button-icon button-clear ion-android-arrow-back"
                     ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
@@ -26,6 +26,10 @@
         </div>
     </ion-header-bar>
 
+    <tsk-empty-page show="mv.isEmpty" icon="projects"
+        title="{{'i18n.components.emptyPage.projects.title' | translate}}"
+        subtitle="{{'i18n.components.emptyPage.projects.subtitle' | translate}}"></tsk-empty-page>
+
     <ion-content overflow-scroll="false">
         <tsk-list icon="work" fields="mv.fields" collection="mv.projects"
             selected-count="mv.selectedCount" selected-all="mv.selectedAll"
@@ -33,7 +37,8 @@
         </tsk-list>
     </ion-content>
 
-    <button class="button button-fab button-fab-bottom-right button-purple" ng-click="mv.showForm()">
+    <button class="button button-fab button-fab-bottom-right button-secondary"
+        ng-click="mv.showForm()" ng-show="!mv.hasSelected()">
         <i class="icon ion-android-add"></i>
     </button>
 </ion-view>

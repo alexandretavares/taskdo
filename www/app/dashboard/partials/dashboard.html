@@ -1,24 +1,24 @@
 <ion-view>
-    <ion-nav-title translate="i18n.dashboard.title"></ion-nav-title>
+    <ion-nav-title translate="i18n.dashboard.title" ng-show="mv.loaded"></ion-nav-title>
 
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
 
-    <ion-content scroll="false">
+    <ion-content scroll="false" ng-show="mv.loaded">
           <section class="dashboard-container">
               <div class="row icon-row">
                   <div class="col text-center">
-                      <a class="item-image button button-stable"
+                      <a nav-direction="forward" class="item-image button button-stable"
                         ui-sref="{{mv.STATE.TASKS.INBOX}}">
-                          <i class="icon light material-icons md-48 md-dark">inbox</i>
+                          <i class="icon light material-icons md-48 md-dark inbox"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.inbox"></div>
                   </div>
                   <div class="col text-center">
-                      <a class="item-image button button-stable"
+                      <a nav-direction="forward" class="item-image button button-stable"
                         ui-sref="{{mv.STATE.TASKS.TODAY}}">
-                          <i class="icon light material-icons md-48 md-dark">today</i>
+                          <i class="icon light material-icons md-48 md-dark today"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.today"></div>
                   </div>
@@ -26,16 +26,16 @@
 
               <div class="row icon-row">
                   <div class="col text-center">
-                      <a class="item-image button button-stable"
+                      <a nav-direction="forward" class="item-image button button-stable"
                         ui-sref="{{mv.STATE.TASKS.WEEK}}">
-                          <i class="icon light material-icons md-48 md-dark">&#xE916;</i>
+                          <i class="icon light material-icons md-48 md-dark week"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.week"></div>
                   </div>
                   <div class="col text-center">
-                      <a class="item-image button button-stable"
+                      <a nav-direction="forward" class="item-image button button-stable"
                         ui-sref="{{mv.STATE.TASKS.ALL}}">
-                          <i class="icon light material-icons md-48 md-dark">description</i>
+                          <i class="icon light material-icons md-48 md-dark tasks"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.tasks"></div>
                   </div>
@@ -43,14 +43,14 @@
 
               <div class="row icon-row">
                   <div class="col text-center">
-                      <a class="item-image button button-stable" ui-sref="{{mv.STATE.PROJECTS}}">
-                          <i class="icon light material-icons md-48 md-dark">work</i>
+                      <a nav-direction="forward" class="item-image button button-stable" ui-sref="{{mv.STATE.PROJECTS}}">
+                          <i class="icon light material-icons md-48 md-dark projects"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.projects"></div>
                   </div>
                   <div class="col text-center">
-                      <a class="item-image button button-stable" ui-sref="{{mv.STATE.SETTINGS}}">
-                          <i class="icon light material-icons md-48 md-dark">settings</i>
+                      <a nav-direction="forward" class="item-image button button-stable" ui-sref="{{mv.STATE.SETTINGS}}">
+                          <i class="icon light material-icons md-48 md-dark settings"></i>
                       </a>
                       <div class="item-image-text" translate="i18n.menu.settings"></div>
                   </div>

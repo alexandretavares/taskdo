@@ -120,3 +120,46 @@
     // }
 
 } // end snackbar
+
+// empty page
+.empty-page {
+    padding-top: 50%;
+    display: none;
+
+    &.show {
+        display: block;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-top: 5px;
+        color: #888;
+    }
+
+    p {
+        margin: 0 auto;
+        width: 80%;
+        color: #888;
+    }
+
+    .icon {
+        font-size: 112px;
+    }
+
+} // end empty page
+
+
+// loader component
+.loading {
+    padding: 0 !important;
+
+    .loader {
+        width: 50px !important;
+        height: 50px !important;
+
+        .circular {
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+}

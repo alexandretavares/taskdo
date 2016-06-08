@@ -28,6 +28,23 @@
             });
         };
 
+        var _alertPopup = function(i18nOjb) {
+            return $q(function(resolve, reject) {
+                $ionicPopup.alert({
+                        title: i18nOjb.title,
+                        template: i18nOjb.content,
+                        okText: i18n.common.popup.buttons.ok,
+                        okType: "button-stable"
+                    })
+                    .then(function() {
+                        resolve();
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        };
+
         this.remove = function() {
             return _confirmPopup(i18n.common.popup.remove);
         };
@@ -42,6 +59,10 @@
 
         this.exit = function(callback) {
             return _confirmPopup(i18n.common.popup.exit);
+        };
+
+        this.fatal = function() {
+            return _alertPopup(i18n.common.popup.error.fatal);
         };
 
     }

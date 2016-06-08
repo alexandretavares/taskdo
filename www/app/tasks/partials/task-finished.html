@@ -6,7 +6,7 @@
                 ng-click="mv.goBack()"></button>
     </ion-nav-buttons>
 
-    <ion-header-bar align-title="left" class="bar-purple">
+    <ion-header-bar align-title="left" class="bar-secondary">
         <div class="buttons buttons-left header-item">
             <button class="button button-icon button-clear ion-android-arrow-back"
                     ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
@@ -26,6 +26,10 @@
                     ng-click="mv.remove()"></button>
         </div>
     </ion-header-bar>
+
+    <tsk-empty-page show="mv.isEmpty" icon="finished"
+        title="{{'i18n.components.emptyPage.finishedTasks.title' | translate}}"
+        subtitle="{{'i18n.components.emptyPage.finishedTasks.subtitle' | translate}}"></tsk-empty-page>
 
     <ion-content overflow-scroll="false">
         <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"

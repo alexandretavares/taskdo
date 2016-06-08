@@ -14,11 +14,14 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-
-$royal: #673AB7 !default;
-$purple: #E040FB !default;
-$balanced: #4caf50 !default;
 $bar-height: 56px !default;
+
+$energized: #FF9800 !default;
+$royal: #673AB7 !default;
+$balanced: #4caf50 !default;
+
+$secondary: #ffc900 !default;
+// purple $secondary: #E040FB !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -29,5 +32,6 @@ $material-icons-font-path: "../fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 @import "robotodraft";
 @import "material-icons";
+@import "app-animations"
 @import "app-style";
 @import "app-components"

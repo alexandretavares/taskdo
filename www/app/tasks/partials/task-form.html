@@ -1,5 +1,5 @@
 <ion-modal-view>
-    <ion-header-bar class="bar bar-header bar-royal" align-title="left">
+    <ion-header-bar class="bar bar-header bar-energized" align-title="left">
         <div class="buttons buttons-left header-item">
             <button class="button button-icon button-clear ion-android-close"
                     ng-click="mv.hideForm()"></button>
@@ -9,7 +9,7 @@
 
         <div class="buttons buttons-right header-item">
             <span class="right-buttons">
-                <button class="button button-fab button-purple" ng-click="mv.save()">
+                <button class="button button-fab button-secondary" ng-click="mv.save()">
                     <i class="icon ion-android-done"></i>
                 </button>
             </span>
@@ -45,7 +45,7 @@
                         placeholder="{{'i18n.tasks.form.fields.notes' | translate}}"></textarea>
                 </label>
 
-                <ion-toggle class="ng-hide" toggle-class="toggle-royal"
+                <ion-toggle class="ng-hide" toggle-class="toggle-energized"
                     ng-model="mv.task.finished" ng-show="mv.editMode">
                     {{'i18n.tasks.form.fields.finished' | translate}}
                 </ion-toggle>

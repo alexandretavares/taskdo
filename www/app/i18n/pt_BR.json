@@ -60,7 +60,8 @@
             "popup": {
                 "buttons": {
                     "yes": "Sim",
-                    "no": "Não"
+                    "no": "Não",
+                    "ok": "OK"
                 },
                 "remove": {
                     "title": "Remover",
@@ -77,6 +78,12 @@
                 "exit": {
                     "title": "Sair",
                     "content": "Deseja sair da aplicação?"
+                },
+                "error": {
+                    "fatal": {
+                        "title": "Erro fatal",
+                        "content": "Ocorreu um erro desconhecido. A aplicação será fechada."
+                    }
                 }
             }
         },
@@ -84,6 +91,20 @@
             "snackbar": {
                 "text": "Concluído",
                 "button": "Desfazer"
+            },
+            "emptyPage": {
+                "projects": {
+                    "title": "Sem projetos",
+                    "subtitle": "Clique no botão + para adicionar um novo projeto."
+                },
+                "tasks": {
+                    "title": "Sem tarefas",
+                    "subtitle": "Clique no botão + para adicionar uma nova tarefa."
+                },
+                "finishedTasks": {
+                    "title": "Sem tarefas",
+                    "subtitle": "Não há tarefas finalizadas."
+                }
             }
         },
         "projects": {

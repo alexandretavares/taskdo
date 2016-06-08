@@ -22,7 +22,7 @@
             on-touch="clickedItem = true">
 
             <div class="item-image" ng-click="toggleMark(item)"
-                ng-class="wasSelected(item._id) ? 'purple-bg' : 'stable-bg'">
+                ng-class="wasSelected(item._id) ? 'secondary-bg' : 'stable-bg'">
                 <i class="icon light material-icons">{{wasSelected(item._id) ? 'done' : avatarIcon}}</i>
             </div>
             <div ng-click="rowClick(item)" on-hold="toggleMark(item)" class="item-multi-line">

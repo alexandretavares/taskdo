@@ -5,14 +5,15 @@
 
     TaskController.$inject = ['$scope', '$state', '$ionicPopover', '$ionicModal',
         'LIST_FIELDS', 'STATE', 'i18nService', 'toastService', 'popupService',
-        'taskService', 'projectService', 'defaultProject', 'utilService'];
+        'taskService', 'projectService', 'defaultProject', 'utilService', '$ionicLoading'];
 
     function TaskController($scope, $state, $ionicPopover, $ionicModal,
         LIST_FIELDS, STATE, i18n, toastService, popupService, taskService,
-        projectService, defaultProject, utilService) {
+        projectService, defaultProject, utilService, $ionicLoading) {
 
         var mv = this;
-        var _partialsPath = "app/tasks/partials/";
+        var DEFAULT_ICON = "tasks";
+        var PARTIALS_PATH = "app/tasks/partials/";
 
         var _lastFinished = null;
         var _projectId = null;
@@ -93,12 +94,24 @@
         };
 
         mv.refreshList = function() {
+            $ionicLoading.show();
+
             taskService.listOpened(_projectId, _startDate, _endDate)
                 .then(function(tasks) {
                     mv.tasks = tasks;
                 })
                 .catch(function(error) {
+                    mv.tasks = []
                     console.error(error);
+                })
+                .finally(function() {
+                    $ionicLoading.hide().then(function() {
+                        if (mv.tasks.length == 0) {
+                            mv.isEmpty = true;
+                        } else {
+                            mv.isEmpty = false;
+                        }
+                    });
                 });
         };
 
@@ -201,20 +214,24 @@
                 case STATE.TASKS.INBOX:
                     _projectId = defaultProject._id;
                     mv.pageTitle = defaultProject.name;
+                    mv.emptyPageIcon = "inbox";
                     break;
                 case STATE.TASKS.TODAY:
                     _endDate = new Date();
-                    mv.pageTitle = i18n.tasks.list.today;
+                    mv.pageTitle = "i18n.tasks.list.today";
+                    mv.emptyPageIcon = "today";
                     break;
                 case STATE.TASKS.WEEK:
                     var weekRange = utilService.getWeekRangeOfDate(new Date());
                     _startDate = weekRange.start;
                     _endDate = weekRange.end;
 
-                    mv.pageTitle = i18n.tasks.list.week;
+                    mv.pageTitle = "i18n.tasks.list.week";
+                    mv.emptyPageIcon = "week";
                     break;
                 case STATE.TASKS.BY_PROJECT:
                     var project = $state.params.project;
+                    mv.emptyPageIcon = DEFAULT_ICON;
 
                     if (project) {
                         _projectId = project._id;
@@ -223,7 +240,8 @@
 
                     break;
                 default:
-                    mv.pageTitle = i18n.tasks.list.all;
+                    mv.emptyPageIcon = DEFAULT_ICON;
+                    mv.pageTitle = "i18n.tasks.list.all";
             }
 
             mv.refreshList();
@@ -246,14 +264,16 @@
             mv.snackbarVisible = false;
             mv.stateFinished = STATE.TASKS.FINISHED;
             mv.fields = LIST_FIELDS.TASKS;
+            mv.emptyPageIcon = DEFAULT_ICON;
+            mv.isEmpty = false;
 
-            $ionicPopover.fromTemplateUrl(_partialsPath + 'task-more-actions.html', {
+            $ionicPopover.fromTemplateUrl(PARTIALS_PATH + 'task-more-actions.html', {
                 scope: $scope
             }).then(function(popover) {
                 _popover = popover;
             });
 
-            $ionicModal.fromTemplateUrl(_partialsPath + 'task-form.html', {
+            $ionicModal.fromTemplateUrl(PARTIALS_PATH + 'task-form.html', {
                 scope: $scope,
                 animation: 'slide-in-up',
                 focusFirstInput: true

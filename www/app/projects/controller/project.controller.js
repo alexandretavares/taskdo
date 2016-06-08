@@ -4,23 +4,36 @@
     angular.module("taskdo.projects").controller("ProjectController", ProjectController);
 
     ProjectController.$inject = ['$scope', '$ionicPopover', '$ionicModal', 'projectService',
-        'toastService', 'popupService', 'i18nService', 'LIST_FIELDS', '$state', 'STATE'];
+        'toastService', 'popupService', 'i18nService', 'LIST_FIELDS', '$state',
+        'STATE', '$ionicLoading'];
 
     function ProjectController($scope, $ionicPopover, $ionicModal, projectService,
-        toastService, popupService, i18n, LIST_FIELDS, $state, STATE) {
+        toastService, popupService, i18n, LIST_FIELDS, $state, STATE, $ionicLoading) {
 
         var mv = this;
         var _popover = null;
         var _modal = null;
-        var _partialsPath = "app/projects/partials/";
+        var PARTIALS_PATH = "app/projects/partials/";
 
         mv.refreshList = function() {
+            $ionicLoading.show();
+
             projectService.list(true)
                 .then(function(projects) {
                     mv.projects = projects;
                 })
                 .catch(function(error) {
+                    mv.projects = [];
                     console.error(error);
+                })
+                .finally(function() {
+                    $ionicLoading.hide().then(function() {
+                        if (mv.projects.length == 0) {
+                            mv.isEmpty = true;
+                        } else {
+                            mv.isEmpty = false;
+                        }
+                    });
                 });
         };
 
@@ -115,6 +128,10 @@
             _popover.remove();
         });
 
+        $scope.$on("$ionicView.loaded", function(event, data) {
+            mv.refreshList();
+        });
+
         (function() {
             mv.projects = [];
             mv.project = {};
@@ -122,22 +139,21 @@
             mv.selectedCount = 0;
             mv.selectedAll = false;
             mv.fields = LIST_FIELDS.PROJECTS;
+            mv.isEmpty = false;
 
-            $ionicPopover.fromTemplateUrl(_partialsPath + 'project-more-actions.html', {
+            $ionicPopover.fromTemplateUrl(PARTIALS_PATH + 'project-more-actions.html', {
                 scope: $scope
             }).then(function(popover) {
                 _popover = popover;
             });
 
-            $ionicModal.fromTemplateUrl(_partialsPath +  'project-form.html', {
+            $ionicModal.fromTemplateUrl(PARTIALS_PATH +  'project-form.html', {
                 scope: $scope,
                 animation: 'slide-in-up',
                 focusFirstInput: true
             }).then(function(modal) {
                 _modal = modal;
             });
-
-            mv.refreshList();
         })();
     }
 

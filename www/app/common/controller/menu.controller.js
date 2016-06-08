@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module("taskdo.common").controller("MenuController", MenuController);
-    MenuController.$inject = ['STATE', 'popupService'];
+    MenuController.$inject = ['$rootScope', '$ionicSideMenuDelegate', 'STATE', 'popupService'];
 
-    function MenuController(STATE, popupService) {
+    function MenuController($rootScope, $ionicSideMenuDelegate, STATE, popupService) {
         var mv = this;
 
         mv.exit = function() {
@@ -15,6 +15,14 @@
 
         (function() {
             mv.STATE = STATE;
+
+            $rootScope.$on('$ionicView.enter',
+                function(event, toState, toParams, fromState, fromParams) {
+                    if ($ionicSideMenuDelegate.isOpenLeft()) {
+                        $ionicSideMenuDelegate.toggleLeft(false);
+                    }
+                }
+            );
         })();
     }
 
