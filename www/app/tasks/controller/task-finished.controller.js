@@ -59,7 +59,7 @@
                 })
                 .finally(function() {
                     $ionicLoading.hide().then(function() {
-                        if (mv.tasks.length == 0) {
+                        if (mv.tasks.length === 0) {
                             mv.isEmpty = true;
                         } else {
                             mv.isEmpty = false;

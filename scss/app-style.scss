@@ -166,3 +166,16 @@
     -webkit-transition: 0.1s opacity linear;
     transition: 0.1s opacity linear;
 }
+
+.form-errors {
+    margin: 5px 0;
+    font-size: 12px;
+}
+.form-error {
+    padding: 2px 0 2px 0px;
+    color: red;
+}
+
+label.item.has-error {
+    border-bottom: 2px solid red;
+}

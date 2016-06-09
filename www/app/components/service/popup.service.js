@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.components").service("popupService", popupService);
-    popupService.$inject = ['$q', '$ionicPopup', 'i18nService'];
+    angular.module("taskdo.components").service("popupService", PopupService);
+    PopupService.$inject = ['$q', '$ionicPopup', 'i18nService'];
 
-    function popupService($q, $ionicPopup, i18n) {
+    function PopupService($q, $ionicPopup, i18n) {
 
         var _confirmPopup = function(i18nOjb) {
             return $q(function(resolve, reject) {

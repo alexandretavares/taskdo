@@ -48,7 +48,7 @@
 
         $scope.$on("$ionicView.loaded", function() {
             settingService.get().then(function(setting) {
-                if (setting != null) {
+                if (setting !== null) {
                     mv.setting = setting;
                 } else {
                     mv.setting.language = i18n.getCurrentLanguage();

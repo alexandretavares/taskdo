@@ -23,7 +23,7 @@
         var settingLanguage = function() {
             return $q(function(resolve, reject) {
                 settingService.getLanguage().then(function(lang) {
-                    if (lang != null) {
+                    if (lang !== null) {
                         i18nRefresh(resolve, reject, lang);
                     } else if (typeof navigator.globalization !== "undefined") {
                        navigator.globalization.getPreferredLanguage(function(language) {

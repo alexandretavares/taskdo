@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.settings").service("settingService", settingService);
-    settingService.$inject = ['TABLE', 'Database', '$q'];
+    angular.module("taskdo.settings").service("settingService", SettingService);
+    SettingService.$inject = ['TABLE', 'Database', '$q'];
 
-    function settingService(TABLE, Database, $q) {
+    function SettingService(TABLE, Database, $q) {
         var that = this;
         var db = new Database(TABLE.SETTING);
 

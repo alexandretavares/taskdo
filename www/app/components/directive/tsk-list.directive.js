@@ -59,10 +59,10 @@
                     transformService.translateX(target, deltaX, 'none');
                 });
 
-                var _deepValue = function(obj, path) {
-                    for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
+                var _deepValue = function(obj, pathObj) {
+                    for (var i = 0, path = pathObj.split('.'), len = path.length; i < len; i++) {
                         obj = obj[path[i]];
-                    };
+                    }
 
                     return obj;
                 };
@@ -86,7 +86,7 @@
                 };
 
                 scope.wasSelected = function(id) {
-                    return scope.selected[id] != undefined;
+                    return scope.selected[id] !== undefined;
                 };
 
                 scope.hasSelected = function() {

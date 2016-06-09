@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.tasks").service("taskService", taskService);
-    taskService.$inject = ['$q', 'TABLE', 'Database'];
+    angular.module("taskdo.tasks").service("taskService", TaskService);
+    TaskService.$inject = ['$q', 'TABLE', 'Database'];
 
-    function taskService($q, TABLE, Database) {
+    function TaskService($q, TABLE, Database) {
         var db = new Database(TABLE.TASK);
 
         var options = {
@@ -30,7 +30,7 @@
             };
 
             if (projectId) {
-                query["project_id"] = projectId;
+                query.project_id = projectId;
             }
 
             if (start || end) {
@@ -44,7 +44,7 @@
                     dateFilter.push({ dueDate: { $lte: end } });
                 }
 
-                query["$and"] = dateFilter;
+                query.$and = dateFilter;
             }
 
             return db.find(query, options);
@@ -54,7 +54,7 @@
             var query = { "finished": true };
 
             if (projectId) {
-                query["project_id"] = projectId;
+                query.project_id = projectId;
             }
 
             return db.find(query, options);
@@ -65,7 +65,7 @@
             var query = { name: task.name, project_id: task.project_id };
 
             if (task.hasOwnProperty("_id")) {
-                query["_id"] = { "$ne": task._id };
+                query._id = { "$ne": task._id };
             }
 
             db.findOne(query).then(function(doc) {
@@ -82,7 +82,7 @@
                         })
                         .catch(function(error) {
                             deferred.reject(error);
-                        })
+                        });
                 }
             }).catch(function(error) {
                 deferred.reject(error);

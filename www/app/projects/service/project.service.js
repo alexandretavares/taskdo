@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.projects").service("projectService", projectService);
-    projectService.$inject = ['$q', 'TABLE', 'Database', 'taskService'];
+    angular.module("taskdo.projects").service("projectService", ProjectService);
+    ProjectService.$inject = ['$q', 'TABLE', 'Database', 'taskService'];
 
-    function projectService($q, TABLE, Database, taskService) {
+    function ProjectService($q, TABLE, Database, taskService) {
         var that = this;
         var db = new Database(TABLE.PROJECT);
 
@@ -21,7 +21,7 @@
             var query = { name: project.name };
 
             if (project.hasOwnProperty("_id")) {
-                query["_id"] = { "$ne": project._id };
+                query._id = { "$ne": project._id };
             }
 
             db.findOne(query).then(function(doc) {
@@ -38,7 +38,7 @@
                         })
                         .catch(function(error) {
                             deferred.reject(error);
-                        })
+                        });
                 }
             }).catch(function(error) {
                 deferred.reject(error);
@@ -71,7 +71,7 @@
 
         this.getDefault = function() {
             return db.findOne({"default": "true"}).then(function(project) {
-                if (project != null) {
+                if (project !== null) {
                     return project;
                 } else {
                     return that.save({name: "i18n.default.project", "default": "true"})

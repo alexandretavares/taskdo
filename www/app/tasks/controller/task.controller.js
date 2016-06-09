@@ -60,7 +60,7 @@
                 mv.task = {};
                 mv.editMode = false;
 
-                if (_projectId != null) {
+                if (_projectId !== null) {
                     mv.task.project_id = _projectId;
                 }
             }
@@ -76,7 +76,7 @@
 
         mv.hasOnlySelected = function() {
             return (!angular.equals({}, mv.selected) && mv.selectedCount == 1);
-        }
+        };
 
         mv.hasSelected = function() {
             return !angular.equals({}, mv.selected);
@@ -101,12 +101,12 @@
                     mv.tasks = tasks;
                 })
                 .catch(function(error) {
-                    mv.tasks = []
+                    mv.tasks = [];
                     console.error(error);
                 })
                 .finally(function() {
                     $ionicLoading.hide().then(function() {
-                        if (mv.tasks.length == 0) {
+                        if (mv.tasks.length === 0) {
                             mv.isEmpty = true;
                         } else {
                             mv.isEmpty = false;

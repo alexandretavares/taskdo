@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.common").service("transformService", transformService);
-    transformService.$inject = [];
+    angular.module("taskdo.common").service("transformService", TransformService);
+    TransformService.$inject = [];
 
-    function transformService() {
+    function TransformService() {
         var _regex = /translate3d\((-?\d+\.?\d*(?:px)?),\s?(-?\d+\.?\d*(?:px)?),\s?(-?\d+\.?\d*(?:px)?)\)/;
 
         var _normalizeValue = function(value) {
@@ -19,7 +19,7 @@
             } else {
                 return "0px";
             }
-        }
+        };
 
         var _getCoordinatesInPixel = function(element) {
             var transform = element.style[ionic.CSS.TRANSFORM];

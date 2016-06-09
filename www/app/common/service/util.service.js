@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module("taskdo.common").service("utilService", utilService);
-    utilService.$inject = [];
+    angular.module("taskdo.common").service("utilService", UtilService);
+    UtilService.$inject = [];
 
-    function utilService() {
+    function UtilService() {
         this.getWeekRangeOfDate = function(date) {
             var daysOnWeek = 6;
             var dayOfWeek = date.getDay();

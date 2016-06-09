@@ -28,7 +28,7 @@
                 })
                 .finally(function() {
                     $ionicLoading.hide().then(function() {
-                        if (mv.projects.length == 0) {
+                        if (mv.projects.length === 0) {
                             mv.isEmpty = true;
                         } else {
                             mv.isEmpty = false;
@@ -63,7 +63,7 @@
 
         mv.hasOnlySelected = function() {
             return (!angular.equals({}, mv.selected) && mv.selectedCount == 1);
-        }
+        };
 
         mv.hasSelected = function() {
             return !angular.equals({}, mv.selected);
