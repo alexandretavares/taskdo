@@ -133,7 +133,9 @@ gulp.task('demo', ['demo-minify'], function() {
         '!./demo/lib/ionic/fonts/ionicons.eot',
         '!./demo/lib/ionic/fonts/ionicons.svg',
         '!./demo/lib/ionic/fonts/ionicons.ttf',
-        '!./demo/lib/ionic/fonts/ionicons.woff'
+        '!./demo/lib/ionic/fonts/ionicons.woff',
+        '!./demo/lib/robotodraft',
+        '!./demo/lib/robotodraft/fonts/**'
     ])
     .catch(function(err) {
         console.log('Error while deleting files');

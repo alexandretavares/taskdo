@@ -7,3 +7,4 @@ plugins/
 www/lib/
 .DS_Store
 www/css/ionic.app*
+demo
