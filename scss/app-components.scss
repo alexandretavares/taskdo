@@ -84,7 +84,7 @@
             background-color: $assertive;
         }
     }
-    
+
 } // end list component
 
 // snackbar
@@ -156,6 +156,12 @@
         .circular {
             width: 50px !important;
             height: 50px !important;
+
+            .path {
+                stroke: $light;
+                -webkit-animation: dash 1.5s ease-in-out infinite;
+                animation: dash 1.5s ease-in-out infinite;
+            }
         }
     }
 }

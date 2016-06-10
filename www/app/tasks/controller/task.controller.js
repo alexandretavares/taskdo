@@ -283,8 +283,7 @@
 
             $ionicModal.fromTemplateUrl(PARTIALS_PATH + 'task-form.html', {
                 scope: $scope,
-                animation: 'slide-in-up',
-                focusFirstInput: true
+                animation: 'slide-in-up'
             }).then(function(modal) {
                 _modalForm = modal;
             });
