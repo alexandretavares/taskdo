@@ -103,3 +103,40 @@ gulp.task('delete-files', function() {
  * This task is called from a hook to prepare files for building
  * **********************************************************************************/
 gulp.task('build-prepare', ['minification']);
+
+/* **********************************************************************************
+ * Demo
+ * **********************************************************************************/
+gulp.task('demo-prepare', function(done) {
+    del("demo/**").then(function() {
+        gulp.src(["./www/**", "!./www/css{,/**}", "!./www/index.html"])
+            .pipe(gulp.dest("demo"))
+            .on("end", done);
+    });
+});
+
+gulp.task("demo-minify", ['demo-prepare'], function() {
+    return gulp.src("./www/*.html")
+        .pipe(usemin({
+            'js': [uglify]
+        }))
+        .pipe(gulp.dest("./demo"));
+});
+
+gulp.task('demo', ['demo-minify'], function() {
+    del([
+        './demo/app/**/*.js',
+        './demo/lib/**',
+        '!./demo/lib',
+        '!./demo/lib/ionic',
+        '!./demo/lib/ionic/fonts',
+        '!./demo/lib/ionic/fonts/ionicons.eot',
+        '!./demo/lib/ionic/fonts/ionicons.svg',
+        '!./demo/lib/ionic/fonts/ionicons.ttf',
+        '!./demo/lib/ionic/fonts/ionicons.woff'
+    ])
+    .catch(function(err) {
+        console.log('Error while deleting files');
+        console.log(err);
+    });
+});
