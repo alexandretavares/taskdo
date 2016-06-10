@@ -18,16 +18,11 @@
 
     <ion-content overflow-scroll="false">
         <ng-form name="mv.projectForm">
-            <div class="list padding-horizontal">
-                <label class="item item-input item-stacked-label"
-                    ng-class="{'has-error' : mv.projectForm.projectName.$invalid
-                    && mv.projectForm.projectName.$dirty}">
-
-                    <span class="input-label" translate="i18n.projects.form.fields.name"></span>
+            <div class="form list padding">
+                <label class="item item-input item-stacked-label">
                     <input name="projectName" type="text"
-                        placeholder="{{'i18n.projects.form.fields.name' | translate}}"
-                        ng-model="mv.project.name" ng-model-options="{debounce: 300}"
-                        ng-minlength="3" ng-maxlength="25" required>
+                        ng-model="mv.project.name" maxlength="30" required>
+                    <span class="input-span" translate="i18n.projects.form.fields.name"></span>
                 </label>
             </div>
         </ng-form>

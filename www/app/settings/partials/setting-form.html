@@ -18,40 +18,14 @@
 
     <ion-content overflow-scroll="false">
         <ng-form name="mv.settingForm">
-            <div class="list padding">
-                <label class="item item-input item-select">
-                    <div class="input-label" translate="i18n.settings.form.fields.language"></div>
-                      <select ng-model="mv.setting.language"
-                            ng-options="('i18n.language.' + language) | translate for language in mv.languages">
+            <div class="form list padding">
+                <label class="item item-input item-stacked-label item-select">
+                    <select ng-model="mv.setting.language" tsk-focus="mv.focusFirstInput"
+                          ng-options="('i18n.language.' + language) | translate for language in mv.languages">
                     </select>
+                    <span class="input-span" translate="i18n.settings.form.fields.language"></span>
                 </label>
             </div>
         </ng-form>
     </ion-content>
 </ion-modal-view>
-
-
-
-<!-- <ng-form class="form" name="mv.settingForm" novalidate>
-    <ion-view>
-        <ion-nav-title translate="i18n.settings.form.title"></ion-nav-title>
-
-        <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-android-done" ng-click="mv.save()"></button>
-
-            <button class="button button-icon button-clear ion-android-more-vertical"
-                    ng-click="mv.showMoreActions($event)"></button>
-        </ion-nav-buttons>
-
-        <ion-content overflow-scroll="false">
-            <div class="list padding-horizontal">
-                <label class="item item-input item-select">
-                    <div class="input-label" translate="i18n.settings.form.fields.language"></div>
-                      <select ng-model="mv.setting.language"
-                            ng-options="('i18n.language.' + language) | translate for language in mv.languages">
-                    </select>
-                </label>
-            </div>
-        </ion-content>
-    </ion-view>
-</ng-form> -->

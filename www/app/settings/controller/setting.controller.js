@@ -20,7 +20,9 @@
             if (modalName == mv.MODAL.ABOUT) {
                 _modalAbout.show();
             } else {
-                _modalForm.show();
+                _modalForm.show().then(function() {
+                    mv.focusFirstInput = true;
+                });
             }
         };
 
@@ -30,6 +32,7 @@
             } else {
                 _modalForm.hide().then(function () {
                     mv.setting = angular.copy(mv.defaultSetting);
+                    mv.focusFirstInput = false;
                 });
             }
         };
@@ -61,6 +64,7 @@
         (function() {
             mv.setting = {};
             mv.languages = i18n.getLanguages();
+            mv.focusFirstInput = false;
             mv.MODAL = { ABOUT: "ABOUT", FORM: "FORM" };
 
             $ionicModal.fromTemplateUrl(PARTIALS_PATH + 'setting-form.html', _modalOptions)

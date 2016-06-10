@@ -131,15 +131,19 @@
             } else {
                 taskService.save(mv.task)
                     .then(function() {
+                        var message;
+
                         if (mv.task.hasOwnProperty("_id")) {
-                            toastService.show(i18n.common.messages.success.updated);
+                            message = i18n.common.messages.success.updated;
                         } else {
-                            toastService.show(i18n.common.messages.success.created);
+                            message = i18n.common.messages.success.created;
                         }
 
-                        mv.unselectAll();
-                        mv.refreshList();
-                        mv.hideForm();
+                        toastService.show(message).then(function() {
+                            mv.unselectAll();
+                            mv.refreshList();
+                            mv.hideForm();
+                        });
                     })
                     .catch(function(error) {
                         toastService.show(i18n.common.messages.error.duplicated);
@@ -158,9 +162,11 @@
 
                 taskService.remove(tasksToRemove)
                     .then(function() {
-                        mv.unselectAll();
-                        toastService.show(i18n.common.messages.success.removedSelected);
-                        mv.refreshList();
+                        toastService.show(i18n.common.messages.success.removedSelected)
+                            .then(function() {
+                                mv.unselectAll();
+                                mv.refreshList();
+                            });
                     });
             });
         };
@@ -175,9 +181,11 @@
 
                 taskService.finish(tasksToFinish)
                     .then(function() {
-                        mv.unselectAll();
-                        toastService.show(i18n.tasks.messages.success.finished);
-                        mv.refreshList();
+                        toastService.show(i18n.tasks.messages.success.finished)
+                            .then(function() {
+                                mv.unselectAll();
+                                mv.refreshList();
+                            });
                     });
             });
         };

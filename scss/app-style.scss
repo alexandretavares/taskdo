@@ -1,3 +1,15 @@
+@mixin color-input($colorClass) {
+    border-bottom: 1px solid $colorClass;
+}
+
+@mixin required-field() {
+    content: '*';
+    position: absolute;
+    margin-left: 4px;
+    color: $assertive;
+    top: 2px;
+}
+
 .icon {
     &.material-icons {
         &.home::after {
@@ -95,14 +107,6 @@
     }
 }
 
-.button-fab.button-fab-bottom-right {
-    &.has-snackbar {
-        bottom: 64px !important;
-        -webkit-animation: slideInUp 0.4s;
-        animation: slideInUp 0.4s;
-    }
-}
-
 .dashboard-container {
     display: -webkit-flex;
     -webkit-flex-direction: column;
@@ -167,15 +171,84 @@
     transition: 0.1s opacity linear;
 }
 
-.form-errors {
-    margin: 5px 0;
-    font-size: 12px;
-}
-.form-error {
-    padding: 2px 0 2px 0px;
-    color: red;
+// custom form
+.list.form {
+
+    .item-input {
+        padding-left: 0;
+    }
+
+    .input-span {
+        font-size: 13px;
+        color: #999;
+        position: absolute;
+        top: 8px;
+    }
+
+    .item-input input, .item-input textarea {
+        @include color-input(#aaa);
+        border-radius: 0;
+        margin-top: 22px;
+
+        &:focus {
+            @include color-input($form-focus-color);
+
+            + .input-span {
+                color: $form-focus-color;
+            }
+        }
+
+        &:required + .input-span:after {
+            @include required-field();
+        }
+    }
+
+    .item-input textarea {
+        margin-top: 24px;
+    }
+
+    .item-select {
+        select {
+            @include color-input(#aaa);
+            border-radius: 0;
+            width: 100%;
+            max-width: 100%;
+            display: block;
+            position: relative;
+            padding-bottom: 3px;
+            padding-top: 2px;
+            margin: 0;
+            height: 34px;
+            margin-top: 22px;
+
+            &:focus {
+                @include color-input($form-focus-color);
+
+                + .input-span {
+                    color: $form-focus-color;
+                }
+            }
+
+            &:required + .input-span:after {
+                @include required-field();
+            }
+        }
+
+        &:after {
+            top: 62%;
+            margin-top: 0;
+        }
+    }
 }
 
-label.item.has-error {
-    border-bottom: 2px solid red;
+.platform-android {
+    .list.form {
+        .item-select select {
+            margin-left: -4px;
+        }
+
+        .item-input input[type='date'] {
+            margin-left: -4px;
+        }
+    }
 }

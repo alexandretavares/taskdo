@@ -44,7 +44,7 @@
                 "minlength": "Min length: {{minlength}} characters",
                 "maxlength": "Max length: {{maxlength}} characters",
                 "invalidDate": "Invalid date",
-                "requiredFields": "Required fields unfilled"
+                "requiredFields": "Fields marked with * are mandatory."
             },
             "messages": {
                 "success": {
@@ -133,7 +133,6 @@
                 "fields": {
                     "name": "Name",
                     "project": "Project",
-                    "finished": "Finished",
                     "dueDate": "Due date",
                     "notes": "Notes"
                 }

@@ -86,15 +86,19 @@
             } else {
                 projectService.save(mv.project)
                     .then(function() {
+                        var message;
+
                         if (mv.project.hasOwnProperty("_id")) {
-                            toastService.show(i18n.common.messages.success.updated);
+                            message = i18n.common.messages.success.updated;
                         } else {
-                            toastService.show(i18n.common.messages.success.created);
+                            message = i18n.common.messages.success.created;
                         }
 
-                        mv.unselectAll();
-                        mv.refreshList();
-                        mv.hideForm();
+                        toastService.show(message).then(function() {
+                            mv.unselectAll();
+                            mv.refreshList();
+                            mv.hideForm();
+                        });
                     })
                     .catch(function(error) {
                         toastService.show(i18n.common.messages.error.duplicated);
@@ -103,7 +107,7 @@
             }
         };
 
-        mv.removeSelected = function() {
+        mv.remove = function() {
             popupService.remove().then(function() {
                 var projectsToRemove = [];
 
@@ -113,9 +117,11 @@
 
                 projectService.remove(projectsToRemove)
                     .then(function() {
-                        mv.unselectAll();
-                        toastService.show(i18n.common.messages.success.removedSelected);
-                        mv.refreshList();
+                        toastService.show(i18n.common.messages.success.removedSelected)
+                            .then(function() {
+                                mv.unselectAll();
+                                mv.refreshList();
+                            });
                     });
             });
         };

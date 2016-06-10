@@ -83,8 +83,8 @@
         &.assertive-bg {
             background-color: $assertive;
         }
-
     }
+    
 } // end list component
 
 // snackbar
@@ -109,17 +109,13 @@
         padding-right: 24px;
     }
 
-    &.ng-hide-remove {
-        -webkit-animation: fadeInUp 0.5s;
-        animation: fadeInUp 0.5s;
-    }
-
-    // &.ng-hide-add {
-    //     -webkit-animation: fadeOutDown 0.6s;
-    //     animation: fadeOutDown 0.6s;
-    // }
-
 } // end snackbar
+
+.button-fab.button-fab-bottom-right {
+    &.has-snackbar {
+        bottom: 64px !important;
+    }
+}
 
 // empty page
 .empty-page {

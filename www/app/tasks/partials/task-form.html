@@ -18,37 +18,29 @@
 
     <ion-content overflow-scroll="false">
         <ng-form name="mv.taskForm">
-            <div class="list padding-horizontal">
+            <div class="form list padding">
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label" translate="i18n.tasks.form.fields.name"></span>
                     <input name="taskName" type="text"
-                        placeholder="{{'i18n.tasks.form.fields.name' | translate}}"
-                        ng-model="mv.task.name" ng-model-options="{debounce: 300}"
-                        ng-minlength="3" ng-maxlength="25" required>
+                        ng-model="mv.task.name" maxlength="30" required>
+                    <span class="input-span" translate="i18n.tasks.form.fields.name"></span>
                 </label>
 
-                <label class="item item-input item-select">
-                    <div class="input-label" translate="i18n.tasks.form.fields.project"></div>
+                <label class="item item-input item-stacked-label item-select">
                     <select ng-model="mv.task.project_id" required
                         ng-options="project._id as (project.name | translate) for project in mv.projects">
                     </select>
+                    <span class="input-span" translate="i18n.tasks.form.fields.project"></span>
                 </label>
 
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label" translate="i18n.tasks.form.fields.dueDate"></span>
-                    <input name="taskDueDate" type="date" ng-model="mv.task.dueDate" placeholder="dd/MM/yyyy">
+                    <input name="taskDueDate" type="date" ng-model="mv.task.dueDate">
+                    <span class="input-span" translate="i18n.tasks.form.fields.dueDate"></span>
                 </label>
 
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label" translate="i18n.tasks.form.fields.notes"></span>
-                    <textarea name="taskNotes" ng-model="mv.task.notes"
-                        placeholder="{{'i18n.tasks.form.fields.notes' | translate}}"></textarea>
+                    <textarea name="taskNotes" ng-model="mv.task.notes"></textarea>
+                    <span class="input-span" translate="i18n.tasks.form.fields.notes"></span>
                 </label>
-
-                <ion-toggle class="ng-hide" toggle-class="toggle-energized"
-                    ng-model="mv.task.finished" ng-show="mv.editMode">
-                    {{'i18n.tasks.form.fields.finished' | translate}}
-                </ion-toggle>
             </div>
         </ng-form>
     </ion-content>
