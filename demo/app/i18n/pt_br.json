@@ -1,0 +1,173 @@
+{
+    "i18n": {
+        "default": {
+            "project": "Entrada"
+        },
+        "dashboard": {
+            "title": "Início",
+            "noTasks": "Não existem tarefas em aberto"
+        },
+        "language": {
+            "en": "Inglês",
+            "pt_br": "Português"
+        },
+        "priority": {
+            "critical": "Crítico",
+            "highest": "Muito alto",
+            "high": "Alto",
+            "medium": "Médio",
+            "low": "Baixo",
+            "lowest": "Muito baixo"
+        },
+        "menu": {
+            "home": "Início",
+            "inbox": "Entrada",
+            "today": "Hoje",
+            "week": "Semana",
+            "projects": "Projetos",
+            "tasks": "Tarefas",
+            "settings": "Configurações",
+            "exit": "Sair",
+            "management": "Gerenciamento",
+            "button": {
+                "project": "Novo projeto"
+            }
+        },
+        "common": {
+            "moreActions": {
+                "selectAll": "Marcar todos",
+                "unselectAll": "Desmarcar todos",
+                "ignore": "Ignorar"
+            },
+            "validations": {
+                "required": "Campo obrigatório",
+                "minlength": "Tamanho mínimo: {{minlength}} caracteres",
+                "maxlength": "Tamanho máximo: {{maxlength}} caracteres",
+                "invalidDate": "Data inválida",
+                "requiredFields": "Campos marcados com * são obrigatórios"
+            },
+            "messages": {
+                "success": {
+                    "created": "Registro criado com sucesso",
+                    "updated": "Registro atualizado com sucesso",
+                    "removed": "Registro removido com sucesso",
+                    "removedSelected": "Registros removidos com sucesso"
+                },
+                "error": {
+                    "duplicated": "Registro duplicado"
+                }
+            },
+            "popup": {
+                "buttons": {
+                    "yes": "Sim",
+                    "no": "Não",
+                    "ok": "OK"
+                },
+                "remove": {
+                    "title": "Remover",
+                    "content": "Deseja remover os registros?"
+                },
+                "finish": {
+                    "title": "Finalizar",
+                    "content": "Deseja finalizar os registros?"
+                },
+                "restore": {
+                    "title": "Restaurar",
+                    "content": "Deseja restaurar os registros?"
+                },
+                "exit": {
+                    "title": "Sair",
+                    "content": "Deseja sair da aplicação?"
+                },
+                "error": {
+                    "fatal": {
+                        "title": "Erro fatal",
+                        "content": "Ocorreu um erro desconhecido. A aplicação será fechada."
+                    }
+                }
+            }
+        },
+        "components": {
+            "snackbar": {
+                "text": "Concluído",
+                "button": "Desfazer"
+            },
+            "emptyPage": {
+                "projects": {
+                    "title": "Sem projetos",
+                    "subtitle": "Clique no botão + para adicionar um novo projeto."
+                },
+                "tasks": {
+                    "title": "Sem tarefas",
+                    "subtitle": "Clique no botão + para adicionar uma nova tarefa."
+                },
+                "finishedTasks": {
+                    "title": "Sem tarefas",
+                    "subtitle": "Não há tarefas finalizadas."
+                }
+            }
+        },
+        "projects": {
+            "list": {
+                "title": "Todos os projetos",
+                "createdIn": "Criado em: {{createdIn | date : 'dd/MM/yyyy'}}"
+            },
+            "form": {
+                "title": "Projeto",
+                "fields": {
+                    "name": "Nome"
+                }
+            }
+        },
+        "tasks": {
+            "moreActions": {
+                "finished": "Tarefas finalizadas"
+            },
+            "list": {
+                "all": "Todas as tarefas",
+                "today": "Hoje",
+                "week": "Semana"
+            },
+            "form": {
+                "title": "Tarefa",
+                "fields": {
+                    "name": "Nome",
+                    "project": "Projeto",
+                    "dueDate": "Vencimento",
+                    "notes": "Notas"
+                }
+            },
+            "finished": {
+                "title": "Tarefas finalizadas"
+            },
+            "messages": {
+                "success": {
+                    "finished": "Registros finalizados com sucesso",
+                    "restored": "Registros restaurados com sucesso"
+                }
+            }
+        },
+        "settings": {
+            "list": {
+                "general": "Gerais",
+                "about": "Sobre"
+            },
+            "form": {
+                "title": "Configurações",
+                "fields": {
+                    "language": "Idioma"
+                }
+            },
+            "about": {
+                "title": "Sobre",
+                "version": "Versão: {{version}}",
+                "text": "Esta é uma aplicação para registrar tarefas a fazer. É possível criar projetos para organizar suas tarefas."
+            },
+            "messages": {
+                "success": {
+                    "updated": "Configurações atualizadas com sucesso"
+                }
+            }
+        }
+    }
+}
