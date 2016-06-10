@@ -1,0 +1,59 @@
+<ion-view hide-nav-bar="mv.hasSelected()">
+    <ion-nav-title>{{mv.pageTitle | translate}}</ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-more-vertical"
+            ng-click="mv.showMoreActions($event)" ng-show="mv.canShowFinished()"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar align-title="left" class="bar-secondary">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.goBack()" ng-show="!mv.hasSelected()"></button>
+
+            <button class="button button-icon button-clear ion-android-arrow-back"
+                    ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
+
+            <span ng-show="mv.hasSelected()">{{mv.selectedCount}}</span>
+            <button class="button button-icon button-clear ion-android-arrow-dropdown"
+                    ng-click="mv.showMoreActions($event)" ng-show="mv.hasSelected()"></button>
+        </div>
+
+        <h1 class="title"></h1>
+
+        <div class="buttons buttons-right header-item">
+            <button class="button button-icon button-clear ion-android-create"
+                    ng-click="mv.showForm(true)" ng-show="mv.hasOnlySelected()"></button>
+
+            <button class="button button-icon button-clear ion-android-done"
+                    ng-click="mv.finish()" ng-show="mv.hasSelected()"></button>
+
+            <button class="button button-icon button-clear ion-android-delete"
+                    ng-click="mv.remove()" ng-show="mv.hasSelected()"></button>
+        </div>
+    </ion-header-bar>
+
+    <tsk-empty-page show="mv.isEmpty" icon="{{mv.emptyPageIcon}}"
+        title="{{'i18n.components.emptyPage.tasks.title' | translate}}"
+        subtitle="{{'i18n.components.emptyPage.tasks.subtitle' | translate}}"></tsk-empty-page>
+
+    <ion-content overflow-scroll="false">
+        <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"
+            selected-count="mv.selectedCount" selected-all="mv.selectedAll"
+            selected="mv.selected" drag-left="false" drag-right="true"
+            on-drag-right-complete="mv.onDragRightComplete(id)">
+        </tsk-list>
+    </ion-content>
+
+    <button class="button button-fab button-fab-bottom-right button-secondary"
+        ng-class="{'has-snackbar' : mv.snackbarVisible}"
+        ng-click="mv.showForm()" ng-show="!mv.hasSelected()">
+        <i class="icon ion-android-add"></i>
+    </button>
+
+    <tsk-snackbar show="mv.snackbarVisible" on-undo="mv.undoFinish()"></tsk-snackbar>
+</ion-view>

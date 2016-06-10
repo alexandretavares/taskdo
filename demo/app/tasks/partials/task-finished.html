@@ -1,0 +1,40 @@
+<ion-view hide-nav-bar="mv.hasSelected()">
+    <ion-nav-title translate="i18n.tasks.finished.title"></ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-android-close"
+                ng-click="mv.goBack()"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar align-title="left" class="bar-secondary">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-arrow-back"
+                    ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
+
+            <span>{{mv.selectedCount}}</span>
+            <button class="button button-icon button-clear ion-android-arrow-dropdown"
+                    ng-click="mv.showMoreActions($event)" ng-show="mv.hasSelected()"></button>
+        </div>
+
+        <h1 class="title"></h1>
+
+        <div class="buttons buttons-right header-item" ng-show="mv.hasSelected()">
+            <button class="button button-icon button-clear ion-reply"
+                    ng-click="mv.restore()"></button>
+
+            <button class="button button-icon button-clear ion-android-delete"
+                    ng-click="mv.remove()"></button>
+        </div>
+    </ion-header-bar>
+
+    <tsk-empty-page show="mv.isEmpty" icon="finished"
+        title="{{'i18n.components.emptyPage.finishedTasks.title' | translate}}"
+        subtitle="{{'i18n.components.emptyPage.finishedTasks.subtitle' | translate}}"></tsk-empty-page>
+
+    <ion-content overflow-scroll="false">
+        <tsk-list icon="description" fields="mv.fields" collection="mv.tasks"
+            selected-count="mv.selectedCount" selected-all="mv.selectedAll"
+            selected="mv.selected">
+        </tsk-list>
+    </ion-content>
+</ion-view>

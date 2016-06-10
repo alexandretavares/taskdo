@@ -1,0 +1,54 @@
+<ion-side-menus enable-menu-with-back-views="false" delegate-handle="mainMenu">
+    <!-- Left menu -->
+    <ion-side-menu side="left" width="305">
+        <ion-header-bar class="bar bar-header bar-dark expanded">
+            <img src="img/logo.png" class="avatar">
+            <div class="menu-avatar-text">
+                Taskdo
+            </div>
+        </ion-header-bar>
+
+        <ion-content overflow-scroll="false" class="has-footer has-expanded-header-avatar">
+            <div class="list dark">
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.DASHBOARD}}">
+                    <i class="icon material-icons home"></i>{{'i18n.menu.home' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.TASKS.INBOX}}">
+                    <i class="icon material-icons inbox"></i>{{'i18n.menu.inbox' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.TASKS.TODAY}}">
+                    <i class="icon material-icons today"></i>{{'i18n.menu.today' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.TASKS.WEEK}}">
+                    <i class="icon material-icons week"></i>{{'i18n.menu.week' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.PROJECTS}}">
+                    <i class="icon material-icons projects"></i>{{'i18n.menu.projects' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.TASKS.ALL}}">
+                    <i class="icon material-icons tasks"></i>{{'i18n.menu.tasks' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" ui-sref-active-eq="active"
+                    ui-sref="{{mv.STATE.SETTINGS}}">
+                    <i class="icon material-icons settings"></i>{{'i18n.menu.settings' | translate}}
+                </a>
+                <a nav-clear class="item item-icon-left" href="javascript:void(0)" ng-click="mv.exit()">
+                    <i class="icon material-icons exit"></i>{{'i18n.menu.exit' | translate}}
+                </a>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+    <!-- end left menu -->
+
+    <ion-side-menu-content drag-content="false">
+        <ion-nav-bar class="bar-energized" align-title="left"></ion-nav-bar>
+        <ion-nav-view name="content-menu"></ion-nav-view>
+        <div class="menu-backdrop"></div>
+    </ion-side-menu-content>
+</ion-side-menus>

@@ -1,0 +1,44 @@
+<ion-view hide-nav-bar="mv.hasSelected()">
+    <ion-nav-title translate="i18n.projects.list.title"></ion-nav-title>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar align-title="left" class="bar-secondary">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-arrow-back"
+                    ng-click="mv.unselectAll()" ng-show="mv.hasSelected()"></button>
+
+            <span>{{mv.selectedCount}}</span>
+            <button class="button button-icon button-clear ion-android-arrow-dropdown"
+                    ng-click="mv.showMoreActions($event)" ng-show="mv.hasSelected()"></button>
+        </div>
+
+        <h1 class="title"></h1>
+
+        <div class="buttons buttons-right header-item">
+            <button class="button button-icon button-clear ion-android-create"
+                    ng-click="mv.showForm(true)" ng-show="mv.hasOnlySelected()"></button>
+
+            <button class="button button-icon button-clear ion-android-delete"
+                    ng-click="mv.remove()" ng-show="mv.hasSelected()"></button>
+        </div>
+    </ion-header-bar>
+
+    <tsk-empty-page show="mv.isEmpty" icon="projects"
+        title="{{'i18n.components.emptyPage.projects.title' | translate}}"
+        subtitle="{{'i18n.components.emptyPage.projects.subtitle' | translate}}"></tsk-empty-page>
+
+    <ion-content overflow-scroll="false">
+        <tsk-list icon="work" fields="mv.fields" collection="mv.projects"
+            selected-count="mv.selectedCount" selected-all="mv.selectedAll"
+            selected="mv.selected" on-row-click="mv.onRowClick(item)">
+        </tsk-list>
+    </ion-content>
+
+    <button class="button button-fab button-fab-bottom-right button-secondary"
+        ng-click="mv.showForm()" ng-show="!mv.hasSelected()">
+        <i class="icon ion-android-add"></i>
+    </button>
+</ion-view>

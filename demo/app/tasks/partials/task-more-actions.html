@@ -1,0 +1,11 @@
+<ion-popover-view class="taskdo-popover">
+    <ion-content>
+        <div class="list">
+            <a class="item" ng-show="mv.hasSelected()" ng-click="mv.toggleSelectAll()">
+                {{(mv.selectedAll ? 'i18n.common.moreActions.unselectAll' : 'i18n.common.moreActions.selectAll') | translate}}
+            </a>
+            <a class="item" ng-show="!mv.hasSelected()" ng-click="mv.goStateFinished()"
+                translate="i18n.tasks.moreActions.finished"></a>
+        </div>
+    </ion-content>
+</ion-popover-view>

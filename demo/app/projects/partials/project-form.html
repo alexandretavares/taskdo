@@ -1,0 +1,30 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-energized" align-title="left">
+        <div class="buttons buttons-left header-item">
+            <button class="button button-icon button-clear ion-android-close"
+                    ng-click="mv.hideForm()"></button>
+        </div>
+
+        <h1 class="title" translate="i18n.projects.form.title"></h1>
+
+        <div class="buttons buttons-right header-item">
+            <span class="right-buttons">
+                <button class="button button-fab button-secondary" ng-click="mv.save()">
+                    <i class="icon ion-android-done"></i>
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
+
+    <ion-content overflow-scroll="false">
+        <ng-form name="mv.projectForm">
+            <div class="form list padding">
+                <label class="item item-input item-stacked-label">
+                    <input name="projectName" type="text"
+                        ng-model="mv.project.name" maxlength="30" required>
+                    <span class="input-span" translate="i18n.projects.form.fields.name"></span>
+                </label>
+            </div>
+        </ng-form>
+    </ion-content>
+</ion-modal-view>

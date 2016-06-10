@@ -1,0 +1,173 @@
+{
+    "i18n": {
+        "default": {
+            "project": "Inbox"
+        },
+        "dashboard": {
+            "title": "Home",
+            "noTasks": "There are not open tasks"
+        },
+        "language": {
+            "en": "English",
+            "pt_br": "Portuguese"
+        },
+        "priority": {
+            "critical": "Critical",
+            "highest": "Highest",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "lowest": "Lowest"
+        },
+        "menu": {
+            "home": "Home",
+            "inbox": "Inbox",
+            "today": "Today",
+            "week": "Week",
+            "projects": "Projects",
+            "tasks": "Tasks",
+            "settings": "Settings",
+            "exit": "Exit",
+            "management": "Management",
+            "button": {
+                "project": "Add project"
+            }
+        },
+        "common": {
+            "moreActions": {
+                "selectAll": "Select all",
+                "unselectAll": "Unselect all",
+                "ignore": "Ignore"
+            },
+            "validations": {
+                "required": "Field required",
+                "minlength": "Min length: {{minlength}} characters",
+                "maxlength": "Max length: {{maxlength}} characters",
+                "invalidDate": "Invalid date",
+                "requiredFields": "Fields marked with * are mandatory."
+            },
+            "messages": {
+                "success": {
+                    "created": "Successfully created record",
+                    "updated": "Successfully updated record",
+                    "removed": "Successfully removed record",
+                    "removedSelected": "Successfully removed records"
+                },
+                "error": {
+                    "duplicated": "Duplicated record"
+                }
+            },
+            "popup": {
+                "buttons": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "ok": "OK"
+                },
+                "remove": {
+                    "title": "Remove",
+                    "content": "Do you want to remove the records?"
+                },
+                "finish": {
+                    "title": "Finish",
+                    "content": "Do you want to finish the records?"
+                },
+                "restore": {
+                    "title": "Restore",
+                    "content": "Do you want to restore the records?"
+                },
+                "exit": {
+                    "title": "Exit",
+                    "content": "Do you want to exit the application?"
+                },
+                "error": {
+                    "fatal": {
+                        "title": "Fatal error",
+                        "content": "An unknown error has occurred. The application will be closed."
+                    }
+                }
+            }
+        },
+        "components": {
+            "snackbar": {
+                "text": "Completed",
+                "button": "Undo"
+            },
+            "emptyPage": {
+                "projects": {
+                    "title": "No projects",
+                    "subtitle": "Click on + button to add a new project."
+                },
+                "tasks": {
+                    "title": "No tasks",
+                    "subtitle": "Click on + button to add a new task."
+                },
+                "finishedTasks": {
+                    "title": "No tasks",
+                    "subtitle": "There are no finished tasks."
+                }
+            }
+        },
+        "projects": {
+            "list": {
+                "title": "All projects",
+                "createdIn": "Created in: {{createdIn | date : 'dd/MM/yyyy'}}"
+            },
+            "form": {
+                "title": "Project",
+                "fields": {
+                    "name": "Name"
+                }
+            }
+        },
+        "tasks": {
+            "moreActions": {
+                "finished": "Finished tasks"
+            },
+            "list": {
+                "all": "All tasks",
+                "today": "Today",
+                "week": "Week"
+            },
+            "form": {
+                "title": "Task",
+                "fields": {
+                    "name": "Name",
+                    "project": "Project",
+                    "dueDate": "Due date",
+                    "notes": "Notes"
+                }
+            },
+            "finished": {
+                "title": "Finished tasks"
+            },
+            "messages": {
+                "success": {
+                    "finished": "Successfully finished records",
+                    "restored": "Successfully restored records"
+                }
+            }
+        },
+        "settings": {
+            "list": {
+                "general": "General",
+                "about": "About"
+            },
+            "form": {
+                "title": "Settings",
+                "fields": {
+                    "language": "Language"
+                }
+            },
+            "about": {
+                "title": "About",
+                "version": "Version: {{version}}",
+                "text": "This is an app that store tasks to do. You can create projects to organize your tasks."
+            },
+            "messages": {
+                "success": {
+                    "updated": "Successfully updated settings"
+                }
+            }
+        }
+    }
+}
