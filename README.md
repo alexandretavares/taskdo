@@ -5,6 +5,10 @@ It is a mobile hybrid app Ionic-based (v1) that store tasks todo. You can create
 ### Version
 1.0.0
 
+### Demo
+
+* [Online demo](http://alexandretavares.github.io/taskdo)
+
 ### Tech
 
 * [NodeJS] - JavaScript runtime built on Chrome's V8 JavaScript engine.
